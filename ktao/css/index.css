@@ -1,0 +1,308 @@
+/*
+2018-06-09
+zhu
+*/
+	.nav-site{
+		height: 44px;
+		background: #f3f5f7;
+	}
+	.nav-login{
+		color: #ea675a;
+	}
+	.nav-left li{
+		line-height: 44px;
+		margin-right: 10px;
+	}
+	.nav-site .dropdown{
+		position: relative;
+	}
+	.nav-site .dropdown .droptag{
+		height: 44px;
+		line-height: 44px;
+		display: block;
+		padding: 0 10px;
+	}
+	.nav-site .dropdown:hover .dropdown-layer{
+		display: block;
+	}
+	.nav-site .dropdown .dropdown-layer{
+		position: absolute;
+		top:43px;
+		background-color: #fff;
+		display: none;
+	}
+	.nav-site .dropdown-arrow{
+		margin-left: 5px;
+	}
+	.nav-site .menu-item{
+
+		line-height: 30px;
+		padding: 0 15px;
+		display: block;
+		white-space: nowrap;
+	}
+	.nav-site .menu-item:hover{
+		background-color: #f3f5f6;
+	}
+	.menu-active .dropdown-layer{
+		display: block;
+	}
+	.menu-active .droptag{
+		background-color: #fff;
+		border-left: 1px solid #f3f5f6;
+		border-right: 1px solid #f3f5f6;
+	}
+	.nav-site .fr .dropdown{
+		float: left;
+	}
+
+	/*
+	.dropdown .dropdown-layer li:hover{
+		background-color: #f3f5f6;
+		border: 1px solid #f3f5f6;
+	}
+	.dropdown .dropdown-layer li{
+		padding: 0 10px;
+	}
+	*/
+/*顶部导航结束*/
+/*头部开始*/
+
+	.header{
+		height: 100px;
+		background: yellow;
+	}
+	.header-logo{
+		width: 150px;
+		height: 70px;
+		display: block;
+		background-image: url(../images/header-logo.png);
+		background-repeat: no-repeat;
+		background-size: 150px;
+		margin-top: 36px;
+	}
+
+	/*搜索框*/
+
+	.header .search{
+		margin-top: 36px;
+		margin-left: 150px;
+	}
+	
+	.header .search-input{
+		width: 400px;
+		height: 40px;
+		outline-width: 0px;
+		padding: 0 10px;
+		box-sizing: border-box;
+	}
+
+	.header .search-btn{
+		width: 80px;
+		height: 40px;
+		border:none;
+		box-sizing: border-box;
+		border:1px solid #ccc;
+		border-left: none;
+		outline-width: 0px;
+		cursor: pointer;
+		background: black;
+		color: #fff;
+	}
+	.header .search-layer{
+		border: 1px solid #ccc;
+		border-top: none;
+		box-sizing: border-box;
+	}
+	.header .search-item{
+		width: 100%;
+		height: 30px;
+		line-height: 30px;
+		padding:0 10px;
+		box-sizing: border-box;
+		background: #fff;
+		cursor: pointer;
+	}
+	.header .search-item:hover{
+		background: #f5f5f7;
+	}
+	*/
+	/**/
+	/**/
+/*头部结束*/
+/*主导航开始*/
+	.nav-main{
+		background:red;
+	}
+	.nav-main .link{
+		display: inline-block;
+		height: 50px;
+		line-height: 50px;
+		font-size: 16px;
+		margin-right: 20px;
+	}
+	.nav-main .link:nth-child(1){
+		margin-left: 100px;
+	}
+/*主导航结束*/
+/*主要内容开始*/
+	.focus{
+		height: 500px;
+		background: blue;
+
+	}
+	.category{
+		position: relative;
+		width: 208px;
+		margin-top: -54px;
+	}
+	.category-title{
+		display: block;
+		width: 100%;
+		height: 54px;
+		line-height: 54px;
+		background-color: red;
+		font-size: 14px;
+		padding-left: 10px;
+		box-sizing: border-box;
+		color: #fff;
+	}
+	.category-title .icon{
+		margin-right: 5px;
+	}
+	.category .dropdown-toggle{
+		width: 100%;
+		height: 36px;
+		line-height: 36px;
+		box-sizing: border-box;
+		background-color: #ea675a;
+	}
+	.category .dropdown{
+		position: static;
+	}
+	.category .dropdown-link{
+		font-size: 14px;
+		color: #fff;
+		margin-left: 10px;
+	}
+	.category .dropdown-icon{
+		position: absolute;
+		font-size: 16px;
+		right: 10px;
+		color: #fff;
+		font-style: normal;
+	}
+	.category .dropdown-layer{
+		/*display: block;*/
+		top: 54px;
+		left: 100%;
+		width: 780px;
+		min-height: 504px;
+		background-color: #fff;
+		padding-bottom: 24px;
+		box-sizing: border-box;
+	}
+	.category-details{
+		overflow: hidden;
+		margin-top: 24px;
+		font-size: 14px;
+		width: 780px;
+	}
+	.cate-title{
+		width: 84px;
+		text-align: right;
+		box-sizing: border-box;
+		padding-right: 10px;
+		border-left: 1px solid #ccc;
+
+	}
+	.cate-title-link{
+		font-weight: bold;
+	}
+	.cate-item{
+		width: 670px;
+		line-height: 20px;
+	}
+	.cate-item .link{
+		margin-left: 10px;
+		display: inline-block;
+	}
+	.category-active .dropdown-toggle{
+		background-color: #ccc;
+	}
+	.category-active .dropdown-link,
+	.category-active .dropdown-icon{
+		color:#ea675a;
+	}
+	.category .dropdown-loading{
+		margin: 220px auto;
+
+	}
+	
+
+	.focus .carousel-container,
+	.focus .carousel-container .carousel-item img{
+		width: 768px;
+		height: 504px;
+	}
+	.carousel-container{
+		position: relative;
+	}
+	.carousel-container .carousel-item{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: red;
+	}
+	.carousel-container .btns{
+		position: absolute;
+		left: 50%;
+		bottom: 10px;
+		border-top: 20px;
+	}
+	.carousel-container .btn-item{
+		float: left;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background-color: rgba(0,0,0,0.7);
+		margin-right: 10px;
+		cursor: pointer;
+	}
+	.carousel-container .btn-item .active{
+		background-color: #fff;
+	}
+	.carousel-container .carousel-con{
+		display: none;
+		position: absolute;
+		top: 50%;
+		margin-top: -50px;
+		text-align: center;
+		font-size: 20px;
+		color: #fff;
+		width: 25px;
+		height: 50px;
+		line-height: 50px;
+		background-color: #000;		
+	}
+	.carousel-container .carousel-con .active{
+		display: block;
+	}
+	.carousel-container .carousel-left{
+		left: 0px;
+	}
+	.carousel-container .carousel-right{
+		right: 0px;
+	}
+/*主要内容结束*/
+/*今日热销开始*/
+	.todays{
+		height: 100px;
+	}
+/*今日热销结束*/
+/*楼层开始*/
+	.floor{
+		height: 300px;
+	}
