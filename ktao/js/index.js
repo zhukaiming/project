@@ -169,6 +169,11 @@ $(function(){
 	});
 
 	//轮播图开始
-	
+		var $focusCarousel = $('.focus .carousel-container');
+		/*调用轮播图插件*/
+		$focusCarousel.carousel({
+			activeIndex:0,
+			interval:0
+		})	
 	//轮播图结束
 })

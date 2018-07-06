@@ -30,6 +30,7 @@
 	(function($){
 		function Slient($elem){
 			this.$elem = $elem;
+			this.$elem.removeClass('transition');
 			this.currentX = parseFloat(this.$elem.css('left'));
 			this.currentY = parseFloat(this.$elem.css('top'));
 		}
@@ -62,9 +63,15 @@
 			this.$elem.addClass('transition')
 			this.currentX = parseFloat(this.$elem.css('left'));
 			this.currentY = parseFloat(this.$elem.css('top'));
+			this.$elem.css({
+				left:this.currentX,
+				top:this.currentY,
+
+			});
 		}
+
 		Css3.prototype = {
-			constructor :Slient,
+			constructor :Css3,
 			to:function(x,y){
 				var self = this;//储存this
 				x = (typeof x == 'number') ? x : this.currentX;//当(typeof x == 'number')为真,返回x，若为假，返回this.currentX
@@ -74,13 +81,50 @@
 				this.$elem.trigger('move')//触发对象的move事件
 				//监听过度完成事件
 				this.$elem
-				.off(kuazhu.transition.end);//关闭
+				.off(kuazhu.transition.end)//关闭
 				.one(kuazhu.transition.end,function(){
 					self.$elem.trigger('moved')
 				});//运行一次
 				this.$elem.css({
 					left:x,
 					top:y
+				});
+				//
+				this.currentX = x;
+				this.currentY = y;
+			},
+			x:function(x){
+				this.to(x);
+			},
+			y:function(y){
+				this.to(null,y);
+			}
+		}
+
+		function Js($elem){
+			this.$elem = $elem;
+			this.$elem.removeClass('transition')
+			this.currentX = parseFloat(this.$elem.css('left'));
+			this.currentY = parseFloat(this.$elem.css('top'));
+		}
+		Js.prototype = {
+			constructor :Js,
+			to:function(x,y){
+				var self = this;//储存this
+				x = (typeof x == 'number') ? x : this.currentX;//当(typeof x == 'number')为真,返回x，若为假，返回this.currentX
+				y = (typeof y == 'number') ? y : this.currentY;//
+
+				if(this.currentX == x && this.currenty == y) return;//当前值没有变化
+				this.$elem.trigger('move')//触发对象的move事件
+				//监听过度完成事件
+				//?
+				this.$elem//
+				.stop()
+				.animate({
+					left:x,
+					top:y
+				},function(){
+					self.$elem.trigger('moved')
 				})
 				//
 				this.currentX = x;
@@ -93,7 +137,10 @@
 				this.to(null,y);
 			}
 		}
-		var move = new Slient($('.box'));
+		var move = new Js($('.box'));
+		$('.box').on('move moved',function(ev){
+			console.log(ev.type)
+		})
 		//向左移动
 		$('button').eq(0).on('click',function(){
 			move.to(200,200);

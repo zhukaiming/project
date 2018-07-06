@@ -18,7 +18,6 @@ var server = http.createServer(function(req,res){
 	var parmsStr = JSON.stringify(prams);
 	res.statusCode = 200;
 	res.end(parmsStr);
-	console.log(req.method);
 
 });
 

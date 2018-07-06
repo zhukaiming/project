@@ -1,7 +1,7 @@
 //2018-06-12
 
 ;(function($){
-
+	
 	function Carousel($elem,options){
 		this.$elem = $elem;
 		this.options = options;
@@ -9,8 +9,7 @@
 		this.$btns = this.$elem.find('.btns');
 		this.$controlBtns = this.$elem.find('.carousel-control');
 		this._init();
-		if(this.options.autocomplete){//如果为真，执行auto方法
-		}
+
 	}
 	Carousel.prototype = {
 		constructor:Carousel,
