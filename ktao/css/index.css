@@ -243,66 +243,100 @@ zhu
 	.focus .carousel-container,
 	.focus .carousel-container .carousel-item img{
 		width: 768px;
-		height: 504px;
-	}
-	.carousel-container{
-		position: relative;
-	}
-	.carousel-container .carousel-item{
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: red;
-	}
-	.carousel-container .btns{
-		position: absolute;
-		left: 50%;
-		bottom: 10px;
-		border-top: 20px;
-	}
-	.carousel-container .btn-item{
-		float: left;
-		width: 20px;
-		height: 20px;
-		border-radius: 50%;
-		background-color: rgba(0,0,0,0.7);
-		margin-right: 10px;
-		cursor: pointer;
-	}
-	.carousel-container .btn-item .active{
-		background-color: #fff;
-	}
-	.carousel-container .carousel-con{
-		display: none;
-		position: absolute;
-		top: 50%;
-		margin-top: -50px;
-		text-align: center;
-		font-size: 20px;
-		color: #fff;
-		width: 25px;
-		height: 50px;
-		line-height: 50px;
-		background-color: #000;		
-	}
-	.carousel-container .carousel-con .active{
-		display: block;
-	}
-	.carousel-container .carousel-left{
-		left: 0px;
-	}
-	.carousel-container .carousel-right{
-		right: 0px;
+		height: 500px;
 	}
 /*主要内容结束*/
 /*今日热销开始*/
 	.todays{
-		height: 100px;
+		height: 158px;
+		background-color: yellow;
+		margin-top: 20px;
+	}
+	.today .carousel-container{
+		width: 100%;
+		height: 158px;
+		background-color:red;
+	}
+	.today .carousel-container .carousel-item img{
+		width: 237px;
+		height: 100%;
+	}
+	.today .carousel-item img{
+		margin: 0;
 	}
 /*今日热销结束*/
 /*楼层开始*/
 	.floor{
+		height: 700px;
+	}
+	.floor-hd{
+		width: 100%;
+		height: 70px;
+		border-bottom: 2px solid red;
+		margin-top: 20px;
+	}
+	.floor .floor-tit{
+		height: 100%;
+	}
+	.floor .floor-tit-meu{
+		display: block;
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+		font-size: 18px;
+		border: 1px solid #000;
+		border-radius: 50%;
+		text-align: center;
+		color: #fff;
+		background-color: #000;
+		margin-right: 5px;
+	}
+	.floor .floor-tit-text{
+		height: 100%;
+		margin-top: 5px;
+		font-size: 18px;
+		font-weight: bold;
+		display: inline-block;
+
+	}
+	.floor .tab-item{
+		color: #000;
+		font-size: 16px;
+	}
+	.floor .floor-item li{
+		display: inline-block;
+		margin-top: 10px;
+		height: 100%;
+		font-size: 16px;
+		color: #000;
+	}
+	.floor-bd{
+		width: 100%;
 		height: 300px;
 	}
+	.floor-bd .tab .tab-tit{
+		width: 200px;
+		height: 100%;
+		margin-top: 10px;
+	}
+	.floor-bd .tab .tab-tit:hover{
+		box-shadow: 0px 5px 10px rgba(0,0,0,0.3)
+	}
+	.tab .tab-tit .tab-img{
+		text-align: center;
+	}
+	.tab .tab-tit .tab-img img{
+		width: 170px;
+	}
+	.tab .tab-ren{
+		font-size: 14px;
+		color: #000;
+		text-align: center;
+	}
+	.tab .tab-men{
+		font-size: 14px;
+		color: red;
+		text-align: center;
+		margin-top: 5px;
+	}
+

@@ -1,6 +1,6 @@
 ;(function($){
 
-	function Carousel($elem,options){
+	function Tab($elem,options){
 		this.$elem = $elem;
 		this.options = options;
 		this.$carouselItems = this.$elem.find('.carousel-item');
@@ -11,8 +11,8 @@
 		this.now = this._getCorrectIndex(options.activeIndex);
 		this._init();
 	}
-	Carousel.prototype = {
-		constructor:Carousel,
+	Tab.prototype = {
+		Tab:Tab,
 		_init:function(){
 			var self = this;
 			//显示当前的
@@ -160,7 +160,7 @@
 		}
 	}
 
-	Carousel.DEFAULTS = {
+	Tab.DEFAULTS = {
 		css3:false,
 		js:true,
 		mode:'fade',
@@ -169,7 +169,7 @@
 	}
 
 	$.fn.extend({
-		carousel:function(options){
+		Tab:function(options){
 			return this.each(function(){
 				var $this = $(this);
 				var carousel = $this.data('carousel');

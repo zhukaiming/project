@@ -60,6 +60,18 @@ $(function(){
 	//下拉菜单结束
 	*/
 
+	function loadImage(url,success,error){
+		//console.log('successs')
+		var image = new Image();
+		image.onload = function(){
+			if(typeof success == 'function') success(url);
+		}
+		image.onerror = function(){
+			if(typeof error == 'function') error(url);
+		}
+		image.src = url;
+	}
+
 	//搜索框
 	var $search = $('.search')
 	$search.search({
@@ -169,11 +181,99 @@ $(function(){
 	});
 
 	//轮播图开始
+	/*
+		按需加载步骤
+		1.什么时候加载
+		2.具体加载
+		3.善后
+	*/
 		var $focusCarousel = $('.focus .carousel-container');
+		/*
+		*/
+		$focusCarousel.item = {};
+		$focusCarousel.totalItemNum = $focusCarousel.find('.carousel-img').length;//轮播图个数
+		$focusCarousel.loadedItemNum = 0;
+		$focusCarousel.on('carousel-show',$focusCarousel.loadFn = function(ev,index,elem){
+			//console.log('carousel-show loading');
+			if($focusCarousel.item[index] != 'loaded'){//如果没有加载
+				$focusCarousel.trigger('carousel-loadItem',[index,elem]);
+	
+			}
+
+			//$img.attr('src',imgUrl);
+		})
+
+		$focusCarousel.on('carousel-loadItem',function(ev,index,elem){//监听事件
+			var $img = $(elem).find('.carousel-img');
+			var imgUrl = $img.data('src');
+
+			loadImage(imgUrl,function(url){//成功
+				$img.attr('src',url);
+			},function(url){//失败
+				$img.attr('src','../images/header-logo.png');
+			});
+			$focusCarousel.item[index] = 'loaded';
+			$focusCarousel.loadedItemNum++;
+			if($focusCarousel.loadedItemNum = $focusCarousel.totalItemNum){//轮播完毕
+				$focusCarousel.trigger('carousel-loadItems');
+			}
+		})
+
+		$focusCarousel.on('carousel-loadItems',function(){
+				$focusCarousel.off('carousel-show',$focusCarousel.loadFn)//终止事件的函数回调
+
+		})
 		/*调用轮播图插件*/
 		$focusCarousel.carousel({
 			activeIndex:0,
+			mode:'slide',
 			interval:0
-		})	
+		});
 	//轮播图结束
+
+	//今日热销开始
+
+	var $todaysCarousel = $('.todays .carousel-container');
+
+	//
+	$todaysCarousel.item = {};
+	$todaysCarousel.totalItemNum = $todaysCarousel.find('.carousel-img').length;//轮播图个数
+	$todaysCarousel.loadedItemNum = 0;
+	//
+	$todaysCarousel.on('carousel-show',loadFn = function(ev,index,elem){
+		//console.log('carousel-show loading');
+
+		if($todaysCarousel.item[index] != 'loaded'){
+			$todaysCarousel.trigger('carousel-loadItem',[index,elem]);
+		}
+		//$img.attr('src',imgUrl);
+	})
+	$todaysCarousel.on('carousel-loadItem',function(ev,index,elem){
+		var $imgs = $(elem).find('carousel-img');
+		$imgs.each(function(){
+			var $img = $(this);
+			var imgUrl = $img.data('src');
+			loadImage(imgUrl,function(url){//成功
+				$img.attr('src',url);
+			},function(url){//失败
+				$img.attr('src','../images/header-logo.png');
+			});
+			$todaysCarousel.item[index] = 'loaded';
+			$todaysCarousel.loadedItemNum++;
+			if(todaysCarousel.loadedItemNum = todaysCarousel.totalItemNum){//轮播完毕
+				$todaysCarousel.trigger('carousel-loadItems');
+			}
+		})
+	})
+	$todaysCarousel.on('carousel-loadItems',function(){
+		$todaysCarousel.off('carousel-show',loadFn)//终止事件的函数回调
+
+	})
+		$todaysCarousel.carousel({
+		activeIndex:0,
+		mode:'slide',
+		interval:0
+		});
+
+	//今日热销结束
 })

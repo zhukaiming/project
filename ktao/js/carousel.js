@@ -33,9 +33,9 @@
 
 	}
 	Carousel.DEFAULTS = {
-		css3:false,
+		css3:true,
 		js:false,
-		mode:'fade'
+		mode:'slide'
 	}
 	$.fn.extend({
 		Carousel:function(options,val){

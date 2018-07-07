@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>移动测试.html</title>
+	<style>
+		button{
+			width: 100px;
+			height: 50px;
+			font-size: 20px;
+		}
+		.box{
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+			left: 0;
+			top: 100px;
+
+		}
+	</style>
+</head>
+<body>
+	<button>&lt;</button><button>&gt;</button>
+	<div class="box transition"></div>
+</body>
+<script src = "js/jquery-1.12.4.js"></script>
+<script src = "js/transition.js"></script>
+<script src = "js/slide移动测试完善.js"></script>
+<script>
+	(function($){
+		var $elem = $('.box');
+		$elem.move({
+			css3:true,
+			js:false
+		})
+		//var move = new Js($('.box'));
+		$elem.on('move moved',function(ev){
+			console.log(ev.type)
+		})
+		//向左移动
+		$('button').eq(0).on('click',function(){
+			$elem.move('to',200,100);
+		})
+		//向右移动
+		$('button').eq(1).on('click',function(){
+			$elem.move('to',0,100);
+		})
+	})(jQuery)
+</script>
+</html>

@@ -110,7 +110,8 @@
 		var mode = null;
 		
 		function move($elem,options){
-			console.log(this);
+			//console.log(this);
+			//判断
 			if(options.css3 && kuazhu.transition.isSupport){//css3的移动,支持css3
 				mode = new Css3($elem);
 			}
@@ -127,8 +128,9 @@
 				y:mode.y.bind(mode)
 			}
 			*/
-			return {
-				to:$.proxy(mode.to,mode),
+			//
+			return{
+				to:$.proxy(mode.to,mode),//接受一个已有的函数,并返回一个带特定上下文的新的函数。
 				x:$.proxy(mode.x,mode),
 				y:$.proxy(mode.y,mode)
 			}
@@ -143,13 +145,13 @@
 				return this.each(function(){
 					var $this = $(this);
 					var moveMode = $this.data('moveMode');
-					if(!search){//单例模式
+					if(!moveMode){//单例模式,判断有无moveMode
 						options  = $.extend(DEFAULTS,options);//将一个或多个对象的内容合并到目标对象
-						moveMode = move($(this),options);
+						moveMode = move($this,options);//把move方法赋给moveMode
 						$this.data('moveMode',moveMode);//储存到对象
 					}
-					if(typeof move[options] == 'function'){
-						move[options](x,y);
+					if(typeof moveMode[options] == 'function'){
+						moveMode[options](x,y);
 					}
 				});
 			}
