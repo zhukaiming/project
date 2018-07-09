@@ -172,8 +172,8 @@ zhu
 	}
 	.category .dropdown-toggle{
 		width: 100%;
-		height: 36px;
-		line-height: 36px;
+		height: 50px;
+		line-height: 50px;
 		box-sizing: border-box;
 		background-color: #ea675a;
 	}
@@ -242,8 +242,50 @@ zhu
 
 	.focus .carousel-container,
 	.focus .carousel-container .carousel-item img{
-		width: 768px;
+		width: 760px;
 		height: 500px;
+	}
+	.focus-news {
+		padding: 7px 20px 12px;
+		background-color: #fff;
+		border: 1px solid #d9dde1;
+		border-bottom: none;
+	}
+	.focus-news-head {
+		height: 38px;
+		line-height: 38px;
+	}
+	.focus-news-title {
+		color: #ea675a;
+		font-size: 16px;
+	}
+	.focus-news-body {
+		line-height: 28px;
+	}
+	.focus-service {
+		background-color: #fff;
+		border-left: 1px solid #d9dde1;
+	}
+	.focus-service-item {
+		width: 61px;
+		height: 71px;
+		border-top: 1px solid #d9dde1;
+		border-right: 1px solid #d9dde1;
+		text-align: center;
+	}
+	.focus-service-icon,
+	.focus-service-text {
+		display: inline-block;
+		width: 100%;
+	}
+	.focus-service-icon {
+		margin-top: 17px;
+		color: #f67272;
+		font-size: 22px;
+	}
+	.focus-service-text {
+		margin-top: 6px;
+		color: #4d555d;
 	}
 /*主要内容结束*/
 /*今日热销开始*/
@@ -267,7 +309,9 @@ zhu
 /*今日热销结束*/
 /*楼层开始*/
 	.floor{
-		height: 700px;
+		height: 670px;
+		background-color: orange;
+		margin-bottom: 10px;
 	}
 	.floor-hd{
 		width: 100%;
@@ -300,8 +344,17 @@ zhu
 
 	}
 	.floor .tab-item{
+		display: inline-block;
 		color: #000;
 		font-size: 16px;
+		margin-right: 10px;
+	}
+	.floor .tab-item:hover{
+		color: #ea675a;
+	}
+	.floor .tab-item.tab-item-active{
+		/* background: url(../images/floor-arrow.png) no-repeat center bottom; */
+		color: #ea675a;
 	}
 	.floor .floor-item li{
 		display: inline-block;
@@ -314,26 +367,29 @@ zhu
 		width: 100%;
 		height: 300px;
 	}
-	.floor-bd .tab .tab-tit{
+	.floor-bd .tab-panel .tab-tit{
 		width: 200px;
 		height: 100%;
 		margin-top: 10px;
 	}
-	.floor-bd .tab .tab-tit:hover{
+	.floor-bd .tab-panel{
+		display: none;
+	}
+	.floor-bd .tab-panel .tab-tit:hover{
 		box-shadow: 0px 5px 10px rgba(0,0,0,0.3)
 	}
-	.tab .tab-tit .tab-img{
+	.tab-panel .tab-tit .tab-img{
 		text-align: center;
 	}
-	.tab .tab-tit .tab-img img{
+	.tab-panel .tab-tit .tab-img img{
 		width: 170px;
 	}
-	.tab .tab-ren{
+	.tab-panel .tab-ren{
 		font-size: 14px;
 		color: #000;
 		text-align: center;
 	}
-	.tab .tab-men{
+	.tab-panel .tab-men{
 		font-size: 14px;
 		color: red;
 		text-align: center;

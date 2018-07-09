@@ -213,7 +213,7 @@ $(function(){
 	$focusCarousel.carousel({
 		activeIndex:0,
 		mode:'slide',
-		interval:3000
+		interval:0
 	});
 	//轮播图结束
 
@@ -229,7 +229,7 @@ $(function(){
 		$todaysCarousel.carousel({
 		activeIndex:0,
 		mode:'slide',
-		interval:2000
+		interval:0
 		});
 
 	//今日热销结束
@@ -242,7 +242,7 @@ $(function(){
 		console.log(index,elem,ev.type);
 	});
 	*/
-	/*
+	
 	function floorlLazyLoad($elem){
 		var item = {};
 			totalItemNum = $elem.find('.floor-img').length;//轮播图个数
@@ -284,8 +284,7 @@ $(function(){
 		$floor.each(function(){
 			floorlLazyLoad($(this));
 		})
-	}	
-	
+	}
 	$floor.tab({
 		css3:false,
 		js:false,
@@ -296,112 +295,5 @@ $(function(){
 		interval:0
 
 	})
-	*/
-	var $win = $(window);
-	var $dom = $(document);
-	//
-	function isView($elem){
-		return ($win.height() + $win.scrollTop()>$elem.offset().top) && ($win.scrollTop()< $elem.offset().top +$win.height());
-	};
-	function timeToShow(){
-		floor.each(function(index){
-			//判断满足条件
-			if(isView($(this))){
-				$dom.trigger('floor-show',[index,this]);//触发,参数传递
-			}			
-		})
 
-	};
-	$win.on('scrool',timeToShow);
-
-	//
-	function buildFloorHtml(oneFloorData){
-		var html = "";
-		html += '<div class="container">';
-		html += buildFloorHeaderHtml(oneFloorData);
-		html += buildFloorbodyHtml(oneFloorData);
-		html += '</div>';
-		return html;
-	}
-	function buildFloorHeaderHtml(oneFloorData){
-		var html = "";
-			html += '<div class="floor-hd">';
-			html +=	'<h2 class ="floor-tit fl">';
-			html +=		'<span class = "floor-tit-meu fl">'+oneFloorData.meu+'F</span>';
-			html +=		'<span class = "floor-tit-text fl">'+oneFloorData.text+'</span>';
-			html +=	'</h2>';
-			html +=	'<ul class = "floor-item fr">';
-			for(var i = 0;i<oneFloorData.tabs.length;i++){
-					html +=	'<li fl><a class = "tab-item tab-item-active" href="javascript:;">'+oneFloorData.tabs[i]+'</a></li>';
-					/*
-					if(i != oneFloorData.tabs.length - 1){
-						html += <li class = ""></li>
-					}	
-					*/		
-			}
-				html +=	'</ul>';
-			html +=	'</div>';
-			return html;
-	}
-	function buildFloorbodyHtml(oneFloorData){
-		var html = "";
-		html += '<div class="floor-bd">';
-		for(var i = 0; i<oneFloorData.items.length;i++){
-			html += '<ul class = "tab-panel clearfix">';
-				for(var j = 0;j<oneFloorData.items[i].length;j++){
-					html += '<li class = "tab-tit fl">';
-						html += '<p class = "tab-img">';
-						html += '<img class = "floor-img" src = "images/loading1.gif" data-src="images/1.png" alt="">';
-						html += '</p>';
-						html += '<p class = "tab-ren">';
-						html += '<a href="#" class = "link">'+oneFloorData.items[i][j].name+'</a>';
-						html += '</p>';
-						html += '<p class = "tab-men">￥'+oneFloorData.items[i][j].price+'</p>';
-					html += '</li>';
-				}
-			html += '</ul>';
-		}
-		html +=	'</div>';
-		return html;
-	}
-	function floorlHtmlLazyLoad($elem){
-		var item = {};
-			totalItemNum = $floor.length;//轮播图个数
-			loadedItemNum = 0;
-			loadFn = null;
-		//
-		$doc.on('floor-show',loadFn = function(ev,index,elem){
-			//console.log('carousel-show loading');
-
-			if(item[index] != 'loaded'){
-				$elem.trigger('floor-loadItem',[index,elem]);
-			}
-			//$img.attr('src',imgUrl);
-		})
-		$doc.on('floor-loadItem',function(ev,index,elem){
-			var $imgs = $(elem).find('.floor-img');
-			$imgs.each(function(){
-				var $img = $(this);
-				var imgUrl = $img.data('src');
-				loadImage(imgUrl,function(url){//成功
-					setTimeout(function(){
-						$img.attr('src',url);
-					},1000);
-				},function(url){//失败
-					$img.attr('src','../images/header-logo.png');
-				});
-				item[index] = 'loaded';
-				loadedItemNum++;
-				if(loadedItemNum == totalItemNum){//轮播完毕
-					$elem.trigger('floor-loadItems');
-				}
-			});
-		});
-		//
-		$elem.on('floor-loadItems',function(){
-			$elem.off('floor-show',loadFn)//终止事件的函数回调
-
-		});
-		//遍历，循环
-	}	
 })
