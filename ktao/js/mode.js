@@ -15,13 +15,13 @@
 			this.$elem.trigger('move')//触发对象的move事件
 			//调用回调函数
 			if(typeof callBack == 'function') callBack();
-
 			//
 			this.currentX = x;
 			this.currentY = y;			
 		}
 		function Slient($elem){
-			init.call(this,$elem);
+			//
+			init.call(this,$elem);//
 			this.$elem.removeClass('transition');
 		}
 		Slient.prototype = {
@@ -29,7 +29,7 @@
 			//调用to，通过回调函数实现效果
 			to:function(x,y){
 				var self = this;
-				to.call(this,x,y,function(){
+				to.call(this,x,y,function(){//x,y,function,是介守德来自于to函数的参数,这里的call(this)改变的是function to函数的this指向;
 					self.$elem.css({
 						left:x,
 						top:y
@@ -46,7 +46,7 @@
 		}
 		function Css3($elem){
 			init.call(this,$elem);
-			this.$elem.addClass('transition')
+			this.$elem.addClass('transition');//
 			this.$elem.css({
 				left:this.currentX,
 				top:this.currentY,
@@ -56,15 +56,16 @@
 
 		Css3.prototype = {
 			constructor :Css3,
+			//调用to，通过回调函数实现效果
 			to:function(x,y){
 				var self = this;
 				to.call(this,x,y,function(){
 					self.$elem
 					.off(kuazhu.transition.end)//关闭
 					.one(kuazhu.transition.end,function(){
-						self.$elem.trigger('moved')
+						self.$elem.trigger('moved');
 					});//运行一次
-					self.$elem.css({
+					self.$elem.css({//添加css样式
 						left:x,
 						top:y
 					});			
@@ -140,6 +141,7 @@
 			css3:true,
 			js:true
 		}
+		//原型对象的extend方法
 		$.fn.extend({
 			move:function(options,x,y){
 				return this.each(function(){

@@ -5,21 +5,21 @@
 		this.options = options;
 		this.$tabItems = this.$elem.find('.tab-item');
 		this.itemNum = this.$tabItems.length;
-		this.$tabPanels = $elem.find('.tab-panel');
+		this.$tabPanels = $elem.find('.tab-panel');//方法
 
 		this.now = this._getCorrectIndex(options.activeIndex);//当前下标
 
 		this._init();
-
 	}
 	Tab.prototype = {
-		Tab:Tab,
+		constructor:Tab,
 		_init:function(){
 			var self = this;
 			var timer = null;
 			//初始化页面
-			this.$tabItems.eq(this.now).addClass('tab-active-item');
-			this.$tabPanels.eq(this.now).show();
+			this.$tabItems.eq(this.now).addClass('tab-item-active');
+			this.$tabPanels.eq(this.now).show();//显示当前
+			//
 			this.$tabPanels.on('show shown hide hidden',function(ev){//接收传入的事件类型
 				self.$elem.trigger('tab-' +ev.type,[self.$tabPanels.index(this),this]);//参数的传递
 			})
@@ -47,7 +47,7 @@
 			//
 			if(this.options.interval){
 				this.auto();
-				this.$elem.hover($.proxy(self.pause,self),$.proxy(self.pause,self));
+				this.$elem.hover($.proxy(self.pause,self),$.proxy(self.auto,self));
 			}
 		},
 		//index表示将要显示的索引
@@ -55,10 +55,10 @@
 			//
 			if(this.now == index) return;
 			//隐藏当前的
-			this.$tabItems.eq(this.now).removeClass('tab-active-item');
+			this.$tabItems.eq(this.now).removeClass('tab-item-active');
 			this.$tabPanels.eq(this.now).showHide('hide');//调用showhide	
 			//显示对应的
-			this.$tabItems.eq(index).addClass('tab-active-item');
+			this.$tabItems.eq(index).addClass('tab-item-active');
 			this.$tabPanels.eq(index).showHide('show');
 
 			this.now = index;
@@ -68,7 +68,7 @@
 			var self = this;
 			this.autotimer = null;
 			this.autotimer = setInterval(function(){
-				self.toggle(self._getCorrectIndex(self.now+1));
+				self.toggle(self._getCorrectIndex(self.now+1));//
 			},this.options.interval)
 		},
 		pause(){
@@ -92,16 +92,16 @@
 		delay:200,
 		interval:2000
 	}
-
+	//原型对象的extend方法
 	$.fn.extend({
 		tab:function(options){
 			return this.each(function(){
 				var $this = $(this);
 				var tab = $this.data('tab');
 				if(!tab){//单例模式
-					options  = $.extend(Tab.DEFAULTS,options);
+					options  = $.extend({},Tab.DEFAULTS,options);
 					tab = new Tab($(this),options);
-					$this.data('tab',tab);
+					$this.data('tab',tab);//储存
 				}
 				if(typeof tab[options] == 'function'){
 					tab[options]();

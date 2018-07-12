@@ -216,7 +216,6 @@ $(function(){
 		interval:0
 	});
 	//轮播图结束
-
 	//今日热销开始
 
 	var $todaysCarousel = $('.todays .carousel-container');

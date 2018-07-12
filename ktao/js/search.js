@@ -70,6 +70,7 @@
 
 			this.$searchLayer.showHide(this.options);//初始化	
 		},
+		//获取数据
 		getData:function(){
 			console.log('get data')
 			//数据的获取
@@ -79,10 +80,11 @@
 				this.jqXHR.abort();//终止ajax请求
 			}
 			//当发送ajax请求的时候，会返回一个jqXHR对象
+			//ajax异步传输
 			this.jqXHR = $.ajax({
 				url:this.options.url+this.getInputVal(),
 				dataType:'jsonp',
-				jsonp:'callback'
+				jsonp:'callback'//
 
 			})
 			//成功
@@ -95,6 +97,7 @@
 				//this.$searchLayer.html('').hide();
 				this.$elem.trigger('getNoData')
 			}.bind(this))
+			//避免请求结束后不去执行终止方法abort
 			.always(function(){
 				this.jqXHR = null;
 			}.bind(this))

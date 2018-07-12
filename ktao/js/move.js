@@ -29,7 +29,7 @@
 		to:function(x,y){
 			var self = this;
 			to.call(this,x,y,function(){
-				self.$elem.css({
+				self.$elem.css({    
 					top:y,
 					left:x,
 				});
