@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>个人博客系统</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <link href="/css/admin.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">博客后台</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+                 <div class="btn-group user-info">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{ userInfo.username }} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                          <!-- // href="/user/logout":建立路由,点击的时候发送get请求到user/logout-->
+                      <li><a href="javascript:;" id = "get-out">退出系统</a></li>
+                    </ul>
+                  </div> 
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar blog-menu">
+            <li class="active blog-list"><a href="/Admin/users">用户列表 <span class="sr-only">(current)</span></a></li>
+            <li class="active blog-list"><a href="/category">分类列表 <span class="sr-only">(current)</span></a></li>
+            <li class="active blog-list"><a href="/article">新增文章 <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">
+            {% block header %}{% endblock %}
+          </h1>
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+    </div>
+
+  </body>
+<script src = "/lib/jQuery/jquery-1.12.4.min.js"></script>
+<script src = "/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/admin.js"></script>
+{% block end %}{% endblock %}
+</html>

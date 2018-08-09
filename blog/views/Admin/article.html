@@ -1,0 +1,14 @@
+
+
+{% extends './layout.html' %}
+{% block header %}
+  新增文章
+{% endblock %}<!-- 继承父模板title部分 -->
+
+{% block content %}
+<a href="/article/add" class = "btn btn-primary">新增博文</a>
+
+{% if pages > 1 %}
+{% include './pagination.html' %}
+{% endif %}
+{% endblock %}

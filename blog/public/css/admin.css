@@ -1,0 +1,12 @@
+
+
+.user-info{
+	margin-top: 10px;
+	margin-right: 40px;
+}
+.blog-list{
+	margin-top: 5px;
+}
+.blog-menu li:hover{
+	background: blue;
+}

@@ -1,0 +1,72 @@
+/*2018.07.17*/
+body{
+	background: #efefef;
+}
+#zk-log li{
+	font-size: 16px;
+	margin-left: 10px;
+}
+#zk-log li:hover a{
+	color: red;
+}
+#zk-log li.active a{
+	color: red !important;
+}
+.main{
+	margin-top: 20px;
+}
+.carousel-inner .item img{
+	width: 100%;
+	height: 420px;
+}
+.ad-tit{
+	display: block;
+	margin-bottom: 30px;
+}
+.content-item{
+	margin-top: 30px;
+}
+.content-item .panel-heading{
+	background: #fff;
+	border: none;
+}
+.content-item .panel-footer{
+	background: #fff;
+	border: none;
+}
+.content-item .panel-footer span{
+	font-size: 14px;
+	margin-right: 6px;
+
+}
+.content-item .panel-title{
+	background: #fff;
+}
+.content-item:hover .panel-title{
+	color:red;
+}
+.Page{
+
+}
+.pagination li:hover a{
+	color: red;
+}
+.kaim-img{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+.content-right{
+	margin-top: 30px;
+}
+.list-group .list-item{
+	list-style: none;
+	font-size: 14px;
+	padding: 5px 0 5px 6px;
+}
+.content-right .panel-heading{
+	background: #fff;
+}
+.content-right .panel-body{
+	background: transparent;
+}
