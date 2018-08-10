@@ -35,9 +35,19 @@
 					list.push(i);
 				}
 				//跳过的条数
+
 				let skip = (page-1)*limit;
-				options.model
-				.find(options.query,options.projection)//找到所有user，显示用户的 id username isAdmin
+				let query = options.model.find(options.query,options.projection);
+				if(options.populate){//
+					for(let i = 0;i<options.populate.length;i++){
+						query = query.populate(options.populate[i])
+					}
+				}
+
+
+				
+				//找到所有user，显示用户的 id username isAdmin
+				query
 				.sort(options.sort)
 				.skip(skip)
 				.limit(limit)

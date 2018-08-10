@@ -9,7 +9,6 @@ const UserSchema = new mongoose.Schema({
 	},
 	password:{
 		type:String,
-		default:false
 	},
 	isAdmin:{//是否是管理员
 		type:Boolean,
@@ -18,6 +17,6 @@ const UserSchema = new mongoose.Schema({
 });
 
 //3用定义好的schema生成model模型
-const userModel = mongoose.model('user',UserSchema);
+const userModel = mongoose.model('User',UserSchema);//8/10号修改user为User
 
 module.exports = userModel;

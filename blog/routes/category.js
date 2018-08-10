@@ -7,7 +7,6 @@ const CategoryModel = require('../models/category.js');
 const pagination = require('../util/pagination.js')
 const router = Router();
 
-
 //设置权限
 router.use((req,res,next)=>{
 	if(req.userInfo.isAdmin){
@@ -48,16 +47,14 @@ router.get('/',(req,res)=>{
 		});
 	})
 	*/
-
 })
-
+//显示新增的页面
 router.get('/add',(req,res)=>{
 	//获取首页
-	res.render('Admin/category-add',{
+	res.render('Admin/category-add-edit',{
 		userInfo:req.userInfo//用户信息
 	});
 })
-
 //新增分类
 router.post('/add',(req,res)=>{
 	//console.log(req.body)
@@ -106,26 +103,28 @@ router.get('/edit/:id',(req,res)=>{
 	//console.log(id)
 	CategoryModel.findById(id)
 	.then((category)=>{
-		res.render('Admin/category-edit',{
+		res.render('Admin/category-add-edit',{
 			userInfo:req.userInfo,//用户信息
 			category:category
 		});
 	})
 	
 })
-//编辑
+//处理编辑请求
+//对分类进行编辑处理
+
 router.post('/edit',(req,res)=>{
 	let body = req.body;
 	CategoryModel.findOne({name:body.name})
-	.then((cate)=>{//已有该分类
-		if(cate){
+	.then((category)=>{//已有该分类,
+		if(category && category.order == body.order){
 			res.render('Admin/err',{
 			userInfo:req.userInfo,//用户信息
-			message:'编辑分类失败'
+			message:'编辑分类失败,有同名分类'
 			});
-		}else{//
-			CategoryModel.update({_id:body.id},{name:body.name,order:body.oder},(err,rew)=>{
-				if(!err){
+		}else{//没有该分类的话,更新分类
+			CategoryModel.update({_id:body.id},{name:body.name,order:body.order},(err,rew)=>{
+				if(!err){//
 					res.render('Admin/success',{
 					userInfo:req.userInfo,//用户信息
 					message:'修改分类成功',
@@ -142,6 +141,7 @@ router.post('/edit',(req,res)=>{
 	})
 })
 
+//
 router.get('/delete/:id',(req,res)=>{
 	//获取首页
 	let id = req.params.id;

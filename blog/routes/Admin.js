@@ -3,10 +3,11 @@
 //
 const Router  = require('express').Router;
 
-const userModel = require('../models/user.js')
-const pagination = require('../util/pagination.js')
+const userModel = require('../models/user.js');
+const pagination = require('../util/pagination.js');
 const router = Router();
-
+var multer  = require('multer');
+var upload = multer({ dest: 'public/uploads/' });
 
 //设置权限
 router.use((req,res,next)=>{
@@ -84,4 +85,15 @@ router.get('/users',(req,res)=>{//处理前台发送过来的请求
 	})
 })
 
+//上传图片处理
+router.post('/uploadImages', upload.single('upload'), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+  let path = '/uploads/'+req.file.filename;
+  //console.log(req.file.filename)
+  res.json({
+  	uploaded:true,
+  	url:path
+  })
+})
 module.exports = router;
