@@ -1,0 +1,51 @@
+	<div id = "article-list">
+	{% for article in articles %}
+	<div class="panel panel-default content-item">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><a href="/view/{{ article._id.toString() }}" class = "link" target = "_blank">{{ article.title }}</a></h3>
+	  </div>
+	  <div class="panel-body">
+		{{ article.intro }}
+	  </div>
+	  <div class="panel-footer">
+	  	<span class = "glyphicon glyphicon-user"></span>
+	  	<span>{{ article.user.username }}</span>
+	  	<span class = "glyphicon glyphicon-th-list"></span>
+	  	<span>{{ article.category.name }}</span>
+	  	<span class = "glyphicon glyphicon-time"></span>
+	  	<span>{{ article.createdAt | date('Y年m月d日 H:i:s',-8*60) }}</span>
+	  	<span class = "glyphicon glyphicon-eye-open"></span>
+	  	<span>
+	  		<em>{{ article.click }}</em>已阅读
+	  	</span>
+	  </div>
+	</div>
+	{% endfor %}
+	</div>
+
+	{% if pages >1 %}
+
+	<nav aria-label="Page navigation" id = "page">
+	  <ul class="pagination">
+	    <li><!-- //点击的时候发送请求到Admin/users,调用get方法,让当前页-1 -->
+	      <a href="javascript:;" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+	    </li>
+	    <!-- //遍历数组 -->
+		{% for i in list %}
+		{% if i ==page %}<!-- //如果是当前页 -->
+		<li class = "active"><a href="javascript:;">{{ i }}</a></li>
+		{% else %}<!-- //如果bu是当前页 -->
+		<li><a href="javascript:;">{{ i }}</a></li>
+		{% endif %}
+	    
+		{% endfor %}
+	    <li>
+	      <a href="javascript:;" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	  </ul>
+	</nav>
+	{% endif %}

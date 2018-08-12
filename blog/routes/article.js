@@ -5,7 +5,8 @@ const Router  = require('express').Router;
 
 const CategoryModel = require('../models/category.js');
 const ArticleModel = require('../models/article.js');
-const pagination = require('../util/pagination.js')
+const pagination = require('../util/pagination.js');
+
 const router = Router();
 //设置权限
 router.use((req,res,next)=>{
@@ -36,7 +37,9 @@ router.get('/',(req,res)=>{//处理前台发送过来的请求
 		populate:[{ path: 'category', select: 'name' },{ path: 'user', select: 'username' }]
 	}
 	//调用pagination
+	
 
+	// getPageArticle(req)
 	pagination(options)
 	.then((data)=>{
 		res.render('Admin/article',{
@@ -51,11 +54,10 @@ router.get('/',(req,res)=>{//处理前台发送过来的请求
 })
 //显示新增
 router.get('/add',(req,res)=>{
-
 	CategoryModel.find({},'_id name')
 	.sort({order:1})
 	.then((categories)=>{
-		res.render('Admin/article-add',{
+		res.render('Admin/article-add-edit',{
 			userInfo:req.userInfo,//用户信息
 			categories:categories
 		});		
@@ -109,17 +111,28 @@ router.get('/edit/:id',(req,res)=>{
 	//获取首页
 	let id = req.params.id;
 	//console.log(id)
-	CategoryModel.find({_id:id})
+	CategoryModel.find({},'_id name')
 	.sort({order:-1})
 	.then((categories)=>{
-		res.render('Admin/article-edit',{
+		ArticleModel.findById(id)
+		.then((article)=>{
+			res.render('Admin/article-add-edit',{
+				userInfo:req.userInfo,//用户信息
+				categories:categories,
+				article:article
+			});
+		})
+		.catch((e)=>{
+			res.render('Admin/err',{
 			userInfo:req.userInfo,//用户信息
-			categories:categories
-		});
+			message:'获取文章失败'
+			});			
+		})
 	})
 })
 //处理编辑请求
-//对分类进行编辑处理
+//对文章分类进行编辑处理
+
 router.post('/edit',(req,res)=>{
 	let body = req.body;
 	let options = {
@@ -128,7 +141,7 @@ router.post('/edit',(req,res)=>{
 		category:body.category,
 		intro:body.intro
 	}
-	ArticleModel.find({},options,(err,rew)=>{
+	ArticleModel.update({_id:body.id},options,(err,rew)=>{
 		if(!err){//
 			res.render('Admin/success',{
 			userInfo:req.userInfo,//用户信息

@@ -1,6 +1,6 @@
 //
 const mongoose = require('mongoose');
-
+const pagination = require('../util/pagination.js')
 const ArticleSchema = new mongoose.Schema({
 	//储存的内容
 
@@ -31,6 +31,22 @@ const ArticleSchema = new mongoose.Schema({
 	}
 });
 
+ArticleSchema.statics.getPageArticle = function(req,query={}){
+	return new Promise((resolve,reject)=>{
+		let options = {
+			page:req.query.page,//需要显示的页码
+			model:this,//操作的数据模型
+			query:query,//查询条件
+			projection:'-__v',//投影
+			sort:{_id:-1},//排序
+			populate:[{ path: 'category', select: 'name' },{ path: 'user', select: 'username' }]
+		}
+	pagination(options)
+		.then((data)=>{
+			resolve(data);
+		})
+	})
+}
 //3用定义好的schema生成model模型
 const ArticleModel = mongoose.model('Article',ArticleSchema);
 

@@ -161,4 +161,130 @@
 		})
 	})
 	*/
+
+
+//发送ajax文章列表请求
+	$('#page').on('click','a',function(){
+		//console.log(this)
+		var $this = $(this);
+		var page = 1;
+		//获取当前页
+		var currentpage = $('#page').find('.active a').html();
+		var lable = $this.attr('aria-label')
+		//上一页
+		if(lable == 'Previous'){
+			page = currentpage - 1;
+		}else if(lable == 'Next'){
+		//下一页	
+			page = currentpage*1 + 1;
+		}else{
+			page = $(this).html();
+		}
+		//发送ajax请求
+		var query = 'page='+page;//
+		//获取前台(list)的value
+		var category = $('#category-id').val();//
+		//如果有value,即有该分类
+		if(category){
+			query += "&category="+category;//?
+		}
+		$.ajax({
+			url:'/articles?'+query,
+			type:'get',
+			dataType:'json'
+		})
+		.done(function(result){
+			if(result.code == 0){
+				buildArticlelist(result.data.docs);
+				buildPage(result.data.list,result.data.page)
+			}
+		})
+		.fail(function(){
+
+		})
+
+	})
+	function buildPage(list,page){
+		var html = '';
+		//
+			html = `
+					    <li>
+					      <a href="javascript:;" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+					    `
+					    for(i in list){
+							if(list[i] == page){
+							html += `<li class = "active"><a href="javascript:;">${list[i]}</a></li>`
+						}else{
+							html += `<li><a href="javascript:;">${list[i]}</a></li>`
+							}
+						}
+				html += `
+					    <li>
+					      <a href="javascript:;" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+						`
+			//
+			$('#page .pagination').html(html);
+	}
+	function buildArticlelist(articles){
+		var html = '';
+		for(var i = 0;i<articles.length;i++){
+		var data = moment(articles[i].createdAt).format('MMMM Do YYYY, h:mm:ss');	
+		html += `<div class="panel panel-default content-item">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">
+			    <a href="/view/${articles[i]._id}" class="link" target="_blank">${ articles[i].title }</a>
+			    </h3>
+			  </div>
+			  <div class="panel-body">
+				${ articles[i].intro }
+			  </div>
+			  <div class="panel-footer">
+			  	<span class = "glyphicon glyphicon-user"></span>
+			  	<span>${ articles[i].user.username }</span>
+			  	<span class = "glyphicon glyphicon-th-list"></span>
+			  	<span>${ articles[i].category.name }</span>
+			  	<span class = "glyphicon glyphicon-time"></span>
+			  	<span>${ data }</span>
+			  	<span class = "glyphicon glyphicon-eye-open"></span>
+			  	<span>${ articles[i].click }</span>
+			  </div>
+			</div>`
+		}
+
+		//
+		$('#article-list').html(html);
+	}
+
+	//评论
+	$('#comment-btn').on('click',function(){
+		var articleId = $('#article-id').val();
+		var conmmentContent = $('#comment-content').val();
+		if(conmmentContent.trim() == ''){
+			$('.err').html('评论不能为空');
+			return false;
+		}else{
+			$('.err').html('')
+		}
+		
+		$.ajax({
+			url:'/comment/add',
+			dataType:'json',
+			type:'post',
+			data:{id:articleId,content:conmmentContent}
+
+		})
+		.done(function(result){
+			console.log(result)
+		})
+		.fail(function(err){
+			console.log(err)
+		})
+		
+	})
 })(jQuery)

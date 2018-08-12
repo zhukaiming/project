@@ -1,0 +1,13 @@
+
+<!-- 继承 ./layout.html'：父模板-->
+{% extends './layout.html' %}
+{% block title %} 
+	文章列表页 
+{% endblock %}<!-- 继承父模板title部分 -->
+{% block content %}
+<!-- //接收后台category:id传过来的id在 value = "{{ category }}里-->
+<input type="hidden" value = "{{ category }}" id = "category-id">
+{% include './article-list.html' %}
+									
+{% endblock %}
+

@@ -115,6 +115,7 @@ router.get('/edit/:id',(req,res)=>{
 
 router.post('/edit',(req,res)=>{
 	let body = req.body;
+	/*
 	CategoryModel.findOne({name:body.name})
 	.then((category)=>{//已有该分类,
 		if(category && category.order == body.order){
@@ -136,6 +137,45 @@ router.post('/edit',(req,res)=>{
 					message:'修改分类失败'
 					});					
 				}
+			})
+		}
+	})
+	*/
+	//逻辑：通过id查找分类,对分类进行处理:若数据库中的name=传进来的name且数据库中的order=传进来的order
+	//则有同名分类;在进行查找,name是传进来的name,但当前的id不是传进来的Id,有同名分类,剩下的进行更新操作
+	CategoryModel.findById(body.id)
+	.then((category)=>{
+		if(category.name == body.name && category.order == body.order){
+			res.render('Admin/err',{
+			userInfo:req.userInfo,//用户信息
+			message:'编辑分类失败,有同名分类'
+			});			
+		}else{
+
+			console.log('body',body)
+			CategoryModel.findOne({name:body.name,_id:{$ne:body.id}})
+			.then((newcategory)=>{
+				if(newcategory){
+					res.render('Admin/err',{
+					userInfo:req.userInfo,//用户信息
+					message:'编辑分类失败,有同名分类'
+					});						
+				}else{
+					CategoryModel.update({_id:body.id},{name:body.name,order:body.order},(err,rew)=>{
+						if(!err){//
+							res.render('Admin/success',{
+							userInfo:req.userInfo,//用户信息
+							message:'修改分类成功',
+							url:'/category'
+							});
+						}else{
+							res.render('Admin/err',{
+							userInfo:req.userInfo,//用户信息
+							message:'修改分类失败'
+							});					
+						}
+					})					
+				}		
 			})
 		}
 	})

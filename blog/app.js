@@ -83,6 +83,7 @@ app.use("/user",require('./routes/user.js'));
 app.use("/Admin",require('./routes/Admin.js'));
 app.use("/category",require('./routes/category.js'));
 app.use("/article",require('./routes/article.js'));
+app.use("/comment",require('./routes/comment.js'));
 // app.use("/wish",require('./routes/wish.js'));
 app.listen(3000,()=>{
 	console.log("server running at 127.0.0.1:3000")

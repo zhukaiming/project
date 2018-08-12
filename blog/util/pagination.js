@@ -20,8 +20,10 @@
 				page = 1;
 			}
 			////获取总条数count
-			options.model.estimatedDocumentCount({})
+			//
+			options.model.countDocuments(options.query)
 			.then((count)=>{
+				//console.log(count)
 				let pages = Math.ceil(count/limit);//获取总页数,总条数/每页的条数
 				if(page>pages){
 					page = pages;
