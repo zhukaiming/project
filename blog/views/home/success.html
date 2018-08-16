@@ -1,0 +1,16 @@
+
+
+{% extends './layout.html' %}
+{% block header %}
+  分类列表
+{% endblock %}<!-- 继承父模板title部分 -->
+
+{% block content %}
+<p class="bg-info text-warning">{{ message }}</p>
+{% if url %}
+<a href="{{ url }}">退出</a>
+{% else %}
+<a href="javascript:window.history.back()">返回</a>
+{% endif %}
+
+{% endblock %}

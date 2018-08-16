@@ -78,14 +78,14 @@ router.post('/add',(req,res)=>{
 	.then((article)=>{//
 		res.render('Admin/success',{
 		userInfo:req.userInfo,//用户信息
-		message:'新增文章成功',
+		message:'新增分类成功',
 		url:'/article'
 		});
 	})
 	.catch((e)=>{
 		res.render('Admin/err',{
 		userInfo:req.userInfo,//用户信息
-		message:'新增文章失败'
+		message:'新增分类失败'
 		});
 	})
 })

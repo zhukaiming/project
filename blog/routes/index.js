@@ -8,9 +8,10 @@ const CategoryModel = require('../models/category.js');
 const ArticleModel = require('../models/article.js');
 const pagination = require('../util/pagination.js')
 const getCommonData = require('../util/getCommonData.js')
+const CommentModel=require('../models/comment.js')
+
 const router = Router();
 //显示首页
-
 router.get('/',(req,res)=>{
 	//获取首页
 	/*
@@ -48,6 +49,7 @@ router.get('/',(req,res)=>{
 				pages:pageData.pages,
 				topArticle:data.topArticle,
 				categories:data.categories,
+				site:data.site,
 				url:'/articles'//提交的地址
 				
 			})			
@@ -58,7 +60,7 @@ router.get('/',(req,res)=>{
 //利用ajax请求获取文章列表的分页
 //接收ajax请求
 router.get('/articles',(req,res)=>{
-	let category = req.query.category;
+	let category = req.query.id;
 	let query  = {};
 
 	if(category){
@@ -117,19 +119,25 @@ router.get('/view/:id',(req,res)=>{
 	.then(article=>{
 		getCommonData()
 		.then(data=>{
-			res.render('main/detail',{
-				userInfo:req.userInfo,
-				article:article,
-				categories:data.categories,
-				topArticle:data.topArticle,
-				category:article.category._id.toString()
-			})			
+			CommentModel.getPageComment(req,{article:id})//查询条件,获评论类的id
+			.then(pageData=>{
+				res.render('main/detail',{
+					userInfo:req.userInfo,
+					article:article,
+					categories:data.categories,
+					topArticle:data.topArticle,
+					comments:pageData.docs,
+					page:pageData.page,
+					list:pageData.list,
+					site:data.site,
+					pages:pageData.pages,
+					category:article.category._id.toString()
+				})
+			})
 		})
 	})
 })
-
 //显示列表页
-
 router.get('/list/:id',(req,res)=>{
 	//获取
 	let id = req.params.id;
@@ -143,12 +151,12 @@ router.get('/list/:id',(req,res)=>{
 				page:pageData.page*1,//传递当前页,把字符串转化为数字
 				list:pageData.list,
 				pages:pageData.pages,
+				site:data.site,
 				topArticle:data.topArticle,
 				categories:data.categories,
 				//category:id:接收一个分类,然后把该分类的id传递到页面,目的是让每一个列表页只显示他自己的文章
 				category:id,
 				url:'/articles'//提交的地址
-				
 			})			
 		})
 	})

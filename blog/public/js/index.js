@@ -28,7 +28,6 @@
 		if(!/^[a-z][a-z|0-9|_]{2,9}$/i.test(username)){
 			errmsg = '用户名必须是字母数字下划线开头,2-9个字符';
 		}
-
 		//密码
 		if(!/^\w{3,10}$/.test(username)){
 			errmsg = '密码为3-10个字符'
@@ -164,7 +163,14 @@
 
 
 //发送ajax文章列表请求
-	$('#page').on('click','a',function(){
+	var $articlePage = $('#article-page');
+	$articlePage.on('get-data',function(e,result){
+		buildArticlelist(result.data.docs);
+		buildPage($articlePage,result.data.list,result.data.page);
+	})
+	$articlePage.pagination();
+	/*
+	$articlePage.on('click','a',function(){
 		//console.log(this)
 		var $this = $(this);
 		var page = 1;
@@ -196,7 +202,7 @@
 		.done(function(result){
 			if(result.code == 0){
 				buildArticlelist(result.data.docs);
-				buildPage(result.data.list,result.data.page)
+				buildPage(result.data.list,result.data.page);
 			}
 		})
 		.fail(function(){
@@ -204,7 +210,8 @@
 		})
 
 	})
-	function buildPage(list,page){
+	*/
+	function buildPage($page,list,page){
 		var html = '';
 		//
 			html = `
@@ -229,7 +236,8 @@
 					    </li>
 						`
 			//
-			$('#page .pagination').html(html);
+			$page.find('.pagination').html(html);
+			// $('#page .pagination').html(html);
 	}
 	function buildArticlelist(articles){
 		var html = '';
@@ -256,12 +264,33 @@
 			  </div>
 			</div>`
 		}
-
 		//
 		$('#article-list').html(html);
 	}
 
+	function buildCommentlist(comments){
+		var html = '';
+		for(var i = 0;i<comments.length;i++){
+		var createdAt = moment(comments[i].createdAt).format('MMMM Do YYYY, h:mm:ss');
+
+		html += 
+			`
+			<div class="panel panel-default">
+			  <div class="panel-heading">${ comments[i].user.username }发表于${ createdAt }</div>
+			  <div class="panel-body">
+			    ${ comments[i].content }
+			  </div>
+			</div>
+			`
+		}
+		$('#comment-list').html(html);	
+	}
+
+
 	//评论
+	var $commentPage = $('#comment-page');
+
+	
 	$('#comment-btn').on('click',function(){
 		var articleId = $('#article-id').val();
 		var conmmentContent = $('#comment-content').val();
@@ -277,14 +306,34 @@
 			dataType:'json',
 			type:'post',
 			data:{id:articleId,content:conmmentContent}
-
 		})
 		.done(function(result){
-			console.log(result)
+			//
+			//buildCommentlist(result.data.docs)
+			//2.
+			//buildPage(result.data.list,result.data.page)
+			
+			if(result.code == 0){
+				//1渲染评论列表
+				buildCommentlist(result.data.docs);
+				//2渲染分页
+				buildPage($commentPage,result.data.list,result.data.page)
+			}
+			
+			//console.log('111',result)
 		})
 		.fail(function(err){
 			console.log(err)
 		})
+	})
+	$commentPage.on('get-data',function(e,result){
+		buildCommentlist(result.data.docs);
+		//2渲染分页
+		if(result.data.pages>1){
+			buildPage($commentPage,result.data.list,result.data.page);
+		}
 		
 	})
+	$commentPage.pagination();	
+
 })(jQuery)

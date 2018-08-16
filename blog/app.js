@@ -77,13 +77,14 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 //5:处理路由
-//5:处理路由
 app.use("/",require('./routes/index.js'));
 app.use("/user",require('./routes/user.js'));
 app.use("/Admin",require('./routes/Admin.js'));
 app.use("/category",require('./routes/category.js'));
 app.use("/article",require('./routes/article.js'));
 app.use("/comment",require('./routes/comment.js'));
+app.use("/resource",require('./routes/resource.js'));
+app.use("/home",require('./routes/home.js'));
 // app.use("/wish",require('./routes/wish.js'));
 app.listen(3000,()=>{
 	console.log("server running at 127.0.0.1:3000")

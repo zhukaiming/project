@@ -10,3 +10,15 @@
 .blog-menu li:hover{
 	background: blue;
 }
+table.table {
+	table-layout: fixed;
+}
+td{
+	word-break: break-word;
+}
+.btn-add{
+	margin-top: 10px;
+}
+.row-site{
+	margin-bottom: 10px;
+}

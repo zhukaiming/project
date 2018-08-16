@@ -34,6 +34,7 @@
 	</div>
 	<div class="row">
 	  <div class="col-lg-12">
+	  	{% if userInfo._id %}
 	    <div class="input-group">
 	     <textarea id="comment-content" cols="30" rows="3" class = "form-control"></textarea>
 	      <span class="input-group-btn">
@@ -43,7 +44,49 @@
 	      </span>
 	    </div>
 	    <p class = "text-danger err"></p>
+	    {% else %}
+	    <div class="alert alert-success" role="alert">请登入后评论</div>
+	    {% endif %}
 	  </div>	
 	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div id = "comment-list"></div>
+			{% for comment in comments %}
+			<div class="panel panel-default">
+			  <div class="panel-heading">{{ comment.user.username }}发表于{{ comment.createdAt | date('Y年m月d日 H:i:s',-8*60) }}</div>
+			  <div class="panel-body">
+			    {{ comment.content }}
+			  </div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	<nav aria-label="Page navigation" id = "comment-page" data-url = "/comment/list" data-id = "{{ article._id.toString() }}">
+	{% include './pagination.html' %}
+	</nav>
+<!-- 	<nav aria-label="Page navigation" id = "comment-page">
+  <ul class="pagination">
+    <li>//点击的时候发送请求到Admin/users,调用get方法,让当前页-1
+      <a href="javascript:;" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    //遍历数组
+	{% for i in list %}
+	{% if i ==page %}//如果是当前页
+	<li class = "active"><a href="javascript:;">{{ i }}</a></li>
+	{% else %}//如果bu是当前页
+	<li><a href="javascript:;">{{ i }}</a></li>
+	{% endif %}
+    
+	{% endfor %}
+    <li>
+      <a href="javascript:;" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav> -->
 {% endblock %}
 

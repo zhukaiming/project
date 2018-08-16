@@ -1,0 +1,117 @@
+
+
+{% extends './layout.html' %}
+{% block header %}
+  站点
+{% endblock %}<!-- 继承父模板title部分 -->
+
+{% block content %}
+<form class="form-horizontal" action="/admin/site" method="post">
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">网站名称</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" name = "name" placeholder="输入网站名" value = "{{ site.name }}" required>
+    </div>
+    <p class = "text-danger err"></p>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">轮播图</label>
+    <div class="col-lg-6">
+      {% for carousel in site.carouseles %}
+      <div class="row row-site">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <span class="input-group-addon">
+              跳转地址
+            </span>
+            <input type="text" class="form-control" aria-label="" name = "carouselUrl" required value="{{ carousel.url }}">
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        <div class="col-lg-5">
+          <div class="input-group">
+            <span class="input-group-addon">
+              图片地址
+            </span>
+            <input type="text" class="form-control" aria-label="..." required  name = "carouselPath" required value="{{ carousel.path }}">
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        <a href="javascript:;" class = "btn btn-danger btn-remove">删除</a>
+      </div><!-- /.row -->  
+      {% endfor %}
+      <a href="javascript:;" class = "btn btn-info btn-add">新增</a>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">广告</label>
+    <div class="col-lg-6">
+      {% for ad in site.ads %}
+      <div class="row row-site">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <span class="input-group-addon">
+              跳转地址
+            </span>
+            <input type="text" class="form-control" aria-label="..." required  name = "adUrl" required value="{{ ad.url }}">
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        <div class="col-lg-5">
+          <div class="input-group">
+            <span class="input-group-addon">
+              图片地址
+            </span>
+            <input type="text" class="form-control" aria-label="..." required  name = "adPath" required value="{{ ad.path }}">
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        <a href="javascript:;" class = "btn btn-danger btn-remove">删除</a>
+      </div><!-- /.row -->  
+       {% endfor %}
+       <a href="javascript:;" class = "btn btn-info btn-add">新增</a>
+       
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">博主</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" name = "authorName" placeholder="" required value="{{ site.author.name }}">
+    </div>
+    <p class = "text-danger err"></p>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">博主介绍</label>
+    <div class="col-sm-6">
+      <textarea name = "authorIntro" cols="30" rows="6">{{ site.author.intro }}</textarea>
+    </div>
+    <p class = "text-danger err"></p>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">博主头像</label>
+    <div class="col-sm-6">
+     <input type="text" class="form-control" name = "authorImage" placeholder="" required value="{{ site.author.image }}">
+    </div>
+    <p class = "text-danger err"></p>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">微信</label>
+    <div class="col-sm-6">
+     <input type="text" class="form-control" name = "authorWechat" placeholder="" required value="{{ site.author.wechat }}">
+    </div>
+    <p class = "text-danger err"></p>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">ICP</label>
+    <div class="col-sm-6">
+     <input type="text" class="form-control" name = "icp" placeholder="" required value="{{ site.icp }}">
+    </div>
+    <p class = "text-danger err"></p>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+      <button type="submit" class="btn btn-primary" id="btn-sub">提交</button>
+    </div>
+  </div>
+</form>
+{% endblock %}
+{% block end %}
+<script src = "/js/site.js"></script>
+{% endblock %}
