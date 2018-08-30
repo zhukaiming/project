@@ -27,7 +27,7 @@ class MySider extends Component{
 			            <NavLink to="/category"><Icon type="bars" />分类管理</NavLink>
 			            </Menu.Item>
 			            <Menu.Item key="4">
-			            	<NavLink to="/sort"><Icon type="appstore-o" />商品管理</NavLink>
+			            	<NavLink to="/product"><Icon type="appstore-o" />商品管理</NavLink>
 			            </Menu.Item>
 
 			        </Menu>

@@ -84,7 +84,7 @@ class NormalCategoryForm extends Component{
 			            }],
 			          })(
 							    <Select initialValue="0" style={{ width: 120 }}>
-							      <Option value="1">根分类</Option>
+							      <Option value="0">根分类</Option>
 							     {
 							     	this.props.oneCategories.map((category)=>{
 							     		return <Option key={category.get('_id')} value={category.get('_id')}>跟分类/{category.get('name')}</Option>

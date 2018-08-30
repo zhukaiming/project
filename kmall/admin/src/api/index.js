@@ -14,4 +14,15 @@ export const ADD_CATEGORY = SERVER + 'category';
 
 export const GET_CATEGORY = SERVER + 'category';
 
+export const CAHNGE_CATEGORY = SERVER + 'category/updataname';
+
+
+export const UPDATA_ORDER = SERVER + 'category/updataOrder';
+
+
+
+
+
+
+
 

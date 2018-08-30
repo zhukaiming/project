@@ -5,6 +5,7 @@ import Login from 'pages/login';
 import Home from 'pages/home';
 import User from 'pages/user';
 import Category from 'pages/category';
+import Product from 'pages/product';
 import { getUsername } from 'util';
 import './App.css';
 import  Errorpage  from 'common/err'
@@ -51,6 +52,7 @@ class App extends Component{
 						<ProtectedRouter exact path="/" component={ Home } />
 						<ProtectedRouter  path="/user" component={ User } />
 						<ProtectedRouter  path="/category" component={ Category } />
+						<ProtectedRouter  path="/product" component={ Product } />
 						<LoginRouter path="/login" component={ Login } />
 						<Route component={ Errorpage } />
 					</Switch>

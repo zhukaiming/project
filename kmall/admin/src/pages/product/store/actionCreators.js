@@ -158,7 +158,7 @@ export const changeNameAction = (payload)=>{
 
 export const updataCategoryAction = (pid)=>{
   return (dispatch,getState)=>{//获取category上的state
-        const state = getState().get('category');
+        const state = getState().get('category')
         proajax({
           method: 'put',
           url: CAHNGE_CATEGORY,
