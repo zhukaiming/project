@@ -173,6 +173,9 @@ export const updataCategoryAction = (pid)=>{
           if(result.code == 0){
             console.log('getup...',result.data)
             dispatch(GetCategoriesPage(result.data));//
+            message.success('添加分类成功')
+            dispatch(handleCancelAction())
+
           }else{
             message.error('获取失败')
           }

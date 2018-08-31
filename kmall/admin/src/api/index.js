@@ -19,6 +19,17 @@ export const CAHNGE_CATEGORY = SERVER + 'category/updataname';
 
 export const UPDATA_ORDER = SERVER + 'category/updataOrder';
 
+export const GET_PRODUCT_IMG = SERVER + 'product/uploadproductImages';
+
+export const UPDATA_PRODUCT_DETAIL_IMAGE = SERVER + 'product/updataload';
+export const ADD_PRODUCT = SERVER + 'product';
+
+
+
+
+
+
+
 
 
 

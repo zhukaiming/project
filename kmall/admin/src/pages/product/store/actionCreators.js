@@ -4,27 +4,20 @@ import * as types from './actionType.js';
 import axios from 'axios';
 import { message } from 'antd';
 import { proajax } from 'util';
-import { ADD_CATEGORY,GET_CATEGORY,CAHNGE_CATEGORY,UPDATA_ORDER } from 'api';
+import { GET_CATEGORY,CAHNGE_CATEGORY,UPDATA_ORDER,ADD_PRODUCT } from 'api';
 
-const getAddRequst = ()=>{
+const getSaveRequst = ()=>{
 	return{
-		type:types.ADD_REQUST
+		type:types.SAVE_REQUST
 	}
 }
 //
-const getAddDone = ()=>{
+const getSaveDone = ()=>{
 	return{
-		type:types.ADD_DONE
+		type:types.SAVE_DONE
 	}
 }
-//获取分类
-const GetoneCategories = (payload)=>{
-  return{
-    type:types.GET_CATEGORIES,
-    payload
-  }
-}
-//
+
 //获取分类分页
 const GetCategoriesPage = (payload)=>{
   return{
@@ -34,43 +27,74 @@ const GetCategoriesPage = (payload)=>{
 }
 //
 
-const upDataCategoryName = (payload)=>{
+
+//
+export const GetSetCategoryAction = (parentCategoryId,categoryId)=>{
   return{
-    type:types.UPDATA_CATEGORY,
-    payload
-  }
-}
-//更改分类
-//存储updataId,updataName,更新分类
-export const upDataModalAction = (updataId,updataName)=>{
-  return{
-    type:types.UPDATA_MODAL,
+    type:types.GET_SET_CATEGORY,
     payload:{
-      updataId,
-      updataName
+      parentCategoryId,
+      categoryId
     }
   }
 }
 
-//存储，更新
-export const handleCancelAction = ()=>{
+//
+export const GetSetImagesAction = (fileList)=>{
   return{
-    type:types.CANCEL_OUT
+    type:types.GET_SET_IMAGES,
+    payload:fileList
+  }
+}
+
+//GetSetDetailAction
+
+export const GetSetDetailAction = (payload)=>{
+  return{
+    type:types.GET_SET_DETAIL,
+    payload
+  }
+}
+//
+export const categoryErr = ()=>{
+  return{
+    type:types.CATEGORY_ERR
   }
 }
 
 //GetCategoryPageAction
-//添加分类
-export const getAddAction = (values)=>{
+//商品提交
+export const getSaveAction = (err,values)=>{
 	//返回一个函数
 	//函数接收dispatch参数
 	//发送ajax请求到服务端
-	return (dispatch)=>{
+  //发送商品数据信息到服务器
+	return (dispatch,getState)=>{
 	    // dispatch(getAddRequst());
+        //getState方法返回的是整个store的数据
+        //获取product组件的数据信息
+        dispatch(getSaveRequst());
+        const state = getState().get('product');
+        const categoryId = state.get('categoryId')
+        //如果没有选择所属分类
+        if(!categoryId){
+          dispatch(categoryErr());
+          return;
+        }
+        if(err){
+          return;
+        }
+        console.log('123',state)
         proajax({
           method: 'post',
-          url: ADD_CATEGORY,
-          data:values
+          url: ADD_PRODUCT,
+          data:{
+            //
+            ...values,
+            category:categoryId,
+            images:state.get('images'),
+            detail:state.get('value')
+          }
         })
         .then((result)=>{
           console.log('666',result)
@@ -78,7 +102,8 @@ export const getAddAction = (values)=>{
             if(result.data){//如果添加的是一级分类,从新更新一级分类
               dispatch(GetoneCategories(result.data));// 
             }
-            message.success('添加分类成功')
+            message.success('提交商品管理成功')
+            dispatch(getSaveDone());
           }else{
             message.error('获取失败')
           }
@@ -86,99 +111,7 @@ export const getAddAction = (values)=>{
         })
         .catch((e)=>{
           message.error('网络错误')
-          dispatch(getAddDone());
-        })      
-     }
-}
-
-//获取一级分类
-export const GetCategoryOneAction = ()=>{
-  //返回一个函数
-  //函数接收dispatch参数
-  //发送ajax请求到服务端
-  return (dispatch)=>{
-        proajax({
-          method: 'get',
-          url: GET_CATEGORY,
-          data: {
-            pid:0//获取根分类的所有一级分类
-          }
-        })
-        .then((result)=>{
-          if(result.code == 0){
-            console.log('set...',result)
-            dispatch(GetoneCategories(result.data));//
-          }else{
-            message.error('获取失败')
-          }
-        })
-        .catch((e)=>{
-          message.error('网络错误')
-        })      
-     }
-}
-//
-//获取当前pid的分页
-export const GetCategoryPageAction = (pid,page)=>{
-  //返回一个函数
-  //函数接收dispatch参数
-  //发送ajax请求到服务端
-  return (dispatch)=>{
-        proajax({
-          method: 'get',
-          url: GET_CATEGORY,
-          data: {
-            pid:pid,//获取根分类的所有一级分类
-            page:page
-          }
-        })
-        .then((result)=>{
-          if(result.code == 0){
-            console.log('get...',result.data)
-            dispatch(GetCategoriesPage(result.data));//
-          }else{
-            message.error('获取失败')
-          }
-        })
-        .catch((e)=>{
-          message.error('网络错误')
-        })      
-     }
-}
-
-//更改名称
-export const changeNameAction = (payload)=>{
-  return{
-    type:types.CHANGE_NAME,
-    payload
-  }
-}
-
-//更新分类名称
-
-export const updataCategoryAction = (pid)=>{
-  return (dispatch,getState)=>{//获取category上的state
-        const state = getState().get('category')
-        proajax({
-          method: 'put',
-          url: CAHNGE_CATEGORY,
-          data:{
-            id:state.get('updataId'),
-            name:state.get('updataName'),
-            pid:pid,
-            page:state.get('current')//当前页码
-          }
-        })
-        .then((result)=>{
-          if(result.code == 0){
-            console.log('getup...',result.data)
-            dispatch(GetCategoriesPage(result.data));//
-          }else{
-            message.error('获取失败')
-          }
-        })
-        .catch((e)=>{
-          message.error('网络错误')
+          dispatch(getSaveDone());
         })      
      }
 }
