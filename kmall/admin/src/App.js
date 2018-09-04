@@ -46,7 +46,7 @@ class App extends Component{
 		}
 
 		return(
-			<Router className="box">
+			<Router forceRefresh={true}>
 				<div>
 					<Switch>
 						<ProtectedRouter exact path="/" component={ Home } />

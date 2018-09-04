@@ -3,6 +3,7 @@ const Router  = require('express').Router;
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
+const ProductModel = require('../models/product.js');
 const router = Router();
 //
 const storage = multer.diskStorage({
@@ -23,7 +24,7 @@ router.use((req,res,next)=>{
 	}
 })
 
-//处理新增资源
+//处理图片新增资源
 router.post('/uploadproductImages',upload.single('file'),(req,res)=>{
 	//发送FilePath到服务器端
 	//
@@ -41,4 +42,240 @@ router.post('/updataload',upload.single('upload'),(req,res)=>{
 	})// path: 'public\\resource\\1534175359489.jpg')
 })
 
+//处理提交
+router.post('/',(req,res)=>{
+	let body = req.body;
+		new ProductModel({
+			name:body.name,
+			category:body.category,
+			description:body.description,
+			detail:body.detail,
+			images:body.images,
+			price:body.price,
+			stock:body.stock,
+			status:body.status
+		})
+		.save()
+		.then((product)=>{//渲染成功页面
+			//新增分类成功
+			if(product){//
+				res.json({
+					code:0,
+					message:'新增商品成功'
+				})
+			}
+		})
+		//新增失败
+		.catch((e)=>{
+			res.json({
+				code:1,
+				message:'新增商品失败'
+			})
+		})
+
+			//name price _id status:0//在售
+			//_id pid
+			//
+})
+
+
+
+//get获取分类
+router.get('/',(req,res)=>{
+
+	let page = req.query.page;
+	console.log('page',page)
+	//如果有page的话,显示分页列表
+		ProductModel.getPageProduct(page,{})//调用获取分页封装的函数
+		.then((result)=>{
+			res.json({
+				code:0,
+				data:{
+					list:result.list,
+				    current:result.current,
+				    total:result.total,
+				    pageSize:result.pageSize					
+				}
+			})
+		})
+})
+
+//搜索
+router.get('/searchProduct',(req,res)=>{
+	let page = req.query.page || 1;
+	let keyWord = req.query.keyWord;
+	console.log('page',page)
+	//如果有page的话,显示分页列表
+		ProductModel
+		.getPageProduct(page,{
+			name:{$regex : new RegExp(keyWord,'i')}})//新建一个正则,查找
+		.then((result)=>{
+			res.json({
+				code:0,
+				data:{
+					list:result.list,
+				    current:result.current,
+				    total:result.total,
+				    pageSize:result.pageSize,
+				    keyWord:keyWord
+				}
+			})
+		})
+})
+//更新排序
+router.put('/updataProductOrder',(req,res)=>{
+	//console.log(req.body)
+	let body = req.body;
+	ProductModel.update({_id:body.id},{order:body.order})
+	.then((product)=>{
+		if(product){
+			ProductModel.getPageProduct(body.page,{})//调用获取分页封装的函数
+			.then((result)=>{
+				res.json({
+					code:0,
+					data:{
+						list:result.list,
+					    current:result.current,
+					    total:result.total,
+					    pageSize:result.pageSize					
+					}
+				})
+			})					
+		}else{
+			res.json({
+				code:1,
+				message:'更新order失败'
+			})					
+		}
+	})
+})
+//编辑商品
+router.put('/',(req,res)=>{
+	//console.log(req.body)
+	let body = req.body;
+	let update = {
+		name:body.name,
+		category:body.category,
+		description:body.description,
+		detail:body.detail,
+		images:body.images,
+		price:body.price,
+		stock:body.stock,
+		status:body.status
+	}
+	ProductModel
+	.update({_id:body.id},update)
+	.then((product)=>{//渲染成功页面
+		//新增分类成功
+		if(product){//
+			res.json({
+				code:0,
+				message:'编辑商品成功'
+			})
+		}
+	})
+	//新增失败
+	.catch((e)=>{
+		res.json({
+			code:1,
+			message:'新增商品失败'
+		})
+	})
+})
+//
+router.put('/updataProductStatus',(req,res)=>{
+	//console.log(req.body)
+	let body = req.body;
+	ProductModel.update({_id:body.id},{status:body.status})
+	.then((product)=>{
+		if(product){
+			res.json({
+				code:0,
+				message:'更新状态成功'
+			})						
+		}else{
+			ProductModel.getPageProduct(body.page,{id:body.id})//调用获取分页封装的函数
+			.then((result)=>{
+				res.json({
+					code:1,
+					data:{
+						list:result.list,
+					    current:result.current,
+					    total:result.total,
+					    pageSize:result.pageSize					
+					}
+				})
+			})			
+				
+		}
+	})
+})
+//
+router.get('/detail',(req,res)=>{
+	//获取首页
+	let id = req.query.id;
+	//console.log(id)
+	ProductModel
+	.findById(id,"-__v -order -status -createdAt -updatedAt")//筛选字段，不要
+	.populate({path:'category',select:'_id pid'})//
+	.then((product)=>{
+		res.json({
+			code:0,
+			data:product
+		})		
+	})
+	
+})
+
+/*
+//post新增分类
+router.post('/',(req,res)=>{
+	//console.log(req.body)
+	//插入数据到数据库
+	let body = req.body;
+	ProductModel.findOne({name:body.name,pid:body.pid})
+	.then((cate)=>{
+		console.log('44',cate)
+		//已经存在分类名的话
+		if(cate){//渲染失败页面
+			res.json({
+				code:1,
+				message:'已有该分类'
+			})
+		}else{//bu存在分类名
+			//新建一个model
+			new ProductModel({
+				name:body.name,
+				pid:body.pid
+			})
+			.save()
+			.then((newcate)=>{//渲染成功页面
+				//新增分类成功
+				if(newcate){
+					if(body.pid==0){//如果添加的是一级分类,返回一级分类,在前台显示新添加的一级分类
+						ProductModel.find({pid:0},"_id name")
+						.then((categories)=>{
+							res.json({
+								code:0,
+								data:categories
+							})
+						})
+					}else{
+						res.json({
+							code:0,
+						})						
+					}
+				}
+			})
+			//新增失败
+			.catch((e)=>{
+				res.json({
+					code:1,
+					message:'新增分类失败'
+				})
+			})
+		}
+	})
+})
+*/
 module.exports = router;

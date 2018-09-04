@@ -7,7 +7,7 @@ import MyLayout from 'common/layout';
 import { proajax } from 'util';
 import * as types from './store/actionType.js';
 import { Select  } from 'antd';
-import { GET_CATEGORY } from 'api'
+import { GET_CATEGORY } from 'api';
 import {
 // 使用BrowserRouter时,页面刷新会向服务器发送请求,而HashRouter不会
 // 使用BrowserRouter时devServer的historyApiFallback:true	
@@ -28,7 +28,9 @@ class CreateSelect extends Component{
 			levalOneCategories:[],
 			levalOneCategoriesId:'',
 			levalTwoCategories:[],
-			levalTwoCategoriesId:''
+			levalTwoCategoriesId:'',
+      needToLoadLevalTwo:false,
+      isChanged:false
 		}
 		this.handleOneCategory = this.handleOneCategory.bind(this)
 		this.handleTwoCategory = this.handleTwoCategory.bind(this)
@@ -36,7 +38,56 @@ class CreateSelect extends Component{
   componentDidMount(){
   	this.loadOneCategory();//执行函数,发送ajax请求
   }
+  //props是父组件传来的parentCategoryId和categoryId
+  //回填商品分类
+  //props发生变化,更新state的场景
+  static getDerivedStateFromProps(props,state){
+    console.log('props',props)
+    console.log('state',state)
+    // console.log('state.....1',props.parentCategoryId)
+    // console.log('state.....2',state.levalOneCategoriesId)
+    //
+    const levalOneCategoriesIdChanged = props.parentCategoryId !== state.levalOneCategoriesId;
+    const levalTwoCategoriesIdChanged = props.categoryId !== state.levalTwoCategoriesId;
+    //
+    if(state.levalOneCategoriesIdChanged && !props.parentCategoryId && !props.categoryId){
+      return null;
+    }
+    //如果分类id没有改变,不更新state
+    if(!levalOneCategoriesIdChanged && !levalTwoCategoriesIdChanged){
+      return null;
+    }
+    //
+    if(state.isChanged){
+      return null;
+    }
 
+    if(props.parentCategoryId == 0){//只有一级分类
+      return {
+        levalOneCategoriesId:props.categoryId,//
+        levalTwoCategoriesId:'',
+        isChanged:true     
+      }
+    }else{
+      return {
+        levalOneCategoriesId:props.parentCategoryId,
+        levalTwoCategoriesId:props.categoryId,
+        needToLoadLevalTwo:true,
+        isChanged:true  
+      }
+    }
+    return null;
+  }
+  //获取二级分类
+  componentDidUpdate(){
+    console.log('this.state.needToLoadLevalTwo',this.state.needToLoadLevalTwo)
+    if(this.state.needToLoadLevalTwo){
+      this.loadTwoCategory();
+      this.setState({
+        needToLoadLevalTwo:false
+      })
+    }
+  }
   //获取一级分类
   loadOneCategory(){
         proajax({
@@ -57,8 +108,8 @@ class CreateSelect extends Component{
           }
         })
   }
-  //  //选择一级分类一级分类
-  //value:选择的一级分类的id
+   //选择一级分类一级分类
+  // value:选择的一级分类的id
   handleOneCategory(value){
     //console.log('value',value)
   	this.setState({
@@ -119,16 +170,20 @@ class CreateSelect extends Component{
 	        <Select 
 	        	style={{ width: 400 }}
 	        	onChange={this.handleOneCategory}
+            disabled={this.props.disabled}
+            defaultValue={ levalOneCategoriesId }
+            value={ levalOneCategoriesId }
 	        	>
 	          {levalOneOptions}
 	        </Select>
           {
             levalTwoOptions.length
-            ? <Select 
+            ? <Select
               style={{ width: 400 }}
               defaultValue={ levalTwoCategoriesId }
               value={ levalTwoCategoriesId }
               onChange={this.handleTwoCategory}
+              disabled={this.props.disabled}
               >
               {levalTwoOptions}
             </Select>

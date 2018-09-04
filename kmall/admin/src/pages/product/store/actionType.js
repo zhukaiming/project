@@ -27,6 +27,7 @@ export const GET_SET_DETAIL = 'product\GET_SET_DETAIL'
 export const SAVE_REQUST = 'product\SAVE_REQUST'
 export const SAVE_DONE = 'product\SAVE_DONE'
 export const CATEGORY_ERR = 'product\CATEGORY_ERR'
+export const GET_SET_EDITPRODUCT = 'product\GET_SET_EDITPRODUCT'
 
 
 

@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import MyLayout from 'common/layout';
 import ProductList from './list.js';
 import ProductAdd from './save.js';
+import ProductDetail from './detail.js';
 import {
 // 使用BrowserRouter时,页面刷新会向服务器发送请求,而HashRouter不会
 // 使用BrowserRouter时devServer的historyApiFallback:true	
@@ -21,7 +22,8 @@ class Product extends Component{
 		return(
 				<div>
 					<Switch>
-						<Route path="/product/save" component={ ProductAdd } />
+						<Route path="/product/save/:productId?" component={ ProductAdd } />
+						<Route path="/product/detail/:productId" component={ ProductDetail } />
 						<Route path="/product" component={ ProductList } />
 					</Switch>	
 				</div>

@@ -10,9 +10,8 @@ import CreateSelect from './category-selector.js';
 import UpDateImg from 'common/upload-img';
 
 import RichEditor from 'common/rich-editor';
-
+import './detail.css';
 import {GET_PRODUCT_IMG,UPDATA_PRODUCT_DETAIL_IMAGE} from 'api';
-
 
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
 import {
@@ -31,7 +30,6 @@ const Option = Select.Option;
 class NormalCategoryForm extends Component{
 	constructor(props){
 		super(props)
-		this.handleSubmit=this.handleSubmit.bind(this)
 		//通过判断有没有productId来判断是编辑操作还是新增
 		this.state={
 			productId : this.props.match.params.productId
@@ -45,17 +43,6 @@ class NormalCategoryForm extends Component{
 
     }
   }
-  //处理提交事件
-  //获取组件信息,然后发送到后台,进行数据更新处理
-	handleSubmit(e){
-		e.preventDefault();
-		this.props.form.validateFields((err, values) => {
-		    //console.log('Received values of form: ', values);
-		    //判断编辑还是提交
-		    values.id=this.state.productId;
-		    this.props.handleSave(err,values)
-		});
-	}
 	//从store中获取这些数据
 	render(){
 		const {
@@ -71,14 +58,13 @@ class NormalCategoryForm extends Component{
 			description
 		} = this.props;
 		//图片回填
-		let fileList = [];
+		let imgBox = '';
 		console.log('img',images)
 		if(images){
-			fileList = images.split(',').map((img,index)=>({
-					uid: index, 
-					status: 'done',
-					url:img
-			}))
+			imgBox = images.split(',').map((img,index)=>(
+				<li key={index}>
+					<img src={img} />
+				</li>))
 		}
 		//console.log('aaa:',this.props.categories)
     const { getFieldDecorator } = this.props.form;
@@ -104,6 +90,7 @@ class NormalCategoryForm extends Component{
         },
       }
     };
+    
     ////传递GetCategoryId方法函数到子组件,获取子组件的分类id
     // pid,id：分类的父id和子id
     //商品分类:
@@ -117,12 +104,7 @@ class NormalCategoryForm extends Component{
 				          <Breadcrumb>
 				            <Breadcrumb.Item>Category</Breadcrumb.Item>
 				            <Breadcrumb.Item>
-				            	{
-				            		this.state.productId
-				            		? '编辑商品'
-				            		: '添加商品'
-
-				            	}
+				            	商品详情
 				            </Breadcrumb.Item>
 				          </Breadcrumb>
 					      <Form onSubmit={this.handleSubmit} className="login-form">
@@ -130,31 +112,21 @@ class NormalCategoryForm extends Component{
 					          {...formItemLayout}
 					          label="商品名称"
 					        >
-					          {getFieldDecorator('name', {
-					            rules: [{
-					              required: true, message: '请输入分类',
-					            }],
-					            initialValue:name
-					          })(
 					            <Input 
 					            	style={{ width: 400 }}
+					            	disabled={true}
+					            	defaultValue={name}
 					            />
-					          )}
 					        </FormItem>
 					        <FormItem
 					          {...formItemLayout}
 					          label="商品描述"
 					        >
-					          {getFieldDecorator('description', {
-					            rules: [{
-					              required: true, message: '请输入分类',
-					            }],
-					            initialValue:description
-					          })(
 					            <Input 
 					            	style={{ width: 400 }}
+					            	disabled={true}
+					            	defaultValue={description}					            	
 					            />
-					          )}
 					        </FormItem>
 					        <FormItem
 					          {...formItemLayout}
@@ -162,10 +134,11 @@ class NormalCategoryForm extends Component{
 					          required={true}
 					          validateStatus={this.props.categoryIdvalidataStatus}
 					          help={this.props.categoryIdhelp}
-					        >
+					        >	
 					        	<CreateSelect
 											parentCategoryId={parentCategoryId}
 											categoryId={categoryId}
+											disabled={true}        	
 					        		GetCategoryId = {(parentCategoryId,categoryId)=>{
 					        			//console.log(pid,id)
 					        			this.props.handleCategory(parentCategoryId,categoryId);
@@ -177,75 +150,39 @@ class NormalCategoryForm extends Component{
 					          {...formItemLayout}
 					          label="商品价格"
 					        >
-					          {getFieldDecorator('price', {
-					            rules: [{
-					              required: true, message: '请输入分类',
-					            }],
-					            initialValue:price
-					          })(
 					            <InputNumber
 					            	style={{ width: 400 }}
 					              formatter={value => `${value}元`}
 					              parser={value=>value.replace('元')}
-
+					              disabled={true}
+					              defaultValue={price}
 					            />
-					          )}
 					        </FormItem>
 					        <FormItem
 					          {...formItemLayout}
 					          label="商品库存"
 					        >
-					          {getFieldDecorator('stock', {
-					            rules: [{
-					              required: true, message: '请输入分类',
-					            }],
-					            initialValue:stock
-					          })(
 					            <InputNumber
 					            	style={{ width: 400 }}
 					              formatter={value => `${value}件`}
 					              parser={value=>value.replace('件')}
+					              disabled={true}
+					              defaultValue={stock}
 					            />
-					          )}
 					        </FormItem>
 					        <FormItem
 					          {...formItemLayout}
 					          label="商品图片"
 					        >
-					        <UpDateImg
-					        	action={GET_PRODUCT_IMG}
-					        	fileList={fileList}
-					        	max={3}
-					        	//接收子组件传过来的图片地址
-					        	getImg={
-					        		(fileList)=>{
-					        			console.log('save..',fileList)
-					        			this.props.handleImages(fileList);
-					        		}
-					        	}
-					        />
+					        	<ul className="imgBox">
+					        		{imgBox}
+					        	</ul>
 					        </FormItem>
 					        <FormItem
 					          {...formItemLayout}
 					          label="商品详情"
 					        >
-					        <RichEditor
-					        	url = { UPDATA_PRODUCT_DETAIL_IMAGE }
-					        	GetRichEditorValue={
-					        		(value)=>{
-					        			//console.log('value',value)
-					        			this.props.handleDetail(value);
-					        		}
-					        	}
-					        	detail={detail}
-					        />
-					        </FormItem>
-					        <FormItem {...tailFormItemLayout}>
-					          <Button 
-					          	type="primary"
-					          	onClick={this.handleSubmit}
-					          	loading={this.props.isAddFeting} 
-					          	>提交</Button>
+					        <div dangerouslySetInnerHTML={{__html:detail}}></div>
 					        </FormItem>
 					      </Form>
 						</div>
@@ -269,6 +206,7 @@ const mapStateToProps = (state)=>{
 		stock:state.get('product').get('stock'),
 		price:state.get('product').get('price'),
 		description:state.get('product').get('description'),
+		keyWord:state.get('product').get('keyWord'),
  	/*name:state.get('category').get('name'),
     pid:state.get('category').get('pid')*/
   }
@@ -295,6 +233,6 @@ const mapDispatchToProps = (dispatch)=>{
   }
 }
 
-const ProductAdd=  Form.create()(NormalCategoryForm)
+const ProductDetail=  Form.create()(NormalCategoryForm)
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProductAdd);
+export default connect(mapStateToProps,mapDispatchToProps)(ProductDetail);

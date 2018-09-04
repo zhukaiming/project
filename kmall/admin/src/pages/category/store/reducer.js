@@ -53,7 +53,7 @@ export default (state=defaultState,action)=>{
 	if(action.type == types.GET_PAGE_CATEGORIES){
 
 		return state.merge({
-			defaultCurrent:action.payload.defaultCurrent,
+			current:action.payload.current,
 			total:action.payload.total,
 			pageSize:action.payload.pageSize,
 			list:fromJS(action.payload.list)//

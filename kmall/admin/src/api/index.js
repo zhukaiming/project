@@ -23,6 +23,13 @@ export const GET_PRODUCT_IMG = SERVER + 'product/uploadproductImages';
 
 export const UPDATA_PRODUCT_DETAIL_IMAGE = SERVER + 'product/updataload';
 export const ADD_PRODUCT = SERVER + 'product';
+export const GET_Product = SERVER + 'product';
+export const UPDATA_PRODUCT_ORDER = SERVER + 'product/updataProductOrder';
+export const GET_PRODUCY_DETAIL = SERVER + 'product/detail';
+export const UPDATA_PRODUCT_STATUS = SERVER + 'product/updataProductStatus';
+export const GET_SEARCH_PRODUCT = SERVER + 'product/searchProduct';
+
+
 
 
 

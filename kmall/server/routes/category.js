@@ -72,7 +72,7 @@ router.post('/',(req,res)=>{
 //get获取分类
 router.get('/',(req,res)=>{
 	let pid = req.query.pid;
-
+	
 	let page = req.query.page;
 	console.log('page',page)
 	//如果有page的话,显示分页列表
@@ -83,7 +83,7 @@ router.get('/',(req,res)=>{
 				code:0,
 				data:{
 					list:result.list,
-				    current:result.defaultCurrent,
+				    current:result.current,
 				    total:result.total,
 				    pageSize:result.pageSize					
 				}
@@ -175,7 +175,7 @@ router.put('/updataorder',(req,res)=>{
 					code:0,
 					data:{
 						list:result.list,
-					    current:result.defaultCurrent,
+					    current:result.current,
 					    total:result.total,
 					    pageSize:result.pageSize					
 					}
@@ -358,7 +358,7 @@ router.post('/edit',(req,res)=>{
 	})
 })
 */
-//
+
 router.get('/delete/:id',(req,res)=>{
 	//获取首页
 	let id = req.params.id;

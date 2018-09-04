@@ -1,3 +1,5 @@
+
+//获取图片组件
 import React,{Component} from 'react';
 
 import { Upload, Icon, Modal } from 'antd';
@@ -13,7 +15,16 @@ class UpDateImg extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleCancel = this.handleCancel.bind(this)
   }
-
+  //回填图片
+  static getDerivedStateFromProps(props,state){
+    //console.log('sasd...',props.fileList.length)
+    if(props.fileList.length > 0 && state.fileList.length == 0){
+      return{
+        fileList:props.fileList
+      }
+    }
+    return null;
+  }
   handleCancel(){
     this.setState({ previewVisible: false })
   }
@@ -24,7 +35,7 @@ class UpDateImg extends React.Component {
       previewVisible: true,
     });
   }
-
+  //
   handleChange({ fileList }){//把图片地址传送给父组件
     console.log('ooo...',fileList)
     //
@@ -51,6 +62,7 @@ class UpDateImg extends React.Component {
           onPreview={this.handlePreview}
           onChange={this.handleChange}
           //客戶端發送請求的時候會把cookie發送到服務器端,服務器端根據發送過來的信息判斷用戶有沒有登錄
+          //
           withCredentials={true}          
         >
           {fileList.length >= this.props.max ? null : uploadButton}

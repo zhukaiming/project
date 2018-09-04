@@ -1,27 +1,33 @@
 
 
-// state=defaultState,action
+//state=defaultState,action
 import * as types from './actionType.js';
 const { fromJS } = require('immutable');
 const defaultState=fromJS({//包装为一个immutable对象Map
 	isAddFeting:false,
 	isPageFeting:false,
-    current:0,
-    total:0,
-    pageSize:0,
-    list:[],
+  current:0,
+  total:0,
+  pageSize:0,
+  list:[],
 	oneCategories:[],
 	updataName:'',
 	updataId:'',
 	updataVisible:false,
-
-//
+	//
 	parentCategoryId:'',
 	categoryId:'',
 	images:'',
-	value:'',
+	detail:'',
 	categoryIdvalidataStatus:'',
-	categoryIdhelp:''
+	categoryIdhelp:'',
+
+	name:'',
+	stock:'',
+	price:'',
+	description:'',
+	keyWord:''
+
 })
 //
 export default (state=defaultState,action)=>{
@@ -58,13 +64,15 @@ export default (state=defaultState,action)=>{
 		return state.set('oneCategories',fromJS(action.payload))
 	}	
 	*/
+	//
 	if(action.type == types.GET_PAGE_CATEGORIES){
 
 		return state.merge({
-			defaultCurrent:action.payload.defaultCurrent,
+			current:action.payload.current,
 			total:action.payload.total,
 			pageSize:action.payload.pageSize,
-			list:fromJS(action.payload.list)//
+			list:fromJS(action.payload.list),//
+			keyWord:action.payload.keyWord || ''
 		})
 
 	}
@@ -88,7 +96,6 @@ export default (state=defaultState,action)=>{
 		return state.merge({
 			parentCategoryId:action.payload.parentCategoryId,
 			categoryId:action.payload.categoryId,
-
 			categoryIdvalidataStatus:'',
 			categoryIdhelp:''
 		})
@@ -101,14 +108,26 @@ export default (state=defaultState,action)=>{
 	if(action.type == types.GET_SET_DETAIL){
 		return state.set('value',action.payload)
 	}
-
+//
 	if(action.type == types.CATEGORY_ERR){
 		return state.merge({
 			categoryIdvalidataStatus:'error',
 			categoryIdhelp:'请输入所属分类'
 		})
 	}
-
-
+	//
+	//GET_SET_EDITPRODUCT
+	if(action.type == types.GET_SET_EDITPRODUCT){
+		return state.merge({
+			parentCategoryId:action.payload.category.pid,
+			categoryId:action.payload.category._id,
+			images:action.payload.images,
+			detail:action.payload.detail,	
+			name:action.payload.name,
+			stock:action.payload.stock,
+			price:action.payload.price,
+			description:action.payload.description
+		})
+	}
 	return state;
 }
