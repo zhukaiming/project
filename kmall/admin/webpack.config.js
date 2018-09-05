@@ -80,6 +80,7 @@ module.exports = {
 	],
 	devServer:{//实时重新加载页面
 		contentBase: './dist',
-		historyApiFallback:true
+		historyApiFallback:true,
+		port:3002
 	}
 }

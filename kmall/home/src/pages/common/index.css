@@ -1,0 +1,33 @@
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	background: #ccc;
+}
+a{
+	text-decoration: none;
+}
+.link{
+	text-decoration: none;
+	color: #ccc;
+}
+.link:hover{
+	color: red;
+}
+.hide{
+	display: none;
+}
+.link-text{
+	text-decoration: none;
+	color: #ccc;
+}
+.nav-item{
+	list-style: none;
+}
+.container{
+	width: 1080px;
+	margin: 0 auto;
+}

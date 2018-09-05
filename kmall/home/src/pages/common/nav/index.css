@@ -1,0 +1,16 @@
+
+.nav{
+	height: 50px;
+	line-height: 50px;
+	background-color: #fff;
+}
+
+.nav .user-info{
+	float: left;
+}
+.nav .nav-list{
+	float: right;
+}
+.nav-list .nav-item{
+	float: left;
+}

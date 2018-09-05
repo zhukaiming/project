@@ -100,10 +100,16 @@ router.post('/login',(req,res)=>{
 		}
 	})
 })
-
+//设置权限
+router.use((req,res,next)=>{
+	if(req.userInfo.isAdmin){
+		next();
+	}else{
+		code:10
+	}
+})
 //退出
-
-router.get('/userout',(req,res)=>{
+router.get('/logout',(req,res)=>{
 	let result = {
 		code:0,
 		errmsg:''
@@ -114,6 +120,17 @@ router.get('/userout',(req,res)=>{
 	req.session.destroy();
 	res.json(result);
 })
+/*router.get('/userout',(req,res)=>{
+	let result = {
+		code:0,
+		errmsg:''
+	}
+	//req.cookies.set('userInfo',null);//
+	//res.json(result);
+	//清除session
+	req.session.destroy();
+	res.json(result);
+})*/
 
 
 module.exports = router;
