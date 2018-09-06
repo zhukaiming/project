@@ -1,6 +1,6 @@
 //
 var _util = {
-	request:function(){
+	request:function(params){
 		var _this = this;
 		$.ajax({
 			url:params.url || '',
@@ -18,7 +18,7 @@ var _util = {
 					params.error && params.error(result.message)
 				}
 			},
-			error:function(){
+			error:function(result){
 				params.error && params.error(result.statusText)
 			}
 		})
@@ -28,6 +28,38 @@ var _util = {
 	},
 	doLogin:function(){
 		window.location.href = './user-login.html'
+	},
+	gohome:function(){
+		window.location.href = './'
+	},
+	getParmFromUrl:function(key){//从url中获取参数
+		var query = window.location.search.substr(1);
+		//type=erere&dsd=we
+		var reg = new RegExp('(^|&)'+key+'=([^&]*)(&|$)');
+	},
+	validate:function(value,type){
+		var value = $.trim(value)
+		//菲空验证
+		if(type == 'require'){
+			return !!value;
+		}
+		//用户名验证
+		if(type == 'username'){
+			return /^[a-zA-Z0-9_]{3,10}$/.test(value)
+		}
+		//mima验证
+		if(type == 'password'){
+			return /^[a-zA-Z0-9_]{3,10}$/.test(value)
+		}
+		//手机验证
+		if(type == 'phone'){//^开头$结尾
+			return /^1[3568]\d{9}$/.test(value)
+		}	
+		//邮箱验证
+		if(type == 'email'){//^开头$结尾
+			return /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(value)
+		}
+			
 	}
 }
 

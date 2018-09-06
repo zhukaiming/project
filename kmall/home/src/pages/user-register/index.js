@@ -25,6 +25,25 @@ var page = {
 	//绑定事件
 	bindEvent:function(){//处理提交事件
 		var _this = this;
+		//
+		$('[name="username"]').on('blur',function(){
+			var username = $(this).val();
+			if(!_util.validate(username,'require')){
+				return;
+			}
+			if(!_util.validate(username,'username')){
+				return;
+			}
+			_user.checkedUsername(username,function(){
+				//该用户名没有注册
+				console.log('ok')
+				formErr.hide()
+			},function(){
+				//已被注册
+				console.log('ok')
+				formErr.show(message)
+			})
+		})
 		$('#form-sub-btn').on('click',function(){
 			_this.submit();
 			//console.log('sss')
@@ -34,7 +53,10 @@ var page = {
 		//1获取数据
 		var formDate = {
 			username:$.trim($('[name="username"]').val()),
-			password:$.trim($('[name="password"]').val())
+			password:$.trim($('[name="password"]').val()),
+			repassword:$.trim($('[name="repassword"]').val()),
+			phone:$.trim($('[name="phone"]').val()),
+			email:$.trim($('[name="email"]').val())
 		}
 		//console.log(data)
 		//2验证数据
@@ -43,8 +65,10 @@ var page = {
 		if(validateResult.status){//验证成功
 			formErr.hide();	
 			//发送登录请求
-			_user.login(formDate,function(result){
-				_util.gohome()
+			_user.register(formDate,function(result){
+				//_util.gohome()
+				// console.log('ok,,,')
+				window.location.href = './result.html?type=register'//定义一个参数
 			},function(msg){
 				formErr.show(msg)
 			})	
@@ -68,9 +92,31 @@ var page = {
 		}
 		if(!_util.validate(formDate.password,'password')){
 			result.msg = '密码不能为空'
+			return result;
 		}
 		if(!_util.validate(formDate.password,'password')){
 			result.msg = '密码格式错误'
+			return result;
+		}
+		if(formDate.password != formDate.repassword){
+			result.msg = '两次密码不一致'
+			return result;
+		}
+		if(!_util.validate(formDate.phone,'require')){
+			result.msg = '手机号不能为空'
+			return result;
+		}
+		if(!_util.validate(formDate.phone,'phone')){
+			result.msg = '手机号格式错误'
+			return result;
+		}
+		if(!_util.validate(formDate.email,'require')){
+			result.msg = '邮箱不能为空'
+			return result;
+		}
+		if(!_util.validate(formDate.email,'email')){
+			result.msg = '邮箱格式错误'
+			return result;
 		}
 		//
 		result.status = true;

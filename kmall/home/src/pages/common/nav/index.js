@@ -21,7 +21,14 @@ var nav = {
 		})*/
 	},
 	userInfo:function(){
-		console.log()
+		_user.getUserInfo(function(userInfo){
+			console.log(userInfo)
+			$('.not-login').hide();
+			$('.login')
+			.show()
+			.find('username')
+			.text(userInfo.username)
+		})
 	},
 	cartInfo:function(){
 		console.log()

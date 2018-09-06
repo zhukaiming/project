@@ -13,7 +13,7 @@ const getHtmlConfig=(name)=>({
     filename:name+'.html',
     inject:true,
     hash:true,
-    chunks:['common',name]	
+    chunks:['common',name]
 })
 module.exports = {
 	mode:'development',
@@ -22,6 +22,8 @@ module.exports = {
 		'index':'./src/pages/index/index.js',
 		'common':'./src/pages/common/index.js',
 		'login':'./src/pages/user-login/index.js',
+		'register':'./src/pages/user-register/index.js',
+		'result':'./src/pages/result/index.js'
 	},
 	//配置额外jq
 	externals:{
@@ -89,6 +91,8 @@ module.exports = {
 	plugins:[
 	    new htmlWebpackPlugin(getHtmlConfig('index')),
 	    new htmlWebpackPlugin(getHtmlConfig('login')),
+	    new htmlWebpackPlugin(getHtmlConfig('register')),
+	    new htmlWebpackPlugin(getHtmlConfig('result')),
 	    new CleanWebpackPlugin(['dist']),//清除文件
 	    new MiniCssExtractPlugin({
 	    	filename:'css/[name].css'

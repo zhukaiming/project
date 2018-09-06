@@ -38,12 +38,14 @@ router.post('/register',(req,res)=>{//接收ajax请求
 	.findOne({username:body.username})
 	.then((user)=>{
 		if(user){//用户名存在
-			result.code = 10;
+			result.code = 1;
 			result.errmsg = '用户名已存在'
 			res.json(result)//把result对象转化为json返回出去
 		}else{//用户名不存在
 			new userModel({
 				username:body.username,
+				phone:body.phone,
+				email:body.email,
 				password:hmac(body.password),
 				//isAdmin:true
 			})//新建userModel实例
@@ -51,7 +53,7 @@ router.post('/register',(req,res)=>{//接收ajax请求
 				if(!err){//插入数据库成功
 					res.json(result)
 				}else{
-					result.code = 10;
+					result.code = 1;
 					result.errmsg = '注册失败'
 					req.json(err)
 				}
@@ -71,20 +73,10 @@ router.post('/login',(req,res)=>{
 	}
 	//查询
 	userModel
-	.findOne({username:body.username,password:hmac(body.password)})
+	.findOne({username:body.username,password:hmac(body.password),isAdmin:false})
 	.then((user)=>{
-		if(user){//用户名存在
-			/*
-			result.data = {
-				_id:user._id,
-				username:user.username,
-				isAdmin:user.isAdmin
-			}
-			*/
-			//设置cookies为userInfo，然后在app.js获取userInfo    cookies接收的是字符串
-			//req.cookies.set('userInfo',JSON.stringify(result.data));//
-			//res.json(result);//返回,浏览器端获取cookies
-			
+		if(user){//登录成功
+
 			//加密用户信息
 			req.session.userInfo = {
 				_id:user._id,
@@ -94,12 +86,46 @@ router.post('/login',(req,res)=>{
 			res.json(result);
 			
 		}else{//
-			result.code = 10;
+			result.code = 1;
 			result.message = '用户名和密码错误'
 			res.json(result)
 		}
 	})
 })
+//获取用户信息
+router.get('/userInfo',(req,res)=>{
+	if(req.userInfo._id){//成功
+		res.json({
+			code:0,
+			data:req.userInfo
+		})
+	}else{
+		res.json({
+			code:1
+		})		
+	}
+})
+
+//用户注册
+router.get('/checkedUsername',(req,res)=>{
+	let username = req.query.username;
+	//查询
+	userModel
+	.findOne({username:username.username})
+	.then((user)=>{
+		if(user){//用户名存在
+			res.json({
+				code:1,
+				message:'用户名存在'
+			})
+		}else{//
+			res.json({
+				code:0
+			})
+		}
+	})	
+})
+
 //设置权限
 router.use((req,res,next)=>{
 	if(req.userInfo.isAdmin){

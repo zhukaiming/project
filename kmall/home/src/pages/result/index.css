@@ -1,0 +1,17 @@
+
+
+.result{
+	min-height: 300px;
+	background-color: #ccc;
+	padding-top: 100px;
+	text-align: center;
+
+}
+.result .title{
+	font-size: 30px;
+	margin-bottom: 10px;
+	color: #fff;
+}
+.result-box{
+	display: none;
+}
