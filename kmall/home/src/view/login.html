@@ -5,9 +5,37 @@
 	<title>Document</title>
 </head>
 <body>
-	login
 
+	<%=require('html-loader!./common/logo.html') %>
+	<div class="form">
+		<div class="container">
+			<div class="form-box">
+				<h2 class="title">用户登录</h2>
+				<div class="err">
+					<i class="fa fa-user-circle" aria-hidden="true"></i>
+					<p class="form-err">err</p>
+				</div>
+				<div class="form-item">
+					<lable class="form-lable">
+						<i class="fa fa-user-circle" aria-hidden="true"></i>
+					</lable>
+					<input type="text" class="form-content" name="username">
+				</div>
+				<div class="form-item">
+					<lable class="form-lable">
+						<i class="fa fa-bath" aria-hidden="true"></i>
+					</lable>
+					<input type="password" class="form-content" name="password">
+				</div>
+				<div class="form-btn">
+					<a href="#" id="form-sub-btn">提交</a>
+				</div>
+				<div class="link-item">
+					<a href="./user-regist">用户注册</a>
+				</div>
+			</div>
+		</div>
+	</div>
 	<%=require('html-loader!./common/footer.html') %>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </html>

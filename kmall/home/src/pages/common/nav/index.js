@@ -1,4 +1,3 @@
-console.log('drrrdd')
 require('./index.css')
 var _user = require('service/user')
 var _util = require('util')
@@ -10,24 +9,24 @@ var nav = {
 		return this;
 	},
 	bindEvent:function(){//退出
-/*		$('#logout').on('click',function(){
+		$('#logout').on('click',function(){
 			_user.logout(function(result){
 				window.location.reload();
 			},function(message){
-				_uitl.showErrMessage(message)
+				_util.showErrMessage(message)
 			});
-		})*/
-		$('#logout').on('click',function(){
-			alert('sss')
 		})
-		console.log('ddd')
+/*		$('#logout').on('click',function(){
+			alert('sss')
+		})*/
 	},
 	userInfo:function(){
 		console.log()
 	},
 	cartInfo:function(){
 		console.log()
-	}
+	},
+	
 
 }
-module.exports = nav;
+module.exports = nav.init();
