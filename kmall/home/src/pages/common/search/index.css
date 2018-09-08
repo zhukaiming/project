@@ -1,0 +1,43 @@
+
+.kmall-title{
+	font-size: 20px;
+}
+.search-box{
+	height: 80px;
+	line-height: 80px;
+	margin-bottom: 20px;
+	background-color: #fff;
+	margin-bottom: 20px;
+}
+.logo{
+	float: left;
+}
+.log-text{
+	font-size: 36px;
+}
+.log-text{
+	color: red;
+}
+.search{
+	float: left;
+	margin-top: 20px;
+	margin-left: 200px;
+}
+.search-input{
+	float: left;
+	width: 500px;
+	height: 40px;
+	outline: none;
+	padding-left: 10px;
+	border: 2px solid red;
+}
+.search .search-btn{
+	float: left;
+	display: inline-block;
+	width: 100px;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	background-color: red;
+	color: #fff;
+}

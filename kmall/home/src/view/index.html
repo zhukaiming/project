@@ -6,6 +6,57 @@
 </head>
 <body>
 	<%= require('html-loader!./common/nav.html') %>	
+	<%= require('html-loader!./common/search.html') %>
+	<div class="focus">
+		<div class="container clearfix">
+			<ul class="keywords">
+
+			</ul>
+			<div class="carousel">
+				<ul>
+					<li>
+						<a href="./list.html?categoryId=1111">
+							<img src="<%= require('../util/carousel/images/carousel2.jpg') %>" alt="">
+						<a>
+					</li>
+					<li>
+						<a href="./list.html?categoryId=1111">
+							<img src="<%= require('../util/carousel/images/carousel4.jpg') %>" alt="">
+						<a>
+					</li>
+					<li>
+						<a href="./list.html?categoryId=1111">
+							<img src="<%= require('../util/carousel/images/carousel5.jpg') %>" alt="">
+						<a>
+					</li>
+				</ul>
+				<span class="arrow prev">
+					<i class="fa fa-angle-left" aria-hidden="true"></i>
+				</span>
+				<span class="arrow next">
+					<i class="fa fa-angle-right" aria-hidden="true"></i>
+				</span>		
+			</div>
+		</div>
+	</div>
+	<div class="floor">
+		<div class="container">
+			<div class="floor-wap">
+				<div class="floor-box">
+<!-- 					<h2 class="floor-title">F1 电器</h2>
+<ul class="floor-list clearfix">
+	<li class="floor-item">
+		<a href="./list>categoryId=1111">
+			<p class="floor-text">手机</p>
+			<img class = "floor-img" src="<%= require('../util/carousel/images/f1.jpg') %>" alt="">
+		</a>
+	</li>
+	</li>
+</ul> -->
+				</div>
+			</div>
+		</div>
+	</div>
 	<%= require('html-loader!./common/footer.html') %>	
 </body>
 </html>

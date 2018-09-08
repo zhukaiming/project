@@ -4,7 +4,7 @@ var _util = require('util')
 var nav = {
 	init:function(){
 		this.bindEvent();
-		this.userInfo();
+		this.loadUsername();
 		this.cartInfo();
 		return this;
 	},
@@ -20,14 +20,14 @@ var nav = {
 			alert('sss')
 		})*/
 	},
-	userInfo:function(){
-		_user.getUserInfo(function(userInfo){
-			console.log(userInfo)
+	loadUsername:function(){
+		_user.getUsername(function(user){
+			//console.log(loadUsername)
 			$('.not-login').hide();
 			$('.login')
 			.show()
-			.find('username')
-			.text(userInfo.username)
+			.find('.username')
+			.text(user.username)
 		})
 	},
 	cartInfo:function(){

@@ -1,6 +1,9 @@
 
 require('pages/common/logo')
 require('pages/common/footer')
+require('pages/common/nav')
+require('pages/common/search')
+require('pages/common/side')
 require('./index.css')
 var _util = require('util')
 var _user = require('service/user')
@@ -22,9 +25,13 @@ var page = {
 	init:function(){
 		this.bindEvent()
 	},
+	onload:function(){//
+		_side.render('update-password')
+	},
 	//绑定事件
 	bindEvent:function(){//处理提交事件
 		var _this = this;
+		//
 		$('#form-sub-btn').on('click',function(){
 			_this.submit();
 			//console.log('sss')
@@ -43,12 +50,13 @@ var page = {
 		if(validateResult.status){//验证成功
 			formErr.hide();	
 			//发送登录请求
-			_user.login(formDate,function(result){
+			_user.updatePassword(formDate,function(result){
 				//_util.gohome()
-				window.location.href = _util.getParmFromUrl('redirect') || './index.html';
+				// console.log('ok,,,')
+				window.location.href = './result.html?type=updatePassword'//定义一个参数
 			},function(msg){
-				//formErr.show(msg)
-			})	
+				formErr.show(msg)
+			})		
 		}else{//验证失败
 			formErr.show(validateResult.msg);
 		}

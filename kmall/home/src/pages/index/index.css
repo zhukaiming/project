@@ -1,1 +1,137 @@
 	
+
+.keywords{
+	float: left;
+	width: 200px;
+	height: 450px;
+	background-color: #f2f2f2;
+	padding: 20px 10px;
+	box-sizing: border-box;
+	margin-right: 10px;
+}
+.carousel{
+	float: left;
+	width: 850px;
+	height: 500px;
+}
+.carousel li{
+	width: 850px;
+	height: 450px;
+}
+.carousel li img{
+	width: 100%;
+	height: 100%;
+}
+.arrow-left{
+	float: left;
+}
+.arrow-right{
+	float: right;
+}
+.keywords .keyword-item{
+	list-style: none;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+}
+.keyword-item:hover{
+	background-color: #ccc;
+}
+
+.carousel .dots {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 20px;
+		text-align: center;
+	}
+		.carousel .dots li {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			margin: 0 4px;
+
+			text-indent: -999em;
+
+			border: 2px solid #fff;
+			border-radius: 6px;
+
+			cursor: pointer;
+			opacity: .4;
+
+			-webkit-transition: background .5s, opacity .5s;
+			-moz-transition: background .5s, opacity .5s;
+			transition: background .5s, opacity .5s;
+		}
+			.carousel .dots li.active {
+				background: #fff;
+				opacity: 1;
+			}
+
+	.carousel .arrows {
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+		color: #fff;
+	}
+		.carousel .arrow {
+			display: inline;
+			padding-left: 10px;
+			cursor: pointer;
+		}
+.arrow{
+	position: absolute;
+	width: 30px;
+	height: 60px;
+	line-height: 50px;
+	font-size: 36px;
+	color: #fff;
+	text-align: center;
+	background-color: rgba(0,0,0,0.3);
+	top: 200px;
+}
+.arrow:hover{
+	background-color: rgba(0,0,0,0.6);
+}
+.arrow.prev{
+	left: 0px;
+ }
+.arrow.next{
+	right: 0px;
+}
+
+/* //floor */
+
+.floor{
+	margin-top: 50px;
+}
+.floor-box{
+	margin-top: 50px;
+}
+.floor-title{
+	border-bottom: 2px solid red;
+}
+.floor-list{
+	height: 240px;
+}
+.floor-item{
+	float: left;
+	list-style: none;
+	width: 205px;
+	height: 100%;
+	margin-left: 10px;
+	margin-top: 20px;
+	background-color: #fff;
+}
+.floor-text{
+	font-size: 18px;
+	margin-top: 15px;
+	font-weight: bold;
+	text-align: center;
+	color: #000;
+}
+.floor-img{
+	width: 130px;
+	height: 140px;
+	margin: 20px 40px;
+}

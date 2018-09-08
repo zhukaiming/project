@@ -23,6 +23,8 @@ module.exports = {
 		'common':'./src/pages/common/index.js',
 		'login':'./src/pages/user-login/index.js',
 		'register':'./src/pages/user-register/index.js',
+		'user-center':'./src/pages/user-center/index.js',
+		'update-password':'./src/pages/update-password/index.js',
 		'result':'./src/pages/result/index.js'
 	},
 	//配置额外jq
@@ -84,7 +86,14 @@ module.exports = {
 	                presets: ['env','es2015','stage-3'],
 	            }
 	        }               
-		    }			
+		    },
+		    {//对以tpl结尾的文件的处理
+	        test:/\.tpl$/,
+	        exclude: /(node_modules)/,
+	        use: {
+	            loader: 'html-loader',
+	        }               
+		    }		
 		]
    	},
    	//自动生成html
@@ -92,6 +101,8 @@ module.exports = {
 	    new htmlWebpackPlugin(getHtmlConfig('index')),
 	    new htmlWebpackPlugin(getHtmlConfig('login')),
 	    new htmlWebpackPlugin(getHtmlConfig('register')),
+	    new htmlWebpackPlugin(getHtmlConfig('user-center')),
+	    new htmlWebpackPlugin(getHtmlConfig('update-password')),
 	    new htmlWebpackPlugin(getHtmlConfig('result')),
 	    new CleanWebpackPlugin(['dist']),//清除文件
 	    new MiniCssExtractPlugin({

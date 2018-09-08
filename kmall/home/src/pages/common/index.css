@@ -10,9 +10,16 @@ body{
 a{
 	text-decoration: none;
 }
+.clearfix:after{
+	clear: both;
+	display: block;
+	content: '';
+	height: 0px;
+	visibility: hidden;
+}
 .link{
 	text-decoration: none;
-	color: #ccc;
+	color: #999;
 }
 .link:hover{
 	color: red;

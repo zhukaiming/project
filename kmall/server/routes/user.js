@@ -93,19 +93,66 @@ router.post('/login',(req,res)=>{
 	})
 })
 //获取用户信息
-router.get('/userInfo',(req,res)=>{
-	if(req.userInfo._id){//成功
-		res.json({
-			code:0,
-			data:req.userInfo
-		})
-	}else{
-		res.json({
-			code:1
-		})		
-	}
+router.get('/username',(req,res)=>{
+
+		if(req.userInfo._id){//成功
+			userModel.findById(req.userInfo._id,"username phone email")
+			.then(user=>{
+				res.json({
+					code:0,
+					data:user
+				})			
+			})
+		}else{
+			res.json({
+				code:1
+			})		
+		}		
 })
 
+//设置权限
+router.use((req,res,next)=>{
+	if(req.userInfo._id){
+		next();
+	}else{
+		res.json({
+			code:10
+		})
+	}
+})
+//获取用户信息
+router.get('/userInfo',(req,res)=>{
+
+		if(req.userInfo._id){//成功
+			res.json({
+				code:0,
+				data:req.userInfo
+			})
+		}else{
+			res.json({
+				code:1
+			})		
+		}		
+})
+
+
+//更新密码
+
+router.put('updatePassword',(req,res)=>{
+	userModel.update({_id:req.userInfo.id},{password:req.body.password})
+	.then(raw=>{
+		res.json({
+			code:0,
+			message:'更新密码成功'
+		})
+	})
+	.catch(e=>{
+		res.json({
+			code:1,
+			message:'更新密码失败'
+		})		
+	})
+})
 //用户注册
 router.get('/checkedUsername',(req,res)=>{
 	let username = req.query.username;
@@ -126,14 +173,10 @@ router.get('/checkedUsername',(req,res)=>{
 	})	
 })
 
-//设置权限
-router.use((req,res,next)=>{
-	if(req.userInfo.isAdmin){
-		next();
-	}else{
-		code:10
-	}
-})
+
+
+
+
 //退出
 router.get('/logout',(req,res)=>{
 	let result = {

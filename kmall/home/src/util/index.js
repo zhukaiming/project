@@ -1,5 +1,7 @@
 //
+var Hogan = require('hogan.js')
 var _util = {
+	//封装发送ajax请求的方法
 	request:function(params){
 		var _this = this;
 		$.ajax({
@@ -22,21 +24,27 @@ var _util = {
 				params.error && params.error(result.statusText)
 			}
 		})
-	},
+	},//显示错误信息
 	showErrMessage:function(msg){
 		alert(msg)
-	},
+	},//进入登录页
 	doLogin:function(){
-		window.location.href = './user-login.html'
-	},
+		window.location.href = './user-login.html?redirect='+encodeURIComponent(window.location.href)
+	},//返回首页
 	gohome:function(){
 		window.location.href = './'
-	},
-	getParmFromUrl:function(key){//从url中获取参数
+	},//从url中获取参数
+	getParmFromUrl:function(key){
 		var query = window.location.search.substr(1);
 		//type=erere&dsd=we
 		var reg = new RegExp('(^|&)'+key+'=([^&]*)(&|$)');
-	},
+	},//side
+	//模板渲染
+	render:function(tpl,data){
+		var template = Hogan.compile(tpl);
+		var html = template.render(data)
+		return html;		
+	},//验证
 	validate:function(value,type){
 		var value = $.trim(value)
 		//菲空验证
