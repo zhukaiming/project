@@ -21,12 +21,12 @@
 .search{
 	float: left;
 	margin-top: 20px;
-	margin-left: 200px;
 }
 .search-input{
 	float: left;
 	width: 500px;
 	height: 40px;
+	margin-left: 110px;
 	outline: none;
 	padding-left: 10px;
 	border: 2px solid red;

@@ -19,20 +19,21 @@ var formErr = {
 		.text(msg)		
 	}
 }
+//修改了keyWord
 var page = {
 	init:function(){
-		this.bindEvent()
+		this.bindEvent();
+		this.load();
 	},
 	load:function(){
-		var keyWord = _util.getParmFromUrl('keyWord')
-		if(keyWord){
-			$('#search-input').val(keyWord)
+		var keyword = _util.getParmFromUrl('keyword')
+		if(keyword){
+			$('#search-input').val(keyword)
 		}
 	},
 	//绑定事件
 	bindEvent:function(){//处理提交事件
 		var _this = this;
-
 		$('#search-btn').on('click',function(){
 			_this.submit();
 			//console.log('sss')
@@ -46,12 +47,14 @@ var page = {
 	},
 	submit:function(){
 		//1获取数据
-		var keyWord = $.trim($('#search-input').val());
-		if(keyWord){
-			window.location.href = "./list.html"+keyWord
+		var keyword = $.trim($('#search-input').val());
+		window.location.href = "./list.html?keyword="+keyword;
+/*		console.log('keyword',keyword)
+		if(keyword){
+			window.location.href = "./list.html?keyword="+keyword;
 		}else{
 			_util.gohome();
-		}
+		}*/
 	},
 }
 

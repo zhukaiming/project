@@ -58,7 +58,7 @@ var _user = {
 			},
 			success:success,
 			error:error			
-		})		
+		})
 	}
 }
 

@@ -35,9 +35,14 @@ var _util = {
 		window.location.href = './'
 	},//从url中获取参数
 	getParmFromUrl:function(key){
-		var query = window.location.search.substr(1);
+/*		var query = window.location.search.substr(1);
 		//type=erere&dsd=we
+		var reg = new RegExp('(^|&)'+key+'=([^&]*)(&|$)');*/
+		var query = window.location.search.substr(1);
 		var reg = new RegExp('(^|&)'+key+'=([^&]*)(&|$)');
+		//
+		var result = query.match(reg);
+		return result ? decodeURIComponent(result[2]) : null;
 	},//side
 	//模板渲染
 	render:function(tpl,data){

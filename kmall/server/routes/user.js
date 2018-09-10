@@ -4,6 +4,7 @@
 const Router  = require('express').Router;
 
 const userModel = require('../models/user.js');
+const ProductModel = require('../models/product.js');
 const router = Router();
 const hmac = require('../util/crypto.js');
 //用户注册
@@ -109,6 +110,49 @@ router.get('/username',(req,res)=>{
 			})		
 		}		
 })
+//排序
+//获取
+router.get('/productList',(req,res)=>{
+
+	let page = req.query.page;
+	let query = {status:0}
+	//
+	console.log(query)
+	if(req.query.categoryId){
+		query.category = categoryId;
+	}else{
+		query.name = {$regex : new RegExp(req.query.keyword,'i')}
+	}
+	let projection='name price _id images';
+	let sort  = {order:-1};
+	//
+	// console.log(projection)
+	if(req.query.orderBy == 'price-asc'){
+		sort = {price:-1}
+	}else if(req.query.orderBy == 'price-desc'){
+		sort = {price:1}
+	}
+	//
+	ProductModel.getPageProduct(page,query,projection,sort)
+	.then(result=>{
+		res.json({
+			code:0,
+			data:{
+				list:result.list,
+			    current:result.current,
+			    total:result.total,
+			    pageSize:result.pageSize
+			}
+		})		
+	})
+	.catch(e=>{
+		res.json({
+			code:1,
+			message:'获取失败'
+		})
+	})
+})
+
 
 //设置权限
 router.use((req,res,next)=>{
@@ -172,10 +216,6 @@ router.get('/checkedUsername',(req,res)=>{
 		}
 	})	
 })
-
-
-
-
 
 //退出
 router.get('/logout',(req,res)=>{

@@ -103,12 +103,12 @@ router.get('/',(req,res)=>{
 //搜索
 router.get('/searchProduct',(req,res)=>{
 	let page = req.query.page || 1;
-	let keyWord = req.query.keyWord;
-	console.log('page',page)
+	let keyword = req.query.keyword;
+	console.log(keyword)
 	//如果有page的话,显示分页列表
 		ProductModel
 		.getPageProduct(page,{
-			name:{$regex : new RegExp(keyWord,'i')}})//新建一个正则,查找
+			name:{$regex : new RegExp(keyword,'i')}})//新建一个正则,查找
 		.then((result)=>{
 			res.json({
 				code:0,
@@ -117,7 +117,7 @@ router.get('/searchProduct',(req,res)=>{
 				    current:result.current,
 				    total:result.total,
 				    pageSize:result.pageSize,
-				    keyWord:keyWord
+				    keyword:keyword
 				}
 			})
 		})

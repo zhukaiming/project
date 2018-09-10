@@ -8,7 +8,19 @@
 	<%= require('html-loader!./common/nav.html') %>	
 	<%= require('html-loader!./common/search.html') %>
 	<div class="list">
-		
+		<div class="container clearfix">
+			<ul class="sort clearfix">
+				<li class="sort-item default active">默认排序</li>
+				<li class="sort-item price asc">
+						按价格
+					<i class="fa fa-sort-asc" aria-hidden="true"></i>
+					<i class="fa fa-sort-desc" aria-hidden="true"></i>
+				</li>
+			</ul>
+			<div class="product-list">
+				
+			</div>
+		</div>
 	</div>
 	<%= require('html-loader!./common/footer.html') %>	
 </body>

@@ -21,6 +21,7 @@ module.exports = {
 	entry: {
 		'index':'./src/pages/index/index.js',
 		'common':'./src/pages/common/index.js',
+		'list':'./src/pages/list/index.js',
 		'login':'./src/pages/user-login/index.js',
 		'register':'./src/pages/user-register/index.js',
 		'user-center':'./src/pages/user-center/index.js',
@@ -43,6 +44,7 @@ module.exports = {
 	resolve:{
 		alias:{
 			pages:path.resolve(__dirname,'./src/pages'),
+			images:path.resolve(__dirname,'./src/images'),
 			util:path.resolve(__dirname,'./src/util'),
 			node_modules:path.resolve(__dirname,'./node_modules'),
 			service:path.resolve(__dirname,'./src/service'),
@@ -103,6 +105,7 @@ module.exports = {
 	    new htmlWebpackPlugin(getHtmlConfig('register')),
 	    new htmlWebpackPlugin(getHtmlConfig('user-center')),
 	    new htmlWebpackPlugin(getHtmlConfig('update-password')),
+	    new htmlWebpackPlugin(getHtmlConfig('list')),
 	    new htmlWebpackPlugin(getHtmlConfig('result')),
 	    new CleanWebpackPlugin(['dist']),//清除文件
 	    new MiniCssExtractPlugin({
