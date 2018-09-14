@@ -22,6 +22,8 @@ module.exports = {
 		'index':'./src/pages/index/index.js',
 		'common':'./src/pages/common/index.js',
 		'list':'./src/pages/list/index.js',
+		'detail':'./src/pages/detail/index.js',
+		'cart':'./src/pages/cart/index.js',
 		'login':'./src/pages/user-login/index.js',
 		'register':'./src/pages/user-register/index.js',
 		'user-center':'./src/pages/user-center/index.js',
@@ -106,6 +108,8 @@ module.exports = {
 	    new htmlWebpackPlugin(getHtmlConfig('user-center')),
 	    new htmlWebpackPlugin(getHtmlConfig('update-password')),
 	    new htmlWebpackPlugin(getHtmlConfig('list')),
+	    new htmlWebpackPlugin(getHtmlConfig('detail')),
+	    new htmlWebpackPlugin(getHtmlConfig('cart')),
 	    new htmlWebpackPlugin(getHtmlConfig('result')),
 	    new CleanWebpackPlugin(['dist']),//清除文件
 	    new MiniCssExtractPlugin({
@@ -117,6 +121,14 @@ module.exports = {
 		port:3002,//跨域代理
 		proxy:{//3002端口以/user发送出去的请求,相当于从3000端口发送的请求,就不存在跨域了
 			"/user":{
+				target:'http://127.0.0.1:3000',
+				changeOrigin:true//是否跨域
+			},
+			"/product":{
+				target:'http://127.0.0.1:3000',
+				changeOrigin:true//是否跨域
+			},
+			"/cart":{
 				target:'http://127.0.0.1:3000',
 				changeOrigin:true//是否跨域
 			}

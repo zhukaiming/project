@@ -2,7 +2,7 @@
 
 .result{
 	min-height: 300px;
-	background-color: #ccc;
+	background-color: #999;
 	padding-top: 100px;
 	text-align: center;
 
@@ -14,4 +14,7 @@
 }
 .result-box{
 	display: none;
+}
+.addCart .btn{
+	width: 110px;
 }

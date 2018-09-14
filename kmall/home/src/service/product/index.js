@@ -5,7 +5,16 @@ var _product = {
 	getProductList:function(data,success,error){
 		_util.request({
 			method:'get',
-			url:'/user/productList',
+			url:'/product/homeList',
+			data:data,
+			success:success,
+			error:error
+		})
+	},
+	getProductDetail:function(data,success,error){
+		_util.request({
+			method:'get',
+			url:'/product/homeDetail',
 			data:data,
 			success:success,
 			error:error

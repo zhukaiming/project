@@ -15,6 +15,68 @@ const storage = multer.diskStorage({
   }
 })
 const upload = multer({ storage: storage })
+
+
+//排序
+//获取
+router.get('/homeList',(req,res)=>{
+
+	let page = req.query.page;
+	let query = {status:0}
+	//
+	//console.log(query)
+	if(req.query.categoryId){
+		query.category = req.query.categoryId;
+	}else{
+		query.name = {$regex : new RegExp(req.query.keyword,'i')}
+	}
+	let projection='name price _id images';
+	let sort  = {order:-1};
+	//
+	// console.log(projection)
+	if(req.query.orderBy == 'price_asc'){
+		sort = {price:-1}
+	}else if(req.query.orderBy == 'price_desc'){
+		sort = {price:1}
+	}
+	//
+	ProductModel.getPageProduct(page,query,projection,sort)
+	.then(result=>{
+		res.json({
+			code:0,
+			data:{
+				list:result.list,
+			    current:result.current,
+			    total:result.total,
+			    pageSize:result.pageSize
+			}
+		})		
+	})
+	.catch(e=>{
+		res.json({
+			code:1,
+			message:'获取失败'
+		})
+	})
+})
+//获取商品详情页信息
+router.get('/homeDetail',(req,res)=>{
+	console.log(req.query.productId)
+	ProductModel
+	.findOne({status:0,_id:req.query.productId},"-__v -createdAt -updatedAt")
+	.then(product=>{
+		res.json({
+			code:0,
+			data:product
+		})
+	})
+	.catch(e=>{
+		res.json({
+			code:1,
+			message:'获取商品详情页信息失败'
+		})
+	})
+})
 //设置权限
 router.use((req,res,next)=>{
 	if(req.userInfo.isAdmin){
@@ -225,6 +287,18 @@ router.get('/detail',(req,res)=>{
 		})		
 	})
 	
+})
+
+
+//设置权限
+router.use((req,res,next)=>{
+	if(req.userInfo._id){
+		next();
+	}else{
+		res.json({
+			code:10
+		})
+	}
 })
 
 /*

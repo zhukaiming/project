@@ -19,7 +19,7 @@
 			if(!isNaN(parseInt(options.page))){
 				page = parseInt(options.page)
 			}
-			let limit = 20;//每页两条用户信息
+			let limit = 5;//每页两条用户信息
 			if(page <= 0){
 				page = 1;
 			}

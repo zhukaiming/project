@@ -1,0 +1,85 @@
+ul li{
+	list-style: none;
+}
+.cart-title li,
+.cart-item li,
+.cart-footer li{
+	float: left;
+}
+.cart-title,
+.cart-item,
+.cart-footer{
+	padding-left: 10px;
+	box-sizing: border-box;
+}
+.product-select{
+	width: 6%;
+	
+}
+.product-info{
+	width: 54%;
+}
+.product-price{
+	width: 10%;
+}
+.product-count{
+	width: 10%;
+}
+.product-totalPrice{
+	width: 10%;
+}
+.product-edit{
+	width: 10%;
+}
+
+
+.cart-title{
+	height: 40px;
+	line-height: 40px;
+	background-color: #ddd;
+	margin-bottom: 20px;
+}
+.cart-item{
+	height: 80px;
+	line-height: 80px;
+	border: 1px solid #ddd;
+	margin-bottom: 10px;
+}
+.cart-item .product-info img{
+	width: 60px;
+	height: 60px;
+	vertical-align: middle;
+}
+.cart-item .product-count input{
+	width: 40px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	outline: none;
+}
+
+.cart-footer{
+	/*border: 1px solid #ddd;*/
+	height: 40px;
+	line-height: 40px;
+}
+.btn-submit{
+	display: inline-block;
+	text-align:center;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	background: red;
+	text-decoration: none;
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.delete-selected{
+	cursor: pointer;
+	user-select: none;
+}
+.cart-footer .product-submit{
+	float: right;
+}

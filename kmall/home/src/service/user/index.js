@@ -31,7 +31,7 @@ var _user = {
 		_util.request({
 			url:'/user/username',//
 			success:success,
-			error:error			
+			error:error
 		})
 	},
 	getUserInfo:function(success,error){

@@ -26,39 +26,39 @@ var page = {
 		
 	],
 	carousel:[
-		{categoryId:'1111',image:require('images/carousel/carousel2.jpg')},
-		{categoryId:'2222',image:require('images/carousel/carousel4.jpg')},
-		{categoryId:'3333',image:require('images/carousel/carousel5.jpg')}
+		{categoryId:'5b862dcf8e2e0b52609ae6c8',image:require('images/carousel/carousel2.jpg')},
+		{categoryId:'5b862dcf8e2e0b52609ae6c8',image:require('images/carousel/carousel4.jpg')},
+		{categoryId:'5b862dcf8e2e0b52609ae6c8',image:require('images/carousel/carousel5.jpg')}
 	],
 	floor:[
 		{
 			title:'F1 电器',
 			item:[
-				{image:require('images/floor/f1.jpg'),text:'手机',categoryId:1111},
-				{image:require('images/floor/f2.jpg'),text:'电脑',categoryId:2222},
-				{image:require('images/floor/f3.png'),text:'IPhone',categoryId:3333},
-				{image:require('images/floor/f4.jpg'),text:'苹果',categoryId:4444},
-				{image:require('images/floor/f5.jpg'),text:'或权',categoryId:5555}
+				{image:require('images/floor/f1.jpg'),text:'手机',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('images/floor/f2.jpg'),text:'电脑',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('images/floor/f3.png'),text:'IPhone',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('images/floor/f4.jpg'),text:'苹果',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('images/floor/f5.jpg'),text:'或权',categoryId:'5b862dcf8e2e0b52609ae6c8'}
 			]
 		},
 		{
 			title:'F2 服饰',
 			item:[
-				{image:require('../../util/carousel/images/f5.jpg'),text:'手机',categoryId:1111},
-				{image:require('../../util/carousel/images/f5.jpg'),text:'电脑',categoryId:2222},
-				{image:require('../../util/carousel/images/f5.jpg'),text:'IPhone',categoryId:3333},
-				{image:require('../../util/carousel/images/f5.jpg'),text:'苹果',categoryId:4444},
-				{image:require('../../util/carousel/images/f5.jpg'),text:'或权',categoryId:5555}
+				{image:require('../../util/carousel/images/f5.jpg'),text:'手机',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('../../util/carousel/images/f5.jpg'),text:'电脑',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('../../util/carousel/images/f5.jpg'),text:'IPhone',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('../../util/carousel/images/f5.jpg'),text:'苹果',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('../../util/carousel/images/f5.jpg'),text:'或权',categoryId:'5b862dcf8e2e0b52609ae6c8'}
 			]
 		},
 		{
 			title:'F3 家居',
 			item:[
-				{image:require('../../util/carousel/images/f5.jpg'),text:'手机',categoryId:1111},
-				{image:require('../../util/carousel/images/f5.jpg'),text:'电脑',categoryId:2222},
-				{image:require('../../util/carousel/images/f5.jpg'),text:'IPhone',categoryId:3333},
-				{image:require('../../util/carousel/images/f5.jpg'),text:'苹果',categoryId:4444},
-				{image:require('../../util/carousel/images/f5.jpg'),text:'或权',categoryId:5555}
+				{image:require('../../util/carousel/images/f5.jpg'),text:'手机',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('../../util/carousel/images/f5.jpg'),text:'电脑',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('../../util/carousel/images/f5.jpg'),text:'IPhone',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('../../util/carousel/images/f5.jpg'),text:'苹果',categoryId:'5b862dcf8e2e0b52609ae6c8'},
+				{image:require('../../util/carousel/images/f5.jpg'),text:'或权',categoryId:'5b862dcf8e2e0b52609ae6c8'}
 			]
 		},
 
