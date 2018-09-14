@@ -66,7 +66,9 @@ const UserSchema = new mongoose.Schema({
 UserSchema.methods.getCart = function(){
 	return new Promise((resove,reject)=>{
 		if(!this.cart){//没有购物车信息,返回空
-			resove(null)
+			resove({
+				cartList:[]
+			})
 		}
 		//获取
 		let getCartItem = ()=>{
@@ -86,9 +88,25 @@ UserSchema.methods.getCart = function(){
 			let totalCartPrice = 0;//总价
 			//遍历每一个商品价格,求出总价
 			cartItems.forEach(item=>{
-				totalCartPrice += item.totalPrice;
+				if(item.checked){
+					totalCartPrice += item.totalPrice;
+				}
 			});
 			this.cart.totalCartPrice = totalCartPrice;
+			//生成新的
+			this.cart.cartList = cartItems;
+
+			//判断有没有选中的项目
+			//
+			let hasNotCheckedItem = cartItems.find((item)=>{
+				return item.checked == false;
+			})
+
+			if(hasNotCheckedItem){
+				this.cart.allChecked = false;
+			}else{
+				this.cart.allChecked = true;
+			}
 			resove(this.cart);//返回
 		})
 	})

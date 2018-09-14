@@ -1,5 +1,3 @@
-
-{{#cartList}}
 <ul class="cart-title clearfix">
 	<li class="product-select">
 		{{#allChecked}}
@@ -16,7 +14,8 @@
 	<li class="product-totalPrice">小计</li>
 	<li class="product-edit">操作</li>
 </ul>
-<ul class="cart-item">
+{{#cartList}}
+<ul class="cart-item" data-product-id = "{{product._id}}">
 	<li class="product-select">
 		<input type="checkbox" class="select-one">
 	</li>
@@ -37,6 +36,7 @@
 		</span>
 	</li>
 </ul>
+{{/cartList}}
 <ul class="cart-footer">
 	{{#allChecked}}
 		<input type="checkbox" class="select-all" checked>
@@ -55,4 +55,7 @@
 		<a href="javascript:;" class="btn-submit">结算</a>
 	</li>
 </ul>
-{{/cartList}}
+<!-- {{^notEmpty}}
+	<p class="empty-message">购物车空空如也</p>
+	<a href="/" class="btn">去购物</a>
+{{/notEmpty}} -->

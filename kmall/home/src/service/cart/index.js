@@ -17,6 +17,24 @@ var _cart = {
 			success:success,
 			error:error
 		})
+	},
+	selectOne:function(data,success,error){
+		_util.request({
+			method:'put',
+			data:data,
+			url:'/cart/selectOne',
+			success:success,
+			error:error
+		})
+	},
+	unselectOne:function(data,success,error){
+		_util.request({
+			method:'put',
+			data:data,
+			url:'/cart/unselectOne',
+			success:success,
+			error:error
+		})
 	}
 
 }
