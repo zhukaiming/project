@@ -28,6 +28,10 @@ var _util = {
 	showErrMessage:function(msg){
 		alert(msg)
 	},//进入登录页
+	//处理删除
+	confirm:function(msg){
+		return window.confirm(msg)
+	},
 	doLogin:function(){
 		window.location.href = './user-login.html?redirect='+encodeURIComponent(window.location.href)
 	},//返回首页

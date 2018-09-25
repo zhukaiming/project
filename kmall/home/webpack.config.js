@@ -25,6 +25,7 @@ module.exports = {
 		'detail':'./src/pages/detail/index.js',
 		'cart':'./src/pages/cart/index.js',
 		'login':'./src/pages/user-login/index.js',
+		'order-confirm':'./src/pages/order-confirm/index.js',
 		'register':'./src/pages/user-register/index.js',
 		'user-center':'./src/pages/user-center/index.js',
 		'update-password':'./src/pages/update-password/index.js',
@@ -109,6 +110,7 @@ module.exports = {
 	    new htmlWebpackPlugin(getHtmlConfig('update-password')),
 	    new htmlWebpackPlugin(getHtmlConfig('list')),
 	    new htmlWebpackPlugin(getHtmlConfig('detail')),
+	    new htmlWebpackPlugin(getHtmlConfig('order-confirm','结算')),
 	    new htmlWebpackPlugin(getHtmlConfig('cart')),
 	    new htmlWebpackPlugin(getHtmlConfig('result')),
 	    new CleanWebpackPlugin(['dist']),//清除文件

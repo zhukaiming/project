@@ -35,8 +35,58 @@ var _cart = {
 			success:success,
 			error:error
 		})
+	},
+	selectAll:function(success,error){
+		_util.request({
+			method:'put',
+			url:'/cart/selectAll',
+			success:success,
+			error:error
+		})
+	},
+	unselectAll:function(success,error){
+		_util.request({
+			method:'put',
+			url:'/cart/unselectAll',
+			success:success,
+			error:error
+		})
+	},
+	deleteOne:function(data,success,error){
+		_util.request({
+			method:'put',
+			url:'/cart/deleteOne',
+			data:data,
+			success:success,
+			error:error
+		})
+	},
+	deleteSelect:function(success,error){
+		_util.request({
+			method:'put',
+			url:'/cart/deleteSelect',
+			success:success,
+			error:error
+		})
+	},
+	//修改数量
+	updataCount:function(data,success,error){
+		_util.request({
+			method:'put',
+			data:data,
+			url:'/cart/updataCount',
+			success:success,
+			error:error
+		})
+	},
+	//获取购物车数量
+	getCartCount:function(success,error){
+		_util.request({
+			url:'/cart/getCartCount',
+			success:success,
+			error:error
+		})
 	}
-
 }
 
 module.exports = _cart;

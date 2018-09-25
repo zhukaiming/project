@@ -1,0 +1,45 @@
+
+
+.panel-item{
+	width: 150px;
+	height: 100px;
+	float: left;
+	border: 4px dashed #ddd;
+	margin: 20px 20px 20px 0;
+	padding: 10px;
+}
+.shipping-title{
+	margin-bottom: 5px;
+}
+.shipping-detail{
+	margin-bottom: 5px;
+}
+.panel-add-icon{
+
+}
+.panel-item:hover .shipping-footer{
+	visibility: visible;
+}
+.panel-item.active{
+	border-color: #f21;
+}
+.shipping-footer{
+	margin-top: 20px;
+	float: right;
+	visibility: hidden;
+}
+.shipping-edit{
+	
+}
+.shipping-delete{
+	
+}
+.panel-add{
+	margin: 20px 20px 20px 0;
+	padding: 10px;
+	height: 80px;
+	text-align: center;
+	box-sizing: border-box;
+	border: 4px dashed #ccc;
+	float: left;
+}

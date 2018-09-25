@@ -52,7 +52,7 @@ var page = {
 				$input.val(current > min ? current - 1 : min)
 			}
 		})
-		//购物车
+		//购物车添加
 		$('.detail-box').on('click','.add-cart-btn',function(){
 			_cart.addCart({
 				productId:_this.params.productId,
@@ -68,11 +68,11 @@ var page = {
 	//加载商品页
 	loadProductDetail:function(){
 		//
-		var _this = this
+		var _this = this;
 		_product.getProductDetail({productId:this.params.productId},function(product){
 			console.log('156',product.images)
 			if(product.images){
-				product.images = product.images.split(',')[0];//
+				product.images = product.images.split(',');//把一个字符串分割成字符串数组
 			}else{
 				product.images =  [require('images/floor/f1.jpg')]
 				//
@@ -86,9 +86,7 @@ var page = {
 			_util.showErrMessage(msg);//
 		})
 	}
-
 }
-
 $(function(){
 	page.init()
 })

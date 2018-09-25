@@ -71,18 +71,20 @@ UserSchema.methods.getCart = function(){
 			})
 		}
 		//获取
-		let getCartItem = ()=>{
-			return this.cart.cartList.map(cartItem=>{//遍历商品
-				return ProductModel.findById(cartItem.product,"name price stock images")
-				.then(product=>{
-					cartItem.product = product
-					cartItem.totalPrice = product.price * cartItem.count//
-					return cartItem//
-				})
+		let getCartItem =  this.cart.cartList.map(cartItem=>{//遍历商品
+			console.log(cartItem)
+			return ProductModel.findById(cartItem.product,"name price stock images _id")
+			.then(product=>{
+				console.log('www',product)
+				cartItem.product = product;
+				cartItem.totalPrice = product.price * cartItem.count;//求总价
+				//console.log('qqq',cartItem)
+				return cartItem;//
+
 			})
-		}
+		})
 		//
-		Promise.all(getCartItem())
+		Promise.all(getCartItem)
 		.then(cartItems=>{
 			this.cart.cartList = cartItems;
 			let totalCartPrice = 0;//总价
@@ -101,7 +103,7 @@ UserSchema.methods.getCart = function(){
 			let hasNotCheckedItem = cartItems.find((item)=>{
 				return item.checked == false;
 			})
-
+			//有一项没有
 			if(hasNotCheckedItem){
 				this.cart.allChecked = false;
 			}else{

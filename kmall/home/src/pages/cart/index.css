@@ -31,8 +31,6 @@ ul li{
 .product-edit{
 	width: 10%;
 }
-
-
 .cart-title{
 	height: 40px;
 	line-height: 40px;
@@ -82,4 +80,8 @@ ul li{
 }
 .cart-footer .product-submit{
 	float: right;
+}
+.btn-count{
+	cursor: pointer;
+	font-size: 20px;
 }

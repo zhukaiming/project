@@ -1,3 +1,4 @@
+{{#notEmpty}}
 <ul class="cart-title clearfix">
 	<li class="product-select">
 		{{#allChecked}}
@@ -17,21 +18,28 @@
 {{#cartList}}
 <ul class="cart-item" data-product-id = "{{product._id}}">
 	<li class="product-select">
+		{{#checked}}
+		<input type="checkbox" class="select-one" checked>
+		{{/checked}}
+		{{^checked}}
 		<input type="checkbox" class="select-one">
+		{{/checked}}
 	</li>
 	<li class="product-info">
-		<img src="{{product.image}}" alt="">
-		<span>{{product.name}}</span>
+		<a href="./detail.html?productId={{product._id}}" class="link" target="_blank">
+			<img src="{{product.image}}" alt="">
+			<span>{{product.name}}</span>
+		</a>
 	</li>
 	<li class="product-price">￥{{product.price}}</li>
 	<li class="product-count">
 		<span class="btn-count minus">-</span>
-		<input type="text" value="{{count}}">
+		<input type="text" data-stock = "{{product.stock}}" class="count-input" value="{{count}}">
 		<span class="btn-count plus">+</span>
 	</li>
 	<li class="product-totalPrice">{{totalPrice}}</li>
 	<li class="product-edit">
-		<span class="delete-one">
+		<span class="delete-one link">
 			<i class="fa fa-trash-o"></i>删除
 		</span>
 	</li>
@@ -55,7 +63,8 @@
 		<a href="javascript:;" class="btn-submit">结算</a>
 	</li>
 </ul>
-<!-- {{^notEmpty}}
+{{/notEmpty}}
+{{^notEmpty}}
 	<p class="empty-message">购物车空空如也</p>
 	<a href="/" class="btn">去购物</a>
-{{/notEmpty}} -->
+{{/notEmpty}}
