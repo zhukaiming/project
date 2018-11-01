@@ -1,5 +1,5 @@
 {{#notEmpty}}
-<ul class="cart-title clearfix">
+<ul class="product-title clearfix">
 	<li class="product-select">
 		{{#allChecked}}
 			<input type="checkbox" class="select-all" checked>
@@ -16,7 +16,7 @@
 	<li class="product-edit">操作</li>
 </ul>
 {{#cartList}}
-<ul class="cart-item" data-product-id = "{{product._id}}">
+<ul class="product-item" data-product-id = "{{product._id}}">
 	<li class="product-select">
 		{{#checked}}
 		<input type="checkbox" class="select-one" checked>
@@ -45,7 +45,7 @@
 	</li>
 </ul>
 {{/cartList}}
-<ul class="cart-footer">
+<ul class="product-footer">
 	{{#allChecked}}
 		<input type="checkbox" class="select-all" checked>
 	{{/allChecked}}

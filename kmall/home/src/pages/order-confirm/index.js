@@ -7,13 +7,15 @@ require('./index.css')
 //
 var _util = require('util')
 var _cart = require('service/cart')
-var shippingtpl = require('./shippinglist.tpl')
+var shippingtpl = require('./shippinglist.tpl');
+var producttpl = require('./product.tpl')
 var page = {
 	init:function(){
 		//this.bindEvent();
 		this.bindEvent();
 		this.onload();
 		this.shippingList();
+		this.productList();
 	},
 	onload:function(){
 		this.loadCart();
@@ -25,6 +27,9 @@ var page = {
 	shippingList:function(){
 		this.renderShippingList();
 	},
+	productList:function(){
+		this.renderProductList();
+	},
 	renderShippingList:function(){
 		var html = _util.render(shippingtpl);
 		$('.shipping-box').html(html);
@@ -32,8 +37,11 @@ var page = {
 	loadCart:function(){
 		var _this = this;
 		//获取购物车信息
-
 	},
+	renderProductList:function(){
+		var html = _util.render(producttpl);
+		$('.product-box').html(html);
+	}
 }
 $(function(){
 	page.init()
