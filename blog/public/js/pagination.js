@@ -3,11 +3,13 @@
 (function($){
 
 	$.fn.extend({
+		//只负责绑定事件
+		//谁调用pagination,this就是谁
 		pagination:function(){
 			var self = this;//$('#page')
 			this.on('click','a',function(){
 				//console.log(this)
-				var $this = $(this);
+				var $this = $(this);//
 				var page = 1;
 				//获取当前页
 				var currentpage = self.find('.active a').html();

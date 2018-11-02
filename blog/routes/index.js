@@ -62,7 +62,6 @@ router.get('/',(req,res)=>{
 router.get('/articles',(req,res)=>{
 	let category = req.query.id;
 	let query  = {};
-
 	if(category){
 		query.category = category;
 	}

@@ -135,7 +135,6 @@ router.get('/comment/delete/:id',(req,res)=>{
 			});			
 		}
 	})
-	
 })
 //显示站点
 router.get('/site',(req,res)=>{

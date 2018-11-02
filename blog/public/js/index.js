@@ -102,7 +102,6 @@
 				data:{
 					username:username,
 					password:password
-
 				},
 				type:'post',
 				dataType:'json'
@@ -165,7 +164,9 @@
 //发送ajax文章列表请求
 	var $articlePage = $('#article-page');
 	$articlePage.on('get-data',function(e,result){
+		//渲染文章列表
 		buildArticlelist(result.data.docs);
+		//渲染分页
 		buildPage($articlePage,result.data.list,result.data.page);
 	})
 	$articlePage.pagination();
@@ -286,21 +287,19 @@
 		$('#comment-list').html(html);	
 	}
 
-
 	//评论
 	var $commentPage = $('#comment-page');
-
-	
+	//发表评论
 	$('#comment-btn').on('click',function(){
 		var articleId = $('#article-id').val();
 		var conmmentContent = $('#comment-content').val();
-		if(conmmentContent.trim() == ''){
+		if(conmmentContent.trim() == ''){//trim去除空格
 			$('.err').html('评论不能为空');
 			return false;
 		}else{
 			$('.err').html('')
 		}
-		
+		//发送ajax请求到routers/comment
 		$.ajax({
 			url:'/comment/add',
 			dataType:'json',

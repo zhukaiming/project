@@ -20,18 +20,22 @@ const CommentSchema = new mongoose.Schema({
 		default:Date.now
 	}
 });
-
+//
 CommentSchema.statics.getPageComment = function(req,query={}){
 	return new Promise((resolve,reject)=>{
 		let options = {
 			page:req.query.page,//需要显示的页码
 			model:this,//操作的数据模型
-			query:query,//查询条件
-			projection:'-__v',//投影
+			query:query,//查询条件,query={}：查询所有
+			projection:'-__v',//投影,显示的字段
 			sort:{_id:-1},//排序
+			//
 			populate:[{ path: 'article', select: 'title' },{ path: 'user', select: 'username' }]
 		}
-	pagination(options)
+		//返回一个Promise对象,然后调用的时候把相应的options参数传递进去,
+		//然后通过Promise获取到数据data	
+		//Promise
+		pagination(options)
 		.then((data)=>{
 			resolve(data);
 		})

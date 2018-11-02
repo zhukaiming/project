@@ -27,7 +27,7 @@ router.post('/register',(req,res)=>{//接收ajax请求
 			new userModel({
 				username:body.username,
 				password:hmac(body.password),
-				//isAdmin:true
+				// isAdmin:true//是否为管理员
 			})//新建userModel实例
 			.save((err,newUser)=>{//
 				if(!err){//插入数据库成功
@@ -97,20 +97,4 @@ router.get('/userout',(req,res)=>{
 	res.json(result);
 })
 
-
-//
-/*
-router.get('/blogjs.html',(req,res)=>{
-	//获取首页
-	res.render('main/blogjs')
-})
-router.get('/memory.html',(req,res)=>{
-	//获取首页
-	res.render('main/memory')
-})
-router.get('/bloglist.html',(req,res)=>{
-	//获取首页
-	res.render('main/bloglist')
-})
-*/
 module.exports = router;
