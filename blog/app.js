@@ -75,7 +75,6 @@ app.use((req,res,next)=>{
 //4:添加处理post请求的中间件
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
-
 //5:处理路由
 app.use("/",require('./routes/index.js'));
 app.use("/user",require('./routes/user.js'));
