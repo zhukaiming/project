@@ -1,8 +1,6 @@
 
 
 (function($){
-
-	//
 	var $login = $('#login');
 	var $register = $('#register');
 	var $userInfo = $('#user-info')
@@ -161,7 +159,8 @@
 	*/
 
 
-//发送ajax文章列表请求
+	//发送ajax文章列表请求
+	//分页
 	var $articlePage = $('#article-page');
 	$articlePage.on('get-data',function(e,result){
 		//渲染文章列表
@@ -206,16 +205,15 @@
 				buildPage(result.data.list,result.data.page);
 			}
 		})
-		.fail(function(){
-
+		.fail(function(err){
+			console.log(err)
 		})
 
 	})
 	*/
 	function buildPage($page,list,page){
-		var html = '';
 		//
-			html = `
+			var html = `
 					    <li>
 					      <a href="javascript:;" aria-label="Previous">
 					        <span aria-hidden="true">&laquo;</span>

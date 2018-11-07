@@ -75,7 +75,6 @@ router.get('/articles',(req,res)=>{
 		})
 })
 
-
 //处理view
 //显示详情页面
 router.get('/view/:id',(req,res)=>{

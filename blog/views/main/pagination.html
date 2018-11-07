@@ -1,28 +1,28 @@
 	
 
-	
-	  <ul class="pagination">
-	  	{% if pages >1 %}
-	    <li><!-- //点击的时候发送请求到Admin/users,调用get方法,让当前页-1 -->
-	      <a href="javascript:;" aria-label="Previous">
-	        <span aria-hidden="true">&laquo;</span>
-	      </a>
-	    </li>
-	    <!-- //遍历数组 -->
-		{% for i in list %}
-		{% if i ==page %}<!-- //如果是当前页 -->
-		<li class = "active"><a href="javascript:;">{{ i }}</a></li>
-		{% else %}<!-- //如果bu是当前页 -->
-		<li><a href="javascript:;">{{ i }}</a></li>
-		{% endif %}
-	    
-		{% endfor %}
-	    <li>
-	      <a href="javascript:;" aria-label="Next">
-	        <span aria-hidden="true">&raquo;</span>
-	      </a>
-	    </li>
-	    {% endif %}
-	  </ul>
+{% if pages > 1 %}
+  <ul class="pagination">
+    <li><!-- //点击的时候发送请求到Admin/users,调用get方法,让当前页-1 -->
+      <a href="javascript:;" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <!-- //遍历数组 -->
+	{% for i in list %}
+	{% if i == page %}<!-- //如果是当前页 -->
+	<li class = "active"><a href="javascript:;">{{ i }}</a></li>
+	{% else %}<!-- //如果bu是当前页 -->
+	<li><a href="javascript:;">{{ i }}</a></li>
+	{% endif %}
+
+	{% endfor %}
+    <li>
+      <a href="javascript:;" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    
+  </ul>
+{% endif %}
 	
 	

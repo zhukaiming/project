@@ -1,23 +1,22 @@
 
 
 (function($){
-
 	$.fn.extend({
 		//只负责绑定事件
 		//谁调用pagination,this就是谁
-		pagination:function(){
+		pagination:function(){	
+			console.log(this,'this...')
 			var self = this;//$('#page')
 			this.on('click','a',function(){
-				//console.log(this)
 				var $this = $(this);//
 				var page = 1;
 				//获取当前页
 				var currentpage = self.find('.active a').html();
-				var lable = $this.attr('aria-label')
+				var label = $this.attr('aria-label');
 				//上一页
-				if(lable == 'Previous'){
+				if(label == 'Previous'){
 					page = currentpage - 1;
-				}else if(lable == 'Next'){
+				}else if(label == 'Next'){
 				//下一页	
 					page = currentpage*1 + 1;
 				}else{
@@ -52,6 +51,4 @@
 		} 
 	})
 //发送ajax文章列表请求
-
-
 })(jQuery)
