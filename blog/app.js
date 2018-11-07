@@ -71,7 +71,6 @@ app.use((req,res,next)=>{
 	req.userInfo = req.session.userInfo || {};
 	next();
 })
-
 //4:添加处理post请求的中间件
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
