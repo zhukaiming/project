@@ -4,7 +4,7 @@
 .panel-add
 {
 	width: 280px;
-	height: 100px;
+	/* height: 100px; */
 	float: left;
 	border: 4px dashed #ddd;
 	margin: 20px 20px 20px 0;
@@ -22,15 +22,6 @@
 	float: right;
 	visibility: hidden;
 }
-.shipping-edit{
-	
-}
-.shipping-delete{
-	
-}
-.panel-add-icon{
-
-}
 .panel-item:hover .shipping-footer{
 	visibility: visible;
 }
@@ -45,5 +36,60 @@
 	text-align: center;
 	font-size: 30px;
 }
-
+.gocart-btn{
+	display: block;
+	margin: 20px auto;
+}
 /*商品清单*/
+/*
+弹窗
+*/
+.modal{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.4);
+}
+.modal .modal-container{
+	width: 400px;
+	height: 550px;
+	padding: 10px;
+	background-color: #fff;
+	margin: 100px auto;
+}
+.modal-header{
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #ddd;
+	overflow: hidden;
+}
+.modal-header .close{
+	color: #666;
+	float: right;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.modal-title{
+	font-size: 16px;
+	color: #777;
+	float: left;
+}
+.modal-body{
+
+}
+.modal .form{
+	background-color: #fff;
+}
+.modal-body .form-item.city-item{
+	border: none;
+}
+.modal-body .form-item.city-item .form-lable{
+	border: 1px solid #bdbdbd;
+}
+.modal-body .form-item.city-item select{
+	width: 100px;
+	margin-right: 20px;
+}

@@ -4,9 +4,14 @@ require('pages/common/search')
 require('util/carousel')
 // require('pages/common/user-center')
 require('./index.css')
+require('pages/common/side/index.css')
 //
 var _util = require('util')
 var _cart = require('service/cart')
+
+var _order = require('service/order')
+var _shipping = require('service/shipping')
+
 var shippingtpl = require('./shippinglist.tpl');
 var producttpl = require('./product.tpl')
 var page = {
@@ -28,7 +33,7 @@ var page = {
 		this.renderShippingList();
 	},
 	productList:function(){
-		this.renderProductList();
+		this.loadProductList();
 	},
 	renderShippingList:function(){
 		var html = _util.render(shippingtpl);
@@ -38,9 +43,27 @@ var page = {
 		var _this = this;
 		//获取购物车信息
 	},
-	renderProductList:function(){
-		var html = _util.render(producttpl);
+	loadProductList:function(){
+		var _this = this;
+		_order.getOrderProductList(function(result){//成功
+			console.log(result);
+		result.cartList.forEach(item=>{
+			//图片添加
+			if(item.product.images){//
+				item.product.image = item.product.images.split(',')[0]
+			}else{
+				item.product.image = require('images/floor/f1.jpg')
+			}
+		})
+		//
+		result.notEmpty = !!result.cartList.length;
+		var html = _util.render(producttpl,result);
 		$('.product-box').html(html);
+		},function(){//失败
+			$('.product-box').html('<p class = "empty-message">获取信息失败</p>')
+		}) 
+
+
 	}
 }
 $(function(){

@@ -1,6 +1,7 @@
 
 var _nav = require('pages/common/nav')
 require('pages/common/search')
+require('pages/common/side/index.css')
 require('util/carousel')
 // require('pages/common/user-center')
 require('./index.css')
@@ -23,7 +24,7 @@ var page = {
 		$('.cart-box').on('click','.select-one',function(){
 			var $this = $(this)
 			//获取单选框id
-			let productId = $this.parents('.cart-item').data('product-id')
+			let productId = $this.parents('.product-item').data('product-id')
 			if($this.is(':checked')){	
 				_cart.selectOne({productId:productId},function(cart){
 					_this.renderCart(cart)
@@ -63,7 +64,7 @@ var page = {
 		$('.cart-box').on('click','.delete-one',function(){
 			var $this = $(this)
 			//获取单选框id
-			let productId = $this.parents('.cart-item').data('product-id')
+			let productId = $this.parents('.product-item').data('product-id')
 			if(_util.confirm('你确定删除这条商品吗')){
 				_cart.deleteOne({productId:productId},function(cart){
 					_this.renderCart(cart)
@@ -87,7 +88,7 @@ var page = {
 		//增加
 		$('.cart-box').on('click','.btn-count',function(){
 			var $this = $(this)
-			var productId = $this.parents('.cart-item').data('product-id')
+			var productId = $this.parents('.product-item').data('product-id')
 			var $input = $this.siblings('.count-input');
 			var current = parseInt($input.val());
 			var max = $input.data('stock');

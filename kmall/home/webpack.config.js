@@ -133,7 +133,15 @@ module.exports = {
 			"/cart":{
 				target:'http://127.0.0.1:3000',
 				changeOrigin:true//是否跨域
-			}
+			},
+			"/order":{
+				target:'http://127.0.0.1:3000',
+				changeOrigin:true//是否跨域
+			},
+			"/shipping":{
+				target:'http://127.0.0.1:3000',
+				changeOrigin:true//是否跨域
+			},
 		}		
 	}
 }

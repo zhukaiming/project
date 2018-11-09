@@ -113,6 +113,51 @@ UserSchema.methods.getCart = function(){
 		})
 	})
 }
+
+//
+UserSchema.methods.getOrderProductList = function(){
+	return new Promise((resove,reject)=>{
+		if(!this.cart){//没有购物车信息,返回空
+			resove({
+				cartList:[]
+			})
+		}
+		//
+		let checkedCartList = this.cart.cartList.filter(cartItem=>{//筛选出一个新的数组
+			return cartItem.checked;
+		})
+		//获取
+		let getCartItem =  checkedCartList.map(cartItem=>{//遍历商品
+			console.log(cartItem)
+			return ProductModel.findById(cartItem.product,"name price stock images _id")
+			.then(product=>{
+				// console.log('www',product)
+				cartItem.product = product;
+				cartItem.totalPrice = product.price * cartItem.count;//求总价
+				//console.log('qqq',cartItem)
+				return cartItem;//
+
+			})
+		})
+		//
+		Promise.all(getCartItem)
+		.then(cartItems=>{
+			this.cart.cartList = cartItems;
+			let totalCartPrice = 0;//总价
+			//遍历每一个商品价格,求出总价
+			cartItems.forEach(item=>{
+				if(item.checked){
+					totalCartPrice += item.totalPrice;
+				}
+			});
+			this.cart.totalCartPrice = totalCartPrice;
+			//生成新的
+			this.cart.cartList = cartItems;
+
+			resove(this.cart);//返回
+		})
+	})
+}
 //3用定义好的schema生成model模型
 const userModel = mongoose.model('User',UserSchema);//8/10号修改user为User
 

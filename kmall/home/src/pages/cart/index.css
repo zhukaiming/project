@@ -1,5 +1,4 @@
 
-/**/
 ul li{
 	list-style: none;
 }
@@ -40,6 +39,20 @@ ul li{
 	border: 1px solid #ddd;
 	margin-bottom: 10px;
 }
+.product-footer{
+	/*border: 1px solid #ddd;*/
+	height: 40px;
+	line-height: 40px;
+}
+.product-footer .product-submit{
+	float: right;
+}
+.product-item{
+	height: 80px;
+	line-height: 80px;
+	border: 1px solid #ddd;
+	margin-bottom: 10px;
+}
 .product-select{
 	width: 6%;
 }
@@ -58,6 +71,7 @@ ul li{
 .product-edit{
 	width: 10%;
 }
+
 .btn-count{
 	cursor: pointer;
 	font-size: 20px;
@@ -75,19 +89,15 @@ ul li{
 	font-weight: bold;
 	cursor: pointer;
 }
-.product-item .product-info img{
-	width: 60px;
-	height: 60px;
-	vertical-align: middle;
-}
-.delete-selected{
-	cursor: pointer;
-	user-select: none;
-}
 .product-item .product-count input{
 	width: 40px;
 	height: 20px;
 	line-height: 20px;
 	text-align: center;
 	outline: none;
+}
+
+.delete-selected{
+	cursor: pointer;
+	user-select: none;
 }
