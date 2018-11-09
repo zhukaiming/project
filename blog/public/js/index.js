@@ -1,5 +1,4 @@
 
-
 (function($){
 	var $login = $('#login');
 	var $register = $('#register');
@@ -12,7 +11,6 @@
 		$login.hide();
 		$register.show();
 	})
-	//
 	//用户注册处理
 	$('#sub-register').on('click',function(){
 		//获取数据
@@ -67,7 +65,6 @@
 		}
 
 	})
-
 	//用户登录
 	$('#sub-btn').on('click',function(){
 		//获取数据
@@ -86,7 +83,6 @@
 		else if(!/^\w{3,10}$/i.test(username)){
 			errmsg = '密码为3-10个字符'
 		}
-
 		//验证不通过
 		if(errmsg){
 			$err.html(errmsg);
@@ -157,8 +153,6 @@
 		})
 	})
 	*/
-
-
 	//发送ajax文章列表请求
 	//分页
 	var $articlePage = $('#article-page');
@@ -212,7 +206,6 @@
 	})
 	*/
 	function buildPage($page,list,page){
-		//
 			var html = `
 					    <li>
 					      <a href="javascript:;" aria-label="Previous">
