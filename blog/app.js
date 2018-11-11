@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 const Cookies = require('cookies');
 const session = require('express-session');
 const MongoStore = require("connect-mongo")(session);
-//1链接数据库
+//通用
+//1.链接数据库
 mongoose.connect('mongodb://localhost:27017/blog',{useNewUrlParser:true});
 const db = mongoose.connection;//
 db.on('error',(err)=>{
@@ -16,12 +17,11 @@ db.on('error',(err)=>{
 db.once('open', function(){
 
   	console.log('open connect...')
-
 })
 
 const app = express();//
 
-//2配置模板
+//2.配置模板
 swig.setDefaults({
   cache: false//
 })
@@ -32,8 +32,6 @@ app.set('view engine','html');//注册模板引擎
 
 //3:配置静态资源
 app.use(express.static('public'));//托管静态文件
-
-
 //设置cookies中间件
 //目的在服务器端和客户端保存用户的状态信息
 /*
