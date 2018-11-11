@@ -5,7 +5,6 @@ require('util/carousel')
 // require('pages/common/user-center')
 require('./index.css')
 require('pages/common/side/index.css')
-//
 var _util = require('util')
 var _cart = require('service/cart')
 
