@@ -12,6 +12,7 @@ var tpl = require('./index.tpl')
 var page = {
 	init:function(){
 		//this.bindEvent();
+		this.$box = $('.cart-box');
 		this.bindEvent();
 		this.onload();
 	},
@@ -21,10 +22,10 @@ var page = {
 	bindEvent:function(){
 		var _this = this;
 		//购物车选中处理
-		$('.cart-box').on('click','.select-one',function(){
+		this.$box.on('click','.select-one',function(){
 			var $this = $(this)
 			//获取单选框id
-			let productId = $this.parents('.product-item').data('product-id')
+			var productId = $this.parents('.product-item').data('product-id')
 			if($this.is(':checked')){	
 				_cart.selectOne({productId:productId},function(cart){
 					_this.renderCart(cart)
@@ -42,7 +43,7 @@ var page = {
 		})
 
 		//购物车全选,全取消
-		$('.cart-box').on('click','.select-all',function(){
+		this.$box.on('click','.select-all',function(){
 			var $this = $(this)
 			if($this.is(':checked')){	
 				_cart.selectAll(function(cart){
@@ -61,10 +62,10 @@ var page = {
 		})
 
 		//删除单个
-		$('.cart-box').on('click','.delete-one',function(){
+		this.$box.on('click','.delete-one',function(){
 			var $this = $(this)
 			//获取单选框id
-			let productId = $this.parents('.product-item').data('product-id')
+			var productId = $this.parents('.product-item').data('product-id')
 			if(_util.confirm('你确定删除这条商品吗')){
 				_cart.deleteOne({productId:productId},function(cart){
 					_this.renderCart(cart)
@@ -74,7 +75,7 @@ var page = {
 			}
 		})
 		//删除选中
-		$('.cart-box').on('click','.delete-selected',function(){
+		this.$box.on('click','.delete-selected',function(){
 			//获取单选框id
 			if(_util.confirm('你确定删除这条商品吗')){
 				_cart.deleteSelect(function(cart){
@@ -86,7 +87,7 @@ var page = {
 		})
 		//更新数量
 		//增加
-		$('.cart-box').on('click','.btn-count',function(){
+		this.$box.on('click','.btn-count',function(){
 			var $this = $(this)
 			var productId = $this.parents('.product-item').data('product-id')
 			var $input = $this.siblings('.count-input');
@@ -119,7 +120,7 @@ var page = {
 			//
 		})
 		//结算
-		$('.cart-box').on('click','.btn-submit',function(){
+		this.$box.on('click','.btn-submit',function(){
 			if(_this.cart && _this.cart.totalCartPrice > 0){
 				window.location.href = "./order-confirm.html"
 			}

@@ -1,5 +1,4 @@
 
-
 <div class="panel">
 	<h2 class="panel-header">送货地址</h2>
 	<div class="panel-body">
@@ -23,7 +22,7 @@
 				<span class="shipping-delete link">删除</span>
 			</div>
 		</div>
-		<div class="panel-add">
+		<div class="shipping-add">
 			<i class="fa fa-plus panel-add-icon" aria-hidden="true"></i>
 			<p class="shipping-add-text">添加地址</p>
 		</div>

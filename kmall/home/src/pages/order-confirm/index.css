@@ -1,7 +1,7 @@
 
 /*送货地址*/
 .panel-item,
-.panel-add
+.shipping-add
 {
 	width: 280px;
 	/* height: 100px; */
@@ -10,7 +10,9 @@
 	margin: 20px 20px 20px 0;
 	padding: 10px;
 }
-
+.shipping-add:hover{
+	cursor: pointer;
+}
 .shipping-title{
 	margin-bottom: 5px;
 }
@@ -32,7 +34,7 @@
 	border-color: #f21;
 }
 
-.panel-add{
+.shipping-add{
 	text-align: center;
 	font-size: 30px;
 }

@@ -10,7 +10,7 @@ var _cart = require('service/cart')
 
 var _order = require('service/order')
 var _shipping = require('service/shipping')
-
+var _modal = require('./modal.js')
 var shippingtpl = require('./shippinglist.tpl');
 var producttpl = require('./product.tpl')
 var page = {
@@ -27,6 +27,11 @@ var page = {
 	bindEvent:function(){
 		var _this = this;
 		//购物车选中处理
+
+		//绑定新增地址事件
+		$('.shipping-box').on('click','.shipping-add',function(){
+			_modal.show();
+		})
 	},
 	shippingList:function(){
 		this.renderShippingList();
