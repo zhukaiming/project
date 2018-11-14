@@ -1,4 +1,5 @@
 //
+//
 var Hogan = require('hogan.js')
 var _util = {
 	//封装发送ajax请求的方法
@@ -79,5 +80,6 @@ var _util = {
 			
 	}
 }
-
+//
+//
 module.exports = _util;
