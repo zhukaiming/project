@@ -1,5 +1,4 @@
 //
-//
 var Hogan = require('hogan.js')
 var _util = {
 	//封装发送ajax请求的方法
@@ -77,9 +76,7 @@ var _util = {
 		if(type == 'email'){//^开头$结尾
 			return /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(value)
 		}
-			
 	}
 }
-//
 //
 module.exports = _util;
