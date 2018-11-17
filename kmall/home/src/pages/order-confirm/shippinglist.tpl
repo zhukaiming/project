@@ -3,7 +3,7 @@
 	<h2 class="panel-header">送货地址</h2>
 	<div class="panel-body">
 		{{#shippings}}
-		<div class="panel-item active">
+		<div class="panel-item" data-shipping-id = {{_id}}>
 			<h3 class="shipping-title">{{procince}} {{city}} {{name}}</h3>
 			<p class="shipping-detail">
 				{{province}} {{city}} {{address}} {{phone}}

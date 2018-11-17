@@ -11,6 +11,22 @@ var _shipping = {
 			error:error
 		})
 	},
+	getShippingList:function(success,error){
+		_util.request({
+			url:'/shipping/list',
+			success:success,
+			error:error
+		})		
+	},
+	deleteShipping:function(data,success,error){
+		_util.request({
+			method:'put',
+			url:'/shipping/delete',
+			data:data,
+			success:success,
+			error:error			
+		})
+	}
 }
 
 module.exports = _shipping;

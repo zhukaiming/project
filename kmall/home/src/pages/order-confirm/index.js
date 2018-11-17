@@ -16,9 +16,10 @@ var producttpl = require('./product.tpl')
 var page = {
 	init:function(){
 		//this.bindEvent();
+		this.$shippingBox = $('.shipping-box');
 		this.bindEvent();
 		this.onload();
-		this.shippingList();
+		this.loadShippingList();
 		this.productList();
 	},
 	onload:function(){
@@ -29,14 +30,31 @@ var page = {
 		//购物车选中处理
 
 		//绑定新增地址事件
-		$('.shipping-box').on('click','.shipping-add',function(){
+		this.$shippingBox.on('click','.shipping-add',function(){
 			_modal.show({
 				success:_this.renderShippingList
 			});
-		})
+		});
+		//删除地址
+		this.$shippingBox.on('click','.shipping-delete',function(){
+			var $this = $(this);
+			var shippingId = $this.parents(".panel-item").data("shipping-id");
+			if(_util.confirm('你确定删除这条地址码')){
+				_shipping.deleteShipping({shippingId:shippingId},function(shippings){
+					_this.renderShippingList(shippings)
+				},function(msg){
+					_util.showErrMessage(msg);
+				})
+			}
+		});
 	},
-	shippingList:function(){
-		this.renderShippingList();
+	loadShippingList:function(){
+		var _this = this;
+		_shipping.getShippingList(function(shippings){
+			_this.renderShippingList(shippings);
+		},function(msg){
+			_this.$shippingBox.html('<p class = "empty-message">获取信息失败</p>')
+		}) 
 	},
 	productList:function(){
 		this.loadProductList();
@@ -45,7 +63,7 @@ var page = {
 		var html = _util.render(shippingtpl,{
 				shippings:shippings
 			});
-		$('.shipping-box').html(html);
+		this.$shippingBox.html(html);
 	},
 	loadCart:function(){
 		var _this = this;
