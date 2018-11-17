@@ -19,9 +19,8 @@ var _modal = {
 		});
 
 		//省份城市联动
-		var $provincesSelect = this.$box.find('.provinces-select');
-		$provincesSelect.on('change',function(){
-			_this.loadCities($provincesSelect.val());
+		this.$box.find('.provinces-select').on('change',function(){
+			_this.loadCities($(this).val());
 		})
 	},
 	loadModal:function(){
