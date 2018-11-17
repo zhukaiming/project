@@ -19,7 +19,7 @@
 					</div>
 					<div class="form-item city-item">
 						<lable class="form-lable">
-							<i class="fa fa-bath" aria-hidden="true"></i>
+							<i class="fa fa-building" aria-hidden="true"></i>
 						</lable>
 						<select name="province" class="provinces-select">
 							<option value="">请选择</option>
@@ -30,7 +30,7 @@
 					</div>
 					<div class="form-item">
 						<lable class="form-lable">
-							<i class="fa fa-building" aria-hidden="true"></i>
+							<i class="fa fa-map-marker" aria-hidden="true"></i>
 						</lable>
 						<input type="password" class="form-content" name="address" placeholder="请输入详细地址">
 					</div>

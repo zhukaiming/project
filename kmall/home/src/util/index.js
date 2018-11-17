@@ -24,10 +24,14 @@ var _util = {
 				params.error && params.error(result.statusText)
 			}
 		})
-	},//显示错误信息
+	},
+	//显示错误信息
 	showErrMessage:function(msg){
 		alert(msg)
 	},//进入登录页
+	showSuccessMessage:function(msg){
+		alert(msg)
+	},
 	//处理删除
 	confirm:function(msg){
 		return window.confirm(msg)

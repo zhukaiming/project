@@ -30,7 +30,9 @@ var page = {
 
 		//绑定新增地址事件
 		$('.shipping-box').on('click','.shipping-add',function(){
-			_modal.show();
+			_modal.show({
+				success:_this.renderShippingList
+			});
 		})
 	},
 	shippingList:function(){
@@ -39,8 +41,10 @@ var page = {
 	productList:function(){
 		this.loadProductList();
 	},
-	renderShippingList:function(){
-		var html = _util.render(shippingtpl);
+	renderShippingList:function(shippings){
+		var html = _util.render(shippingtpl,{
+				shippings:shippings
+			});
 		$('.shipping-box').html(html);
 	},
 	loadCart:function(){
