@@ -11,6 +11,7 @@ var _shipping = {
 			error:error
 		})
 	},
+	//
 	getShippingList:function(success,error){
 		_util.request({
 			url:'/shipping/list',
@@ -18,6 +19,7 @@ var _shipping = {
 			error:error
 		})		
 	},
+	//
 	deleteShipping:function(data,success,error){
 		_util.request({
 			method:'put',

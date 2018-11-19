@@ -20,7 +20,7 @@ var formErr = {
 		.text(msg)		
 	}
 }
-
+//
 var _modal = {
 	show:function(options){
 		this.$box = $('.modal-box');
