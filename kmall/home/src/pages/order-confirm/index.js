@@ -88,10 +88,9 @@ var page = {
 		},function(){//失败
 			$('.product-box').html('<p class = "empty-message">获取信息失败</p>')
 		}) 
-
-
 	}
 }
+/**/
 $(function(){
 	page.init()
 })
