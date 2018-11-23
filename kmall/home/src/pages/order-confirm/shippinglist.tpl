@@ -4,7 +4,7 @@
 	<div class="panel-body">
 		{{#shippings}}
 		<div class="panel-item" data-shipping-id = {{_id}}>
-			<h3 class="shipping-title">{{procince}} {{city}} {{name}}</h3>
+			<h3 class="shipping-title">{{province}} {{city}} {{name}}</h3>
 			<p class="shipping-detail">
 				{{province}} {{city}} {{address}} {{phone}}
 			</p>

@@ -28,7 +28,25 @@ var _shipping = {
 			success:success,
 			error:error			
 		})
-	}
+	},
+	//编辑地址
+	getShipping:function(data,success,error){
+		_util.request({
+			url:'/shipping',
+			data:data,
+			success:success,
+			error:error			
+		})
+	},
+	editShipping:function(data,success,error){
+		_util.request({
+			url:'/shipping',
+			method:'put',
+			data:data,
+			success:success,
+			error:error			
+		})
+	},
 }
 
 module.exports = _shipping;

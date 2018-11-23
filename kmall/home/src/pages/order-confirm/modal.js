@@ -1,6 +1,4 @@
 
-
-
 var _util = require('util');
 var _shipping = require('service/shipping');
 var _cities = require('util/cities');
@@ -51,20 +49,36 @@ var _modal = {
 		})
 	},
 	loadModal:function(){
-		var html = _util.render(modalTpl);
+		var html = _util.render(modalTpl,{
+			data:this.options.data || {},
+			isEdit:!!this.options.data
+		});
 		this.$box.html(html);
 		this.loadProvinces();
 	},
 	loadProvinces:function(){
 		var provinces = _cities.getProvinces();
-		//console.log(provinces);
 		var provincesSelectOptions = this.getSelectOptions(provinces);
+		var $provincesSelect = this.$box.find('.provinces-select');
 		this.$box.find('.provinces-select').html(provincesSelectOptions);
+
+		//省份回填
+		if(this.options.data && this.options.data.province){
+			$provincesSelect.val(this.options.data.province);
+			this.loadCities(this.options.data.province)
+		}
 	},
 	loadCities:function(provincesName){
 		var cities = _cities.getCities(provincesName);
 	 	var citiesSelectOptions = this.getSelectOptions(cities);
-		this.$box.find('.cities-select').html(citiesSelectOptions);
+	 	var $citiesSelect = this.$box.find('.cities-select')
+		$citiesSelect.html(citiesSelectOptions);
+
+		//城市回填
+		if(this.options.data && this.options.data.city){
+			$citiesSelect.val(this.options.data.city);
+			// this.loadCities(this.options.data.city)
+		}
 	},
 	getSelectOptions:function(arr){
 		let html = `<option value="">请选择</option>`;
@@ -94,13 +108,27 @@ var _modal = {
 		if(validateResult.status){//验证成功
 			formErr.hide();	
 			//发送登录请求
-			_shipping.addShipping(formDate,function(shippings){
-				_util.showSuccessMessage('添加地址成功');
-				_this.hide();
-				_this.options.success(shippings);
-			},function(msg){
-				formErr.show(msg)
-			})	
+			//编辑
+			if(this.options.data){
+				formDate.shippingId = this.options.data._id;
+				_shipping.editShipping(formDate,function(shippings){
+					_util.showSuccessMessage('编辑地址成功');
+					_this.hide();
+					_this.options.success(shippings);
+				},function(msg){
+					formErr.show(msg)
+				})
+			}
+			//新增
+			else{
+				_shipping.addShipping(formDate,function(shippings){
+					_util.showSuccessMessage('添加地址成功');
+					_this.hide();
+					_this.options.success(shippings);
+				},function(msg){
+					formErr.show(msg)
+				})	
+			}
 		}
 		//验证失败
 		else{

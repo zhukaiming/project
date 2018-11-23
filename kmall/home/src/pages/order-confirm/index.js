@@ -28,11 +28,12 @@ var page = {
 	bindEvent:function(){
 		var _this = this;
 		//购物车选中处理
-
 		//绑定新增地址事件
 		this.$shippingBox.on('click','.shipping-add',function(){
 			_modal.show({
-				success:_this.renderShippingList
+				success:function(shippings){
+					_this.renderShippingList(shippings)
+				}
 			});
 		});
 		//删除地址
@@ -46,6 +47,22 @@ var page = {
 					_util.showErrMessage(msg);
 				})
 			}
+		});
+		//编辑地址
+		this.$shippingBox.on('click','.shipping-edit',function(){
+			var $this = $(this);
+			var shippingId = $this.parents(".panel-item").data("shipping-id");
+			_shipping.getShipping({shippingId:shippingId},function(shippings){
+				//console.log(shippings)
+				_modal.show({
+					data:shippings,
+					success:function(shippings){
+						_this.renderShippingList(shippings)
+					}
+				});				
+			},function(msg){
+				_util.showErrMessage(msg);
+			})
 		});
 	},
 	loadShippingList:function(){
