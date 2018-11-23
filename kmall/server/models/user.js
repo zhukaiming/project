@@ -37,6 +37,27 @@ const CartSchema = new mongoose.Schema({
 		default:0
 	}
 })
+const ShippingSchema = new mongoose.Schema({
+	name:{
+		type:String
+	},
+	province:{
+		type:String
+	},
+	city:{
+		type:String
+	},
+	address:{
+		type:String
+	},
+	phone:{
+		type:String
+	},
+	zip:{
+		type:String
+	}
+
+})
 const UserSchema = new mongoose.Schema({
 	//储存的内容
 
@@ -58,6 +79,10 @@ const UserSchema = new mongoose.Schema({
 	},
 	phone:{
 		type:String
+	},
+	shipping:{
+		type:[ShippingSchema],
+		default:[]
 	}
 },{
 	timestamps:true
