@@ -1,5 +1,5 @@
 
-<div class="modal">
+<div class="modal close">
 	<div class="modal-container">
 		<div class="modal-header">
 			{{#isEdit}}
@@ -48,7 +48,7 @@
 					</div>
 					<div class="form-item">
 						<lable class="form-lable">
-							<i class="fa fa-phone" aria-hidden="true"></i>
+							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</lable>
 						<input type="text" class="form-content" name="zip" placeholder="请输入邮编" value="{{data.zip}}">
 					</div>

@@ -14,6 +14,10 @@ var _modal = require('./modal.js')
 var shippingtpl = require('./shippinglist.tpl');
 var producttpl = require('./product.tpl')
 var page = {
+	//
+	data:{
+		shippingId:null
+	},
 	init:function(){
 		//this.bindEvent();
 		this.$shippingBox = $('.shipping-box');
@@ -29,15 +33,20 @@ var page = {
 		var _this = this;
 		//购物车选中处理
 		//绑定新增地址事件
-		this.$shippingBox.on('click','.shipping-add',function(){
+		this.$shippingBox.on('click','.shipping-add',function(shippings){
 			_modal.show({
+				/*
 				success:function(shippings){
 					_this.renderShippingList(shippings)
 				}
+				*/
+				data:shippings,
+				success:_this.renderShippingList.bind(_this)
 			});
 		});
 		//删除地址
-		this.$shippingBox.on('click','.shipping-delete',function(){
+		this.$shippingBox.on('click','.shipping-delete',function(e){
+			e.stopPropagation();//阻止冒泡
 			var $this = $(this);
 			var shippingId = $this.parents(".panel-item").data("shipping-id");
 			if(_util.confirm('你确定删除这条地址码')){
@@ -49,21 +58,27 @@ var page = {
 			}
 		});
 		//编辑地址
-		this.$shippingBox.on('click','.shipping-edit',function(){
+		this.$shippingBox.on('click','.shipping-edit',function(e){
+			e.stopPropagation();
 			var $this = $(this);
 			var shippingId = $this.parents(".panel-item").data("shipping-id");
 			_shipping.getShipping({shippingId:shippingId},function(shippings){
 				//console.log(shippings)
 				_modal.show({
 					data:shippings,
-					success:function(shippings){
-						_this.renderShippingList(shippings)
-					}
+					success:_this.renderShippingList.bind(_this)
 				});				
 			},function(msg){
 				_util.showErrMessage(msg);
 			})
 		});
+		//选择地址
+		this.$shippingBox.on('click','.panel-item',function(){
+			var $this = $(this);
+			$this.addClass('active')
+			.siblings('.panel-item').removeClass('active');
+			_this.data.shippingId = $this.data('shipping-id');
+		})
 	},
 	loadShippingList:function(){
 		var _this = this;
@@ -77,6 +92,12 @@ var page = {
 		this.loadProductList();
 	},
 	renderShippingList:function(shippings){
+		var _this = this;
+		shippings.forEach(function(shipping){
+			if(shipping._id == _this.data.shippingId){
+				shipping.isActive = true;
+			}
+		})
 		var html = _util.render(shippingtpl,{
 				shippings:shippings
 			});
