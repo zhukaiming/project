@@ -35,6 +35,7 @@ var _modal = {
 		this.$box.find('.modal-container').on('click',function(e){
 			e.stopPropagation();
 		});
+		//
 		//省份城市联动
 		this.$box.find('.provinces-select').on('change',function(){
 			_this.loadCities($(this).val());
