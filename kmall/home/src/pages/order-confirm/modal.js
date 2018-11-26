@@ -173,4 +173,5 @@ var _modal = {
 		return result;
 	}
 }
+//
 module.exports = _modal; 
