@@ -1,8 +1,5 @@
 
-
-//
 const Router  = require('express').Router;
-
 const userModel = require('../models/user.js');
 const router = Router();
 const hmac = require('../util/crypto.js');

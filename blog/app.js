@@ -1,5 +1,4 @@
 //
-
 const express = require('express');
 const swig = require('swig');
 const bodyParser = require('body-parser');
@@ -15,7 +14,6 @@ db.on('error',(err)=>{
 	throw err;
 });
 db.once('open', function(){
-
   	console.log('open connect...')
 })
 
