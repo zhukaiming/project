@@ -86,13 +86,13 @@ router.get('/',(req,res)=>{
 		})
 	})
 })
-
+//
 //编辑地址
 router.put('/',(req,res)=>{
 	let body = req.body;
 	userModel.findById(req.userInfo._id)
 	.then(user=>{
-		let shipping = user.shipping.id(body.shippingId)
+		let shipping = user.shipping.id(body.shippingId);
 		shipping.name = body.name;
 		shipping.province = body.province;
 		shipping.city = body.city;

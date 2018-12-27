@@ -16,7 +16,7 @@ db.on('error',(err)=>{
 db.once('open', function(){
   	console.log('open connect...')
 })
-
+//
 const app = express();//
 
 //2.配置模板

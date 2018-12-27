@@ -1,0 +1,17 @@
+<import src="movie-list-template/movie-list.wxml" />
+<view class='movie'>
+  <template 
+    is="movieList" 
+    data="{{movie:comingSoon,tag:comingSoonTag}}"
+    dataType="{{movie:comingSoon,tag:comingSoonTagType}}"
+    />
+  <template is="movieList" 
+    data="{{movie:willComingSoon,tag:willComingTag}}"
+    dataType="{{movie:comingSoon,tag:comingSoonTagType}}"
+    />
+  <template 
+    is="movieList" 
+    data="{{movie:top250Data,tag:top250DataTag}}"
+    dataType="{{movie:comingSoon,tag:comingSoonTagType}}"
+    />
+</view>

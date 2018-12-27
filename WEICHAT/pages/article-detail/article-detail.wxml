@@ -1,0 +1,21 @@
+
+<view>
+  <view class='detail-img'>
+    <image class='detail-bt' src='{{img}}'></image>
+    <image catchtap='tapMusic' class='detail-mus' src="{{ isPlayingMusic ? '/images/play.png' : '/images/pause.png'}}"></image>
+  </view>
+  <view class='detail-header'>
+    <image class='detail-header-img' src='/images/pite.jpg'></image>
+    <text class='detail-name'>{{author}}</text>
+    <text class='detail-side'>发表于</text>
+    <text class='detail-data'>{{time}}</text>
+  </view>
+  <text class='detail-title'>{{title}}</text>
+  <view class='detail-opreition'>
+    <image wx:if="{{currentCollected}}" catchtap='tapCollection' class='detail-star' src='/images/stars.jpg'></image>
+    <image wx:else catchtap='tapCollection' class='detail-star' src='/images/icon-1.png'></image>
+    <image catchtap='tapShare' class="detail-share" src='/images/share.png'></image>
+    <view class='line'></view>
+    <text class='content'>{{content}}</text>
+  </view>
+</view>

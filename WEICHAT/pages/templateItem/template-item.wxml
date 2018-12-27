@@ -1,0 +1,18 @@
+
+<template name="articleItem-template">
+  <view class='article-item'>
+    <view class='article-hearder'>
+      <image class='article-image' src='{{avator}}'></image>
+      <text class='article-time'>{{data}}</text>
+    </view>
+    <text class='article-title'>{{title}}</text>
+    <image src='{{img}}' style="width:100%"></image>
+    <text class='article-description'>{{description}}</text>
+    <view class='article-footer'>
+      <image class='article-icon' src='/images/icon-1.png'></image>
+      <text>{{start}}</text>
+      <image class='article-icon' src='/images/icon-2.png'></image>
+      <text>{{end}}</text>
+    </view>
+  </view>
+</template>

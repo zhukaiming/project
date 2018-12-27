@@ -1,0 +1,16 @@
+
+
+<import src="../movie-item-template/movie-item.wxml" />
+<template name="movieList">
+  <view class='movie-list-box'>
+    <view class='header'>
+      <text class='tag'>{{tag}}</text>
+      <text class='more' catchtap='tapMore' data-tag="{{tagType}}">更多></text>
+    </view>
+    <view class='list'>
+      <block wx:for="{{movie}}" wx:for-item="movie" wx:key="">
+        <template class = "list-item" is="movieItem" data="{{...movie}}"/>
+      </block>
+    </view>
+  </view>
+</template>

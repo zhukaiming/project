@@ -1,0 +1,8 @@
+
+
+
+
+.star-box .score{
+  width: 30rpx;
+  height: 30rpx;
+}

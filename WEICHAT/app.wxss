@@ -1,0 +1,23 @@
+/**app.wxss**/
+
+
+.pages{
+  background-color: yellow;
+}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+.user-motto{
+  width: 160rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  display: flex;
+  border-radius: 10px;
+}

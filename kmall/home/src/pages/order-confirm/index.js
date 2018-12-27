@@ -33,14 +33,14 @@ var page = {
 		var _this = this;
 		//购物车选中处理
 		//绑定新增地址事件
-		this.$shippingBox.on('click','.shipping-add',function(shippings){
+		this.$shippingBox.on('click','.shipping-add',function(){
 			_modal.show({
 				/*
 				success:function(shippings){
 					_this.renderShippingList(shippings)
 				}
 				*/
-				data:shippings,
+				//data:shippings,
 				success:_this.renderShippingList.bind(_this)
 			});
 		});

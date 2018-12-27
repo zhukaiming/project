@@ -1,0 +1,71 @@
+
+.detail-bt{
+  width: 100%;
+  position: relative;
+}
+.detail-mus{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  margin-left: -40rpx;
+  margin-top: 200rpx;
+}
+.detail-header{
+  height: 100rpx;
+  line-height: 100rpx;
+  /* border: 1px solid #ccc; */
+  padding-left: 10px;
+}
+.detail-header-img{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+.detail-name,
+.detail-side,
+.detail-data{
+  font-size: 28rpx;
+}
+.detail-title{
+  margin-left: 10rpx;
+  font-size: 36rpx;
+}
+.detail-opreition{
+  position: relative;
+  height: 150rpx;
+  line-height: 150rpx;
+  padding: 0 20rpx;
+}
+.detail-share,
+.detail-star{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  vertical-align: middle;
+  margin-top: 20rpx;
+  z-index: 999;
+}
+.detail-star{
+  right: 100rpx;
+}
+.detail-share{
+  right: 50rpx;
+}
+.line{
+  height: 1rpx;
+  width: 700rpx;
+  background-color: #ddd;
+  position: absolute;
+  top: 50rpx;
+  left: 20rpx;
+
+}
+.content{
+  letter-spacing: 2px;
+  padding: 10px;
+  font-size: 28rpx;
+  color: #777;
+}

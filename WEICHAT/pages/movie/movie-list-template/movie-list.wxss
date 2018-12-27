@@ -1,0 +1,27 @@
+
+@import '../movie-item-template/movie-item.wxss';
+
+
+.movie-list-box .header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 80rpx;
+  font-size: 32rpx;
+  line-height: 80rpx;
+}
+.header .tag{
+  padding-left: 38rpx;
+}
+.header .more{
+  padding-right: 38rpx;
+}
+.movie-list-box .list{
+  display: flex;
+  flex-direction: row;  
+  /* margin-left: 10rpx; */
+}
+/* .list .list-item{
+  display: flex;
+  flex-direction: row;   
+} */
